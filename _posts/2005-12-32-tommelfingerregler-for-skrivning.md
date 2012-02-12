@@ -20,7 +20,8 @@ title: Tommelfingerregler for skrivning
 - Brug ordrækkefølgen til at strukturere indholdet
 - Brug både visuelt, auditivt, kinestetisk og auditivt-digitalt sprog.
 
-Vær opmærksom på
+Vær opmærksom på:
+
 - Formål med kommunikationen
 - Målgruppen
 - Tilgængelighed
