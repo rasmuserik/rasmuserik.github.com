@@ -1,10 +1,10 @@
 ---
-title: Jekyll / github-pages on ubuntu maverick
+title: Jekyll / github-pages
 layout: default
 category/categories: 
 ---
 
-# Run local version
+# Run local version on ubuntu maverick
 
 Install/run:
 
@@ -15,12 +15,12 @@ Run locally at port 4000:
 
     /var/lib/gems/1.9.1/bin/jekyll --auto --server --pygments --safe
 
-# Making gh-pages on repos
+# Making gh-pages on repos, and sync
 
     git branch gh-pages
     git push origin gh-pages
-
-## Sync gh-pages
+    
+## Sync master branch to gh-pages
 
     git checkout gh-pages
     git merge master
