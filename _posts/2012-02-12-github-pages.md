@@ -11,6 +11,7 @@ Install/run:
     sudo apt-get install ruby1.9.1-full
     sudo gem1.9.1 install jekyll
     sudo gem1.9.1 install rdiscount
+    sudo gem1.9.1 install RedCloth
 
 Run locally at port 4000:
 
