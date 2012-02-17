@@ -1,10 +1,14 @@
-{{ include header.html }}
-<div id="menu"> 
-    <a href="/about">about</a> <a href="/notes?chronological">notes</a> <a href="/notes?tags">tags</a> <a href="/CurriculumVitae">cv</a>
+{% include header.html %}
+<div class="topmenu"> 
+    <span class="sitetitle">solsort.dk</span>
+    <span class="menuitems">
+        <a href="/notes">notes</a> 
+        <a href="/CurriculumVitae">cv</a>
+        <a href="/info">info</a> 
+    </span>
+    <span class="title">{{ page.title }}</span>
 </div>
-<h1 id="pagetop"><!--a href="#pagebottom">&darr;</a--> {{ page.title }}</h1>
-<hr />
 <div id="content">
     {{ content }}
 </div>
-{{ include footer.html }}
+{% include footer.html %}
