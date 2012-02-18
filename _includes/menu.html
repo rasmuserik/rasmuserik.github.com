@@ -1,0 +1,17 @@
+<div class="topmenu">
+    <span class="sitetitle">solsort.dk</span>
+    <span class="menuitems">
+        <a href="/notes">notes</a>
+        <a href="/CurriculumVitae">cv</a>
+        <a href="/info">info</a>
+    </span>
+    <span class="title">{{ page.title }}</span>
+</div>
+<div class="menuskip"></div>
+<script type="text/javascript">
+(function() {
+     function f() {$('.menuskip').css('height', $('.topmenu').outerHeight());};
+     $(window).resize(f);
+     f();
+})();
+</script>
