@@ -4,22 +4,22 @@ body {
     padding:0;
     background: url('/static/background.png');
     font-family: 'Open Sans', sans-serif;
+    line-height: 1.4em;
 }
 
 a {
         border: solid;
         border-width: 1px;
-        border-radius: 7px;
-        vertical-align: middle;
-        padding: .2em .3em .3em .3em;
+        border-radius: .6em;
+        padding: .2em .3em .2em .3em;
         line-height: 2em;
         margin: .2em;
-        //margin: -4px 10px 3px 14px;
 }
 
-@topbar-margin: 10px;
+@topbar-margin: 2px;
+@topbar-button: 8px;
 .topbar {
-    font-size: 14px;
+    font-size: 18px;
     width: 100%;
 
     color: #ffeeee;
@@ -34,23 +34,26 @@ a {
 
     position: absolute;
     top: 0; left: -@topbar-margin; 
-    padding: 11px 0px 0px @topbar-margin*2;
+    padding: @topbar-margin+@topbar-button+1px 0px @topbar-margin + 1px @topbar-margin*2;
     margin: 0px 0px 0px 0px;
 
     a {
-        margin-top: -8px;
         border-color: #b8aaaa;
         color: #ffeeee;
-
+        padding: @topbar-button - 1px @topbar-button @topbar-button + 1px @topbar-button;
+        line-height: 1em;
+        margin: -@topbar-button 0px 0px 0px;
     }
 
     .left {
         float: left;
-        margin-right: 1ex;
+        margin-right: @topbar-margin*2;
+        margin-left: @topbar-margin*2;
     }
     .right {
         float: right;
         margin-right: @topbar-margin*2;
+        margin-left: @topbar-margin*2;
     }
 
 }
