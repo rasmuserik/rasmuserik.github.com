@@ -26,11 +26,12 @@ a {
   text-align: center;
   position: absolute;
   top: 0;
-  left: -1px;
-  padding: 10px 0px 2px 2px;
+  left: -3px;
+  padding: 12px 0px 4px 6px;
   margin: 0px 0px 0px 0px;
 }
 .topbar a {
+  text-decoration: none;
   border-color: #b8aaaa;
   border-radius: 7px;
   color: #ffeeee;
@@ -40,11 +41,11 @@ a {
 }
 .topbar .left {
   float: left;
-  margin-right: 2px;
-  margin-left: 2px;
+  margin-right: 6px;
+  margin-left: 6px;
 }
 .topbar .right {
   float: right;
-  margin-right: 2px;
-  margin-left: 2px;
+  margin-right: 6px;
+  margin-left: 6px;
 }
