@@ -32,6 +32,7 @@ a {
 }
 .topbar a {
   border-color: #b8aaaa;
+  border-radius: 10px;
   color: #ffeeee;
   padding: 7px 8px 9px 8px;
   line-height: 1em;
