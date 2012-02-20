@@ -9,9 +9,10 @@
 </div>
 <div class="menuskip"></div>
 <script type="text/javascript">
-(function() {
-     function f() {$('.menuskip').css('height', $('.topmenu').outerHeight());};
-     $(window).resize(f);
-     f();
-})();
+$(function() {
+     function resizeMenuPadding() {$('.menuskip').css('height', $('.topmenu').outerHeight());};
+     $(window).resize(resizeMenuPadding);
+     resizeMenuPadding();
+     window.scrollTo(1,0);
+});
 </script>
