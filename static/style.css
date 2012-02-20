@@ -5,7 +5,6 @@ body {
   background: url('/static/background.png');
   font-family: 'Open Sans', sans-serif;
   line-height: 1.4em;
-  text-decoration: none;
 }
 a {
   border: solid;
@@ -14,6 +13,7 @@ a {
   padding: .2em .3em .2em .3em;
   line-height: 2em;
   margin: .2em;
+  text-decoration: none;
 }
 .topbar {
   font-size: 18px;
