@@ -1,39 +1,40 @@
 body {
+  font-size: 14px;
   margin: 0;
   padding: 0;
   background: url('/static/background.png');
+  font-family: 'Open Sans', sans-serif;
 }
 .topmenu {
+  font-size: 12px;
   position: fixed;
   top: 0;
-  left: 0;
+  left: -3px;
   width: 100%;
-  padding: 0px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin: 0px;
-  left: 0px;
-  width: 100%;
+  padding: 5px 3px 4px 0px;
+  margin: 0px 0px 0px 0px;
   color: #ffeeee;
+  background-color: #425342;
   background: url('/static/menubackground.png');
   border-bottom: 1px ridge;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
 }
 .topmenu .sitetitle {
+  font-weight: bold;
   float: left;
-  margin-right: 8px;
+  margin: 0px 5px 0px 6px;
 }
 .topmenu .title {
+  margin: 0px 3px 0px 5px;
   text-align: center;
   display: block;
 }
 .topmenu .menuitems a {
   float: right;
   color: #ffeeee;
-  border: solid #666;
+  border: solid #b8aaaa;
   border-width: 1px;
   border-radius: 7px;
-  margin-left: 3px;
-  margin-right: 3px;
-  padding: 3px 6px 3px 6px;
+  margin: -3px 2px -2px 2px;
+  padding: 2px 3px 1px 3px;
 }
