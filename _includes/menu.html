@@ -1,16 +1,12 @@
-<div class="topmenu">
-    <span class="sitetitle">solsort.dk</span>
-    <span class="menuitems">
-        <a href="/notes">notes</a>
-        <a href="/CurriculumVitae">cv</a>
-        <a href="/info">info</a>
-    </span>
-    <span class="title">{{ page.title }}</span>
+<div class="topbar">
+    <a href="/menu">menu</a>
+    <span style="margin-right:1ex">solsort.dk</span> {{ page.title }}
 </div>
-<div class="menuskip"></div>
+<div class="topbarskip"></div>
 <script type="text/javascript">
 $(function() {
-     function resizeMenuPadding() {$('.menuskip').css('height', $('.topmenu').outerHeight());};
+     function resizeMenuPadding() {$('.topbarskip').css('height', $('.topbar').outerHeight());};
+     $('.topbar').css('position', 'fixed');
      $(window).resize(resizeMenuPadding);
      resizeMenuPadding();
      window.scrollTo(1,0);
