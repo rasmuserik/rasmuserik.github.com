@@ -14,11 +14,16 @@ body {
   border-bottom: 1px ridge;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+  text-align: center;
   position: absolute;
   top: 0;
   left: -5px;
   padding: 7px 0px 0px 10px;
   margin: 0px 0px 0px 0px;
+}
+.topbar .sitename {
+  float: left;
+  margin-right: 1ex;
 }
 .topbar a {
   color: #ffeeee;
