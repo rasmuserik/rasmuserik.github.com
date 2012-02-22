@@ -2,6 +2,7 @@
 layout: default
 title: Tekststruktur for rapporter
 tags: tips academic
+date: 2005
 ---
 Skabelon og huskeliste der kan anvendes ved udarbejdelse af naturvidenskabelige rapporter, artikler og lignende. 
 

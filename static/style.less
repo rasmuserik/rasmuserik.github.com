@@ -8,7 +8,6 @@ body {
 }
 
 @topbar-margin: 3px;
-@topbar-button: 8px;
 .topbar {
     font-size: 18px;
     width: 100%;
@@ -23,11 +22,10 @@ body {
 
     text-align: center;
 
-    position: absolute;
     top: 0; left: -@topbar-margin; 
     padding: @topbar-margin+10px 0px @topbar-margin @topbar-margin*2;
     margin: 0px 0px 0px 0px;
-
+    min-height: 30px;
     a {
         text-decoration: none;
         border: solid 1px #b8aaaa;
@@ -37,7 +35,6 @@ body {
         line-height: 1em;
         margin: -10px @topbar-margin*2 0px 0px
     }
-
     .left {
         float: left;
         margin-right: 5px;
@@ -46,5 +43,14 @@ body {
         float: right;
         margin-left: 5px;
     }
-
+}
+.sitemap {
+    font-size: 18px;
+    a {
+        line-height: 46px;
+        text-decoration: none;
+        border: solid 1px;
+        border-radius: 7px;
+        padding: 9px 8px 9px 8px;
+    }
 }

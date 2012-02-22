@@ -1,0 +1,16 @@
+---
+layout: default
+title: javascript
+---
+<script type="text/javascript">
+(function() {
+    var scriptname = document.location.search.slice(1).replace(/"<>/g, '');
+    require.config({baseUrl:"/scripts"});
+    document.title = scriptname;
+    $('.pagetitle').text(scriptname);
+    require([scriptname]);
+    $('#content').text('waiting for ' + scriptname);
+    $('.topbar a.right').attr('href', '/src.html?' + scriptname);
+    $('.topbar a.right').text('source');
+})();
+</script>

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Tommelfingerregler for skrivning
+date: 2005
 ---
 
 * Brug aktiv tale
