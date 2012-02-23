@@ -14,6 +14,8 @@ title: solsort.dk
 ** Tech
 *** "Cloud9 and Ender":/notes/tech/c9ender.html
 *** "Jekyll / github-pages":/notes/tech/jekyll.html
+*** "vim":/notes/tech/vim.html
+*** "CoffeeScript":/notes/tech/coffee.html
 ** "TED talks":/notes/ted.html
 * JS
 ** "devintro":/devintro/book.html
