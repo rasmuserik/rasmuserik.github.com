@@ -67,7 +67,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         }
         $('body').css('background', 'black');
         $(window).resize(relayoutDelayed);
-        $(window).on('orientationchange', relayoutDelayed());
+        $(window).on('orientationchange', relayoutDelayed);
         relayout();
     }
 
