@@ -1,5 +1,6 @@
 define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     "use strict";
+    var position, positionArray; // recursive function forward declaration
     // # Util
     var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
 
@@ -42,27 +43,23 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
             .css('overflow', 'hidden')
             .css('width', $(window).width())
             .css('height', browsOpt.scrollable ? 'auto' : $(window).height());
-        typeof relayoutFn === 'function' && relayoutFn();
+        if(typeof relayoutFn === 'function') {
+            relayoutFn();
+        }
         window.scrollTo(0,1);
     }
-    relayoutDelayed = niceSingle(relayout);
-    /*
-    function relayoutDelayed() {
-        window.setTimeout(relayout, 1);
-        window.setTimeout(relayout, 100);
-    }
-    */
+    var relayoutDelayed = niceSingle(relayout);
     function initFullBrows(opt) {
         browsOpt = opt || {};
-        if(!document.getElementById('main')) {
+        if(!window.document.getElementById('main')) {
             $('body').append('<div id="main"></div>');
         }
         if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
         } else {
             $('body').append('<div style="height:' + 
-                    (Math.max($(window).height(),$(window).width()) + 62) 
-                    + 'px;background-color: black;"></div>');
+                    (Math.max($(window).height(),$(window).width()) + 62) + 
+                    'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
         $(window).resize(relayoutDelayed);
@@ -112,12 +109,11 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         menu.size = totalSize(menu.children)/1.5 + 1;
         relayoutFn = function() {
             position(menu, -margin,-margin,$(window).width()+margin, $(window).height()+margin);
-        }
+        };
     }
 
     // # Calculate position of boxes
-    var positionArray; // recursive function forward declaration
-    function position(menu, x, y, w, h) {
+    position = function(menu, x, y, w, h) {
         w-= 2*(margin + border);
         h-= 2*(margin + border);
         var style = menu.elem.style;
@@ -126,7 +122,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         style.width = w + 'px';
         style.height = h + 'px';
         positionArray(menu.children, margin, titlesize+margin, w-margin*2, h-titlesize-margin*2);
-    }
+    };
 
     positionArray = function(arr, x, y, w, h) {
         if(arr.length === 0) {
