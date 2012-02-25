@@ -38,7 +38,7 @@ define(['jquery'], function($) {
         style.textAlign = 'center';
         style.borderRadius = margin*2 + 'px';
         style.border = '1px solid #000000'; 
-        style.overflow = 'hidden';
+        //style.overflow = 'hidden';
         style.backgroundColor = colorHash(menu.title);
         style.boxShadow = '3px 3px 8px rgba(0, 0, 0, .4)';
         //style.webkitBoxShadow = 'inset 3px 3px 9px rgba(0, 0, 0, 0.5)';
@@ -102,6 +102,7 @@ define(['jquery'], function($) {
     $(function() {
         //$('body').css('overflow', 'hidden');
         $('body').css('background', 'black');
+        $('body').prepend('<div style="width:1000px; height:1000px;">blah</div>');
         $('a').css('border', 'none');
         var menu = elemToObj($('div > ul > li')[0]);
  //       $('div > ul > li')[1].style.display = 'none';
