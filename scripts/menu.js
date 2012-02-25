@@ -26,14 +26,16 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
             window.setTimeout(function() {
                 fn();
                 running = false;
-            }, 1);
+            }, 10);
         };
     }
 
     // # Browser window setup
     var relayoutFn;
     var browsOpt;
+    var prevlayout = {};
     function relayout() {
+        if
         $('#main')
             .css('position', 'absolute')
             .css('left', 0)
@@ -44,10 +46,13 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         typeof relayoutFn === 'function' && relayoutFn();
         window.scrollTo(0,1);
     }
+    relayoutDelayed = niceSingle(relayout);
+    /*
     function relayoutDelayed() {
         window.setTimeout(relayout, 1);
         window.setTimeout(relayout, 100);
     }
+    */
     function initFullBrows(opt) {
         browsOpt = opt || {};
         if(!document.getElementById('main')) {
