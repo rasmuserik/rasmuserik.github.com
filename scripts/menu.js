@@ -36,13 +36,13 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     function relayoutOnce() {
         $('#main')
             .css('position', 'absolute')
-            .css('left', 0)
+            .css('left', 1)
             .css('top', 1)
             .css('overflow', 'hidden')
             .css('width', $(window).width())
             .css('height', browsOpt.scrollable ? 'auto' : $(window).height());
         typeof relayoutFn === 'function' && relayoutFn();
-        window.scrollTo(0,1);
+        window.scrollTo(1,1);
     }
     function relayout() {
         relayoutOnce();
@@ -56,7 +56,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
         } else {
-            $('body').append('<div style="' + Math.max($(window).width(), $(window).height()) + 61 + 'px;background-color: black;"></div>');
+            $('body').append('<div style="height:' + Math.max($(window).width(), $(window).height()) + 61 + 'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
         $(window).resize(relayout);
