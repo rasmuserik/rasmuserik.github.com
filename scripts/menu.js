@@ -33,7 +33,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     // # Browser window setup
     var relayoutFn;
     var browsOpt;
-    var relayout = function() {
+    function relayoutOnce() {
         $('#main')
             .css('position', 'absolute')
             .css('left', 0)
@@ -43,6 +43,10 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
             .css('height', browsOpt.scrollable ? 'auto' : $(window).height());
         typeof relayoutFn === 'function' && relayoutFn();
         window.scrollTo(0,1);
+    }
+    function relayout() {
+        relayoutOnce();
+        window.setTimeout(relayoutOnce, 1000);
     }
     function initFullBrows(opt) {
         browsOpt = opt || {};
@@ -57,9 +61,6 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         $('body').css('background', 'black');
         $(window).resize(relayout);
         relayout();
-        window.setTimeout(relayout, 1000);
-        window.setTimeout(relayout, 2000);
-        window.setTimeout(relayout, 3000);
     }
 
     // # Config
