@@ -45,8 +45,24 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         window.scrollTo(0,1);
     }
     function relayout() {
-        setTimeout(relayoutOnce, 10);
-        setTimeout(relayoutOnce, 5000);
+        setTimeout(relayoutOnce, 1);
+        var height = $(window).height();
+        function testHeight() {
+            if($(window).height() !== height) {
+                height = $(window).height();
+                relayoutOnce();
+            }
+        }
+        window.setTimeout(testHeight, 1000);
+        window.setTimeout(testHeight, 2000);
+        window.setTimeout(testHeight, 3000);
+        window.setTimeout(testHeight, 4000);
+        window.setTimeout(testHeight, 5000);
+        window.setTimeout(testHeight, 6000);
+        window.setTimeout(testHeight, 7000);
+        window.setTimeout(testHeight, 8000);
+        window.setTimeout(testHeight, 9000);
+        window.setTimeout(testHeight, 10000);
     }
     function initFullBrows(opt) {
         browsOpt = opt || {};
