@@ -38,7 +38,7 @@ define(['jquery'], function($) {
         style.textAlign = 'center';
         style.borderRadius = margin*2 + 'px';
         style.border = '1px solid #000000'; 
-        //style.overflow = 'hidden';
+        style.overflow = 'hidden';
         style.backgroundColor = colorHash(menu.title);
         style.boxShadow = '3px 3px 8px rgba(0, 0, 0, .4)';
         style.webkitBoxShadow = '3px 3px 8px rgba(0, 0, 0, .4)';
