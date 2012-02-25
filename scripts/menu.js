@@ -57,7 +57,9 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         $('body').css('background', 'black');
         $(window).resize(relayout);
         relayout();
-        //window.setTimeout(relayout, 0);
+        window.setTimeout(relayout, 1000);
+        window.setTimeout(relayout, 2000);
+        window.setTimeout(relayout, 3000);
     }
 
     // # Config
