@@ -29,6 +29,7 @@ define(['jquery'], function($) {
 
     function reset(menu) {
         var style = menu.elem.style;
+        style.fontSize = '16px';
         style.display = 'block'; 
         style.position = 'absolute'; 
         style.padding = margin/2 + 'px';
