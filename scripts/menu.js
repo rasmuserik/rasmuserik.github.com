@@ -46,8 +46,6 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     }
     function relayout() {
         relayoutOnce();
-        window.setTimeout(relayoutOnce, 1000);
-        window.setTimeout(relayoutOnce, 2000);
         window.setTimeout(relayoutOnce, 3000);
     }
     function initFullBrows(opt) {
@@ -58,7 +56,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
         } else {
-            $('body').append('<div style="' + Math.max($(window).width(), $(window).height()) + 61 + 'px;"></div>');
+            $('body').append('<div style="' + Math.max($(window).width(), $(window).height()) + 61 + 'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
         $(window).resize(relayout);
