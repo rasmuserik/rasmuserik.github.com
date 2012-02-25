@@ -35,7 +35,6 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     var browsOpt;
     var prevlayout = {};
     function relayout() {
-        if
         $('#main')
             .css('position', 'absolute')
             .css('left', 0)
