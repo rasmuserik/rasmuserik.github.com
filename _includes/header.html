@@ -21,6 +21,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js" type="text/javascript"></script>
         <script type="text/javascript">
             define('modernizr', function() { return Modernizr; });
+            define('window', function() { return window; });
+            define('document', function() { return document; });
             require.config({baseUrl:"/scripts"})
         </script>
         <!--link rel="stylesheet/less" type="text/css" href="/static/style.less">

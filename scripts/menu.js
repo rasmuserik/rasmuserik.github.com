@@ -1,4 +1,5 @@
-define(['jquery', 'modernizr'], function($, modernizr) {
+define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
+    "use strict";
     var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
     var margin = 3;
     var titlesize = 20;
@@ -12,12 +13,12 @@ define(['jquery', 'modernizr'], function($, modernizr) {
                 .map(elemToObj),
             url: $(elem).find('> a').attr('href'),
             elem: elem
-        }
+        };
     }
 
     var seed = 1;
     function pseudoRandom(n) {
-        return seed = (1664525 * (n || seed) + 1013904223) |0
+        return (seed = (1664525 * (n || seed) + 1013904223) |0);
     }
 
     function colorHash(text) {
@@ -55,6 +56,7 @@ define(['jquery', 'modernizr'], function($, modernizr) {
         menu.children.forEach(calcSize);
         menu.size = totalSize(menu.children)/1.5 + 1;
     }
+    var positionArray;
     function position(menu, x, y, w, h) {
         w-= 2*(margin + border);
         h-= 2*(margin + border);
@@ -66,7 +68,7 @@ define(['jquery', 'modernizr'], function($, modernizr) {
         positionArray(menu.children, margin, titlesize+margin, w-margin*2, h-titlesize-margin*2);
     }
 
-    function positionArray(arr, x, y, w, h) {
+    positionArray = function(arr, x, y, w, h) {
         if(arr.length === 0) {
             return;
         }
@@ -100,10 +102,10 @@ define(['jquery', 'modernizr'], function($, modernizr) {
             positionArray(arr1, x, y, w, h*ratio|0);
             positionArray(arr2, x ,y+h*ratio|0, w, h-(h*ratio|0));
         }
-    }
+    };
 
     $(function() {
-        if(!Modernizr.touch) {
+        if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
         }
         $('body').css('background', 'black');
@@ -121,11 +123,11 @@ define(['jquery', 'modernizr'], function($, modernizr) {
                     return;
                 }
                 running = true;
-                setTimeout(function() {
+                window.setTimeout(function() {
                     fn();
                     running = false;
                 }, 100);
-            }
+            };
         }
 
         window.scrollTo(1,0);
