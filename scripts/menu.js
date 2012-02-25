@@ -47,6 +47,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     function relayoutDelayed() {
         window.setTimeout(relayout, 1);
         window.setTimeout(relayout, 100);
+        window.setTimeout(relayout, 1000);
     }
     function initFullBrows(opt) {
         browsOpt = opt || {};
@@ -61,7 +62,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
                     + 'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
-        $(window).resize(relayoutDelayed);
+        $(window).onresize(relayoutDelayed);
         relayout();
     }
 
