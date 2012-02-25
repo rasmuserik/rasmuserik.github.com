@@ -33,7 +33,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     // # Browser window setup
     var relayoutFn;
     var browsOpt;
-    function relayoutOnce() {
+    function relayout() {
         $('#main')
             .css('position', 'absolute')
             .css('left', 0)
@@ -44,25 +44,8 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         typeof relayoutFn === 'function' && relayoutFn();
         window.scrollTo(0,1);
     }
-    function relayout() {
-        setTimeout(relayoutOnce, 1);
-        var height = $(window).height();
-        function testHeight() {
-            if($(window).height() !== height) {
-                height = $(window).height();
-                relayoutOnce();
-            }
-        }
-        window.setTimeout(testHeight, 1000);
-        window.setTimeout(testHeight, 2000);
-        window.setTimeout(testHeight, 3000);
-        window.setTimeout(testHeight, 4000);
-        window.setTimeout(testHeight, 5000);
-        window.setTimeout(testHeight, 6000);
-        window.setTimeout(testHeight, 7000);
-        window.setTimeout(testHeight, 8000);
-        window.setTimeout(testHeight, 9000);
-        window.setTimeout(testHeight, 10000);
+    function relayoutDelayed() {
+        window.setTimeout(relayout, 1);
     }
     function initFullBrows(opt) {
         browsOpt = opt || {};
@@ -72,10 +55,10 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
         } else {
-            $('body').append('<div style="height:1000px;background-color: black;"></div>');
+            $('body').append('<div style="height:' + ($(window).height()+$(window).width()) + 'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
-        $(window).resize(relayout);
+        $(window).resize(relayoutDelayed);
         relayout();
     }
 
