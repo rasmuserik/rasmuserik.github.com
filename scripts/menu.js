@@ -46,7 +46,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     }
     function relayout() {
         setTimeout(relayoutOnce, 10);
-        setTimeout(relayoutOnce, 2000);
+        setTimeout(relayoutOnce, 5000);
     }
     function initFullBrows(opt) {
         browsOpt = opt || {};
