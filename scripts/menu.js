@@ -55,7 +55,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
         } else {
-            $('body').append('<div style="height:' + Math.max($(window).width(), $(window).height()) + 61 + 'px;background-color: black;"></div>');
+            $('body').append('<div style="height:1000px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
         $(window).resize(relayout);
