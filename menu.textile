@@ -2,31 +2,32 @@
 layout: mainpage
 title: solsort.dk
 ---
-* "CV":/CurriculumVitae.html
-* Apps
-** "dkcities":/dkcities
-** "notescore":/notescore
-** "planetcute":/planetcute
-* Notes
-** "Tekststruktur for rapporter":/notes/tekststruktur-for-rapporter.html
-** "Tommelfingerregler for skrivning":/notes/tommelfingerregler-for-skrivning.html
-** "Fototips":/notes/fototips.html
-** Tech
-*** "Cloud9 and Ender":/notes/tech/c9ender.html
-*** "Jekyll / github-pages":/notes/tech/jekyll.html
-*** "vim":/notes/tech/vim.html
-*** "CoffeeScript":/notes/tech/coffee.html
-** "TED talks":/notes/ted.html
-* JS
-** "devintro":/devintro/book.html
-** 1k
-*** "4djuliabrot":/f1k/blah.html
-*** "rain":/f1k/rain.html
-** tweetsize
-*** "brownian motion":/f1k/brown.html
-*** "sierpinsky":/f1k/sierpinsky.html
-** "iOS style":
-** "hierachical layout":
-** "slidein transitions":
-* Presentations
-** "OAuth2":/presentations/oauth2.html
+* solsort.dk
+** "CV":/CurriculumVitae.html
+** Apps
+*** "dkcities":/dkcities
+*** "notescore":/notescore
+*** "planetcute":/planetcute
+** Notes
+*** "Tekststruktur for rapporter":/notes/tekststruktur-for-rapporter.html
+*** "Tommelfingerregler for skrivning":/notes/tommelfingerregler-for-skrivning.html
+*** "Fototips":/notes/fototips.html
+*** Tech
+**** "Cloud9 and Ender":/notes/tech/c9ender.html
+**** "Jekyll / github-pages":/notes/tech/jekyll.html
+**** "vim":/notes/tech/vim.html
+**** "CoffeeScript":/notes/tech/coffee.html
+*** "TED talks":/notes/ted.html
+** JS
+*** "devintro":/devintro/book.html
+*** 1k
+**** "4djuliabrot":/f1k/blah.html
+**** "rain":/f1k/rain.html
+*** tweetsize
+**** "brownian motion":/f1k/brown.html
+**** "sierpinsky":/f1k/sierpinsky.html
+*** "iOS style":
+*** "hierachical layout":
+*** "slidein transitions":
+** Presentations
+*** "OAuth2":/presentations/oauth2.html

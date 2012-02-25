@@ -39,6 +39,9 @@ body {
   float: right;
   margin-left: 5px;
 }
+.sitemap li {
+}
+/*
 .sitemap {
   font-size: 18px;
 }
@@ -49,3 +52,4 @@ body {
   border-radius: 7px;
   padding: 9px 8px 9px 8px;
 }
+*/
