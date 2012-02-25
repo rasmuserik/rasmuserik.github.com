@@ -110,7 +110,6 @@ define(['jquery', 'modernizr'], function($, modernizr) {
         $('body').prepend('<div style="width:1000px; height:1000px;">blah</div>');
         $('a').css('border', 'none');
         var menu = elemToObj($('div > ul > li')[0]);
- //       $('div > ul > li')[1].style.display = 'none';
         reset(menu);
         calcSize(menu);
         position(menu, 0-margin,1+0-margin,$(window).width()+margin, $(window).height()+margin);
