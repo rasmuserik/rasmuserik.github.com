@@ -1,6 +1,22 @@
 define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     "use strict";
+    // # Util
     var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
+
+    var seed = 1;
+    function pseudoRandom(n) {
+        return (seed = (1664525 * (n || seed) + 1013904223) |0);
+    }
+
+    function colorHash(text) {
+        var result = 0;
+        for(var i=0;i<text.length; ++i) {
+            result = pseudoRandom(result + text.charCodeAt(i));
+        }
+        return "#" + ((result | 0xe0e0e0)&0xffffff).toString(16);
+    }
+
+    // # Config
     var margin = 3;
     var titlesize = 20;
     var border = modernizr.boxshadow ? 0 : 1;
@@ -16,20 +32,12 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         };
     }
 
-    var seed = 1;
-    function pseudoRandom(n) {
-        return (seed = (1664525 * (n || seed) + 1013904223) |0);
-    }
 
-    function colorHash(text) {
-        var result = 0;
-        for(var i=0;i<text.length; ++i) {
-            result = pseudoRandom(result + text.charCodeAt(i));
-        }
-        return "#" + ((result | 0xe0e0e0)&0xffffff).toString(16);
-    }
 
-    function reset(menu) {
+    function totalSize(arr) {
+        return arr.reduce(function(a,b) { return a + b.size; }, 0);
+    }
+    function initMenu(menu) {
         var style = menu.elem.style;
         style.fontSize = '16px';
         style.display = 'block'; 
@@ -46,16 +54,10 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         style.boxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
         style.webkitBoxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
         //style.webkitBoxShadow = 'inset 3px 3px 9px rgba(0, 0, 0, 0.5)';
-        menu.children.forEach(reset);
-    }
-    function totalSize(arr) {
-        return arr.reduce(function(a,b) { return a + b.size; }, 0);
-    }
-
-    function calcSize(menu) {
-        menu.children.forEach(calcSize);
+        menu.children.forEach(initMenu);
         menu.size = totalSize(menu.children)/1.5 + 1;
     }
+
     var positionArray;
     function position(menu, x, y, w, h) {
         w-= 2*(margin + border);
@@ -104,16 +106,22 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         }
     };
 
-    $(function() {
+    function initFullBrows() {
         if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
+        } else {
+            $('body').append('<div style="' + Math.max($(window).width(), $(window).height()) + 61 + 'px;"></div>');
+
+
         }
         $('body').css('background', 'black');
-        $('body').prepend('<div style="width:1000px; height:1000px;">blah</div>');
-        $('a').css('border', 'none');
+    }
+
+    $(function() {
+        initFullBrows();
+
         var menu = elemToObj($('div > ul > li')[0]);
-        reset(menu);
-        calcSize(menu);
+        initMenu(menu);
         position(menu, 0-margin,1+0-margin,$(window).width()+margin, $(window).height()+margin);
 
         function niceSingle(fn) {
