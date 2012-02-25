@@ -1,6 +1,6 @@
 define(['jquery'], function($) {
     var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
-    var margin = 4;
+    var margin = 3;
     var titlesize = 20;
 
     function elemToObj(elem) {
@@ -37,10 +37,10 @@ define(['jquery'], function($) {
         style.margin = margin + 'px';
         style.textAlign = 'center';
         style.borderRadius = margin*2 + 'px';
-        //style.border = '1px solid #888888'; 
+        style.border = '1px solid #000000'; 
         style.overflow = 'hidden';
         style.backgroundColor = colorHash(menu.title);
-        style.boxShadow = '3px 3px 9px rgba(0, 0, 0, 0.5)';
+        style.boxShadow = '3px 3px 8px rgba(0, 0, 0, .4)';
         //style.webkitBoxShadow = 'inset 3px 3px 9px rgba(0, 0, 0, 0.5)';
         menu.children.forEach(reset);
     }
@@ -53,8 +53,8 @@ define(['jquery'], function($) {
         menu.size = totalSize(menu.children)/1.5 + 1;
     }
     function position(menu, x, y, w, h) {
-        w-= 2*margin;
-        h-= 2*margin;
+        w-= 2*margin + 2;
+        h-= 2*margin + 2;
         var style = menu.elem.style;
         style.left = x + 'px';
         style.top = y + 'px';
