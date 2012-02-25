@@ -41,6 +41,7 @@ define(['jquery'], function($) {
         //style.overflow = 'hidden';
         style.backgroundColor = colorHash(menu.title);
         style.boxShadow = '3px 3px 8px rgba(0, 0, 0, .4)';
+        style.webkitBoxShadow = '3px 3px 8px rgba(0, 0, 0, .4)';
         //style.webkitBoxShadow = 'inset 3px 3px 9px rgba(0, 0, 0, 0.5)';
         menu.children.forEach(reset);
     }
