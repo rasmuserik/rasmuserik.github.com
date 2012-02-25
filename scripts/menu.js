@@ -16,11 +16,56 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         return "#" + ((result | 0xe0e0e0)&0xffffff).toString(16);
     }
 
+    function niceSingle(fn) {
+        var running = false;
+        return function() {
+            if(running) {
+                return;
+            }
+            running = true;
+            window.setTimeout(function() {
+                fn();
+                running = false;
+            }, 1);
+        };
+    }
+
+    // # Browser window setup
+    var relayoutFn;
+    var browsOpt;
+    var relayout = function() {
+        $('#main')
+            .css('position', 'absolute')
+            .css('left', 0)
+            .css('top', 1)
+            .css('overflow', 'hidden')
+            .css('width', $(window).width())
+            .css('height', browsOpt.scrollable ? 'auto' : $(window).height());
+        typeof relayoutFn === 'function' && relayoutFn();
+        window.scrollTo(0,1);
+    }
+    function initFullBrows(opt) {
+        browsOpt = opt || {};
+        if(!document.getElementById('main')) {
+            $('body').append('<div id="main"></div>');
+        }
+        if(!modernizr.touch) {
+            $('body').css('overflow', 'hidden');
+        } else {
+            $('body').append('<div style="' + Math.max($(window).width(), $(window).height()) + 61 + 'px;"></div>');
+        }
+        $('body').css('background', 'black');
+        $(window).resize(relayout);
+        relayout();
+        //window.setTimeout(relayout, 0);
+    }
+
     // # Config
     var margin = 3;
     var titlesize = 20;
     var border = modernizr.boxshadow ? 0 : 1;
 
+    // # Transformation to nested list to object
     function elemToObj(elem) {
         var result = {};
         return {
@@ -32,11 +77,11 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         };
     }
 
-
-
+    // # Initialise the objects, calculate weight
     function totalSize(arr) {
         return arr.reduce(function(a,b) { return a + b.size; }, 0);
     }
+    // style the elemements, and calculate weight which will be the basis for their size
     function initMenu(menu) {
         var style = menu.elem.style;
         style.fontSize = '16px';
@@ -53,12 +98,15 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         style.backgroundColor = colorHash(menu.title);
         style.boxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
         style.webkitBoxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
-        //style.webkitBoxShadow = 'inset 3px 3px 9px rgba(0, 0, 0, 0.5)';
         menu.children.forEach(initMenu);
         menu.size = totalSize(menu.children)/1.5 + 1;
+        relayoutFn = function() {
+            position(menu, -margin,-margin,$(window).width()+margin, $(window).height()+margin);
+        }
     }
 
-    var positionArray;
+    // # Calculate position of boxes
+    var positionArray; // recursive function forward declaration
     function position(menu, x, y, w, h) {
         w-= 2*(margin + border);
         h-= 2*(margin + border);
@@ -106,42 +154,11 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         }
     };
 
-    function initFullBrows() {
-        if(!modernizr.touch) {
-            $('body').css('overflow', 'hidden');
-        } else {
-            $('body').append('<div style="' + Math.max($(window).width(), $(window).height()) + 61 + 'px;"></div>');
-
-
-        }
-        $('body').css('background', 'black');
-    }
-
+    // # Main runner
+    var menu;
     $(function() {
-        initFullBrows();
-
-        var menu = elemToObj($('div > ul > li')[0]);
+        menu = elemToObj($('div > ul > li')[0]);
         initMenu(menu);
-        position(menu, 0-margin,1+0-margin,$(window).width()+margin, $(window).height()+margin);
-
-        function niceSingle(fn) {
-            var running = false;
-            return function() {
-                if(running) {
-                    return;
-                }
-                running = true;
-                window.setTimeout(function() {
-                    fn();
-                    running = false;
-                }, 100);
-            };
-        }
-
-        window.scrollTo(1,0);
-        $(window).resize(niceSingle(function() {
-            position(menu, 0-margin,1+0-margin,$(window).width()+margin, $(window).height()+margin);
-            window.scrollTo(1,0);
-        }));
+        initFullBrows();
     });
 });
