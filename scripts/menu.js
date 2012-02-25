@@ -107,7 +107,7 @@ define(['jquery'], function($) {
  //       $('div > ul > li')[1].style.display = 'none';
         reset(menu);
         calcSize(menu);
-        position(menu, 0-margin,0-margin,$(window).width()+margin, $(window).height()+margin);
+        position(menu, 0-margin,1+0-margin,$(window).width()+margin, $(window).height()+margin);
 
         function niceSingle(fn) {
             var running = false;
@@ -123,8 +123,9 @@ define(['jquery'], function($) {
             }
         }
 
+        window.scrollTo(1,0);
         $(window).resize(niceSingle(function() {
-            position(menu, 0-margin,0-margin,$(window).width()+margin, $(window).height()+margin);
+            position(menu, 0-margin,1+0-margin,$(window).width()+margin, $(window).height()+margin);
         }));
     });
 });
