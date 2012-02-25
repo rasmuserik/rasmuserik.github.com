@@ -103,7 +103,9 @@ define(['jquery', 'modernizr'], function($, modernizr) {
     }
 
     $(function() {
-        //$('body').css('overflow', 'hidden');
+        if(!Modernizr.touch) {
+            $('body').css('overflow', 'hidden');
+        }
         $('body').css('background', 'black');
         $('body').prepend('<div style="width:1000px; height:1000px;">blah</div>');
         $('a').css('border', 'none');
