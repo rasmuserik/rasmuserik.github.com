@@ -32,7 +32,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     }
 
     function windowHeight() {
-        var height = windowHeight();
+        var height = $(window).height();
         // workaround buggy window height on iOS
         if(height === 356 || height === 208) {
             height += 60;
@@ -171,18 +171,9 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
 
     // # Main runner
     var menu;
-    function heightReport() {
-        alert( 'w.inner: ' + window.innerHeight +
-               'w.outer: ' + window.outerHeight +
-               's.avail: ' + window.screen.availHeight +
-               's.height: ' + window.screen.height
-             );
-    }
     $(function() {
         menu = elemToObj($('div > ul > li')[0]);
         initMenu(menu);
         initFullBrows();
-        setTimeout(heightReport, 10);
-        setTimeout(heightReport, 10000);
     });
 });
