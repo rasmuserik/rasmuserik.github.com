@@ -31,6 +31,15 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         };
     }
 
+    function windowHeight() {
+        var height = windowHeight();
+        // workaround buggy window height on iOS
+        if(height === 356 || height === 208) {
+            height += 60;
+        }
+        return height;
+    }
+
     // # Browser window setup
     var relayoutFn;
     var browsOpt;
@@ -42,7 +51,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
             .css('top', 1)
             .css('overflow', 'hidden')
             .css('width', $(window).width())
-            .css('height', browsOpt.scrollable ? 'auto' : $(window).height());
+            .css('height', browsOpt.scrollable ? 'auto' : windowHeight());
         if(typeof relayoutFn === 'function') {
             relayoutFn();
         }
@@ -58,7 +67,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
             $('body').css('overflow', 'hidden');
         } else {
             $('body').append('<div style="height:' + 
-                    (Math.max($(window).height(),$(window).width()) + 62) + 
+                    (Math.max(windowHeight(),$(window).width()) + 62) + 
                     'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
@@ -108,7 +117,7 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
         menu.children.forEach(initMenu);
         menu.size = totalSize(menu.children)/1.5 + 1;
         relayoutFn = function() {
-            position(menu, -margin,-margin,$(window).width()+margin, $(window).height()+margin);
+            position(menu, -margin,-margin,$(window).width()+margin, windowHeight()+margin);
         };
     }
 
@@ -162,9 +171,18 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
 
     // # Main runner
     var menu;
+    function heightReport() {
+        alert( 'w.inner: ' + window.innerHeight +
+               'w.outer: ' + window.outerHeight +
+               's.avail: ' + window.screen.availHeight +
+               's.height: ' + window.screen.height
+             );
+    }
     $(function() {
         menu = elemToObj($('div > ul > li')[0]);
         initMenu(menu);
         initFullBrows();
+        setTimeout(heightReport, 10);
+        setTimeout(heightReport, 10000);
     });
 });
