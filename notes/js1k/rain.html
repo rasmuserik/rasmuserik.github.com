@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<title>JS1k, 1k demo submission [ID]</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<canvas id="c"></canvas>
+		<script>
+			var b = document.body;
+			var c = document.getElementsByTagName('canvas')[0];
+			var a = c.getContext('2d');
+			document.body.clientWidth; // fix bug in webkit: http://qfox.nl/weblog/218
+		</script>
+		<script>
+// start of submission //
+(t=c.style).height="95%";t.width="95%";c.width=c.height=s=256;d=a.getImageData(0,0,s,s);e=d.data;g=[];h=[];function f(){j=g;g=h;h=j;t=Math.random()*s*s|0;g[t]=u=127;g[t+1]=u;g[t+2]=u;g[s+t+1]=u;g[512+t+1]=u;a.putImageData(d,0,0);for(i=s*s;i--;i){h[i]=((g[i-1]+g[i+1]+g[i-s]+g[i+s])/2-h[i])*.99||0;e[i*4+3]=255;e[i*4+2]=255&(u+g[i]-g[i-257]);}setTimeout(f,9);}f();
+// end of submission //
+		</script>
+	</body>
+</html>
