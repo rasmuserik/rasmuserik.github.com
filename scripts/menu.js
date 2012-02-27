@@ -1,5 +1,6 @@
 define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     "use strict";
+    var boxWidth = 1.5;
     var position, positionArray; // recursive function forward declaration
     // # Util
     var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
@@ -111,6 +112,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         style.top = '100px'; 
         style.left = '100px'; 
         style.margin = margin + 'px';
+        style.padding = '2px';
         style.textAlign = 'center';
         style.borderRadius = margin*2 + 'px';
         style.border = border + 'px solid #000000'; 
@@ -135,11 +137,22 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     position = function(menu, x, y, w, h) {
         w-= 2*(margin + border);
         h-= 2*(margin + border);
-        var style = menu.elem.style;
-        style.left = x + 'px';
-        style.top = y + 'px';
-        style.width = w + 'px';
-        style.height = h + 'px';
+        var $elem = $(menu.elem);
+        
+        $elem.css('left', x)
+             .css('top', y)
+             .css('width', w);
+
+        var fontsize = 16;
+        $elem.css('fontSize', fontsize);
+        if(menu.children.length === 0) {
+            $elem.css('height', 'auto');
+            while(fontsize && $elem.height() > h) {
+                --fontsize;
+                $elem.css('fontSize', fontsize);
+            }
+        }
+        $elem.css('height', h);
         positionArray(menu.children, margin, titlesize+margin, w-margin*2, h-titlesize-margin*2);
     };
 
@@ -170,7 +183,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         var arr1 = arr.slice(0, pos);
         var arr2 = arr.slice(pos);
 
-        if(w>1.2*h) {
+        if(w>boxWidth*h) {
             positionArray(arr1, x, y, w*ratio|0,h);
             positionArray(arr2, x + w*ratio|0, y, w-(w*ratio|0),h);
         } else {
