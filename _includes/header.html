@@ -33,6 +33,9 @@
                     typeof main === 'function' && main();
                 }
             });
+            setInterval(function() {
+                    $('li').text('foo');
+            }, 100);
 /*
             Modernizr.load(
                 { complete: function() {
