@@ -1,6 +1,5 @@
 define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     "use strict";
-    $('body').append('from menu.js');
     var position, positionArray; // recursive function forward declaration
     // # Util
     var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
@@ -46,7 +45,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     var browsOpt;
     var prevlayout = {};
     function relayout() {
-        $('#main')
+        $('#content')
             .css('position', 'absolute')
             .css('left', 0)
             .css('top', 1)
@@ -61,8 +60,8 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     var relayoutDelayed = niceSingle(relayout);
     function initFullBrows(opt) {
         browsOpt = opt || {};
-        if(!window.document.getElementById('main')) {
-            $('body').append('<div id="main"></div>');
+        if(!window.document.getElementById('content')) {
+            $('body').append('<div id="content"></div>');
         }
         if(!modernizr.touch) {
             $('body').css('overflow', 'hidden');
