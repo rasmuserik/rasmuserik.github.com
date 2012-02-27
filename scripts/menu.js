@@ -153,6 +153,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
             }
         }
         $elem.css('height', h);
+        $elem.css('boxShadow', '3px 3px 9px rgba(0, 0, 0, .8)');
         positionArray(menu.children, margin, titlesize+margin, w-margin*2, h-titlesize-margin*2);
     };
 
