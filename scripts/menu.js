@@ -120,7 +120,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         style.webkitBoxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
         if(menu.url) {
             var url = menu.url;
-            $(menu.elem).bind(modernizr.touch?'touch':'click', function() {
+            $(menu.elem).bind(modernizr.touch?'touchstart':'mousedown', function() {
                 window.location = url;
             });
         }
