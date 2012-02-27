@@ -78,7 +78,8 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     }
 
     // # Config
-    var margin = 3;
+    var margin = 2;
+    var padding = 2;
     var titlesize = 20;
     var border = modernizr.boxshadow ? 0 : 1;
 
@@ -108,11 +109,10 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         style.fontSize = '16px';
         style.display = 'block'; 
         style.position = 'absolute'; 
-        style.padding = margin/2 + 'px';
+        style.padding = padding + 'px';
         style.top = '100px'; 
         style.left = '100px'; 
         style.margin = margin + 'px';
-        style.padding = '2px';
         style.textAlign = 'center';
         style.borderRadius = margin*2 + 'px';
         style.border = border + 'px solid #000000'; 
@@ -135,8 +135,8 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
 
     // # Calculate position of boxes
     position = function(menu, x, y, w, h) {
-        w-= 2*(margin + border);
-        h-= 2*(margin + border);
+        w-= 2*(margin + border + padding);
+        h-= 2*(margin + border + padding);
         var $elem = $(menu.elem);
         
         $elem.css('left', x)
@@ -154,7 +154,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         }
         $elem.css('height', h);
         $elem.css('boxShadow', '3px 3px 9px rgba(0, 0, 0, .8)');
-        positionArray(menu.children, margin, titlesize+margin, w-margin*2, h-titlesize-margin*2);
+        positionArray(menu.children, padding*2, titlesize + padding, w-padding*2, h-titlesize-padding*2);
     };
 
     positionArray = function(arr, x, y, w, h) {
