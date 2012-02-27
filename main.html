@@ -73,7 +73,7 @@
     if(!window.JSON || !JSON.parse) {
         lib.push('json2');
     }
-    lib.push(navigator.userAgent.match(/webkit/i)?'zepto':'jquery-1.7.1');
+    lib.push(navigator.userAgent.match(/webkit/i)?'zepto.min':'jquery-1.7.1.min');
     require.config({baseUrl:"/lib"});
     require(lib, function() {
         define('modernizr', function() { return Modernizr; });
