@@ -1,3 +1,4 @@
+document.write('blah');
 define('modernizr', function() { return Modernizr; });
 define('window', function() { return window; });
 define('zquery', function() { return $; });
