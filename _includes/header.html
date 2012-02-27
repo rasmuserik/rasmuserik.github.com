@@ -18,7 +18,8 @@
             Modernizr.load([
                 { test: Modernizr.json, nope: '/lib/json2.js'},
                 { test: Object.create && Object.keys && Array.prototype.forEach, nope: '/lib/es5-shim.js'},
-                { test: navigator.userAgent.match(/webkit/i), yep: '/lib/zepto.js', nope: '/lib/jquery-1.7.1.js'},
+                //{ test: navigator.userAgent.match(/webkit/i), yep: '/lib/zepto.js', nope: '/lib/jquery-1.7.1.js'},
+                '/lib/jquery-1.7.1.js',
                 '/static/style.css',
                 { load: '/lib/require.js', complete: function() {
                     define('modernizr', function() { return Modernizr; });
