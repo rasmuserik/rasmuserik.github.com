@@ -18,40 +18,11 @@
             Modernizr.load([
                 { test: Modernizr.json, nope: '/lib/json2.js'},
                 { test: Object.create && Object.keys && Array.prototype.forEach, nope: '/lib/es5-shim.js'},
-                //{ test: navigator.userAgent.match(/webkit/i), yep: '/lib/zepto.js', nope: '/lib/jquery-1.7.1.js'},
-                '/lib/jquery-1.7.1.js',
+                { test: navigator.userAgent.match(/webkit/i), yep: '/lib/zepto.js', nope: '/lib/jquery-1.7.1.js'},
                 '/static/style.css',
                 '/lib/require.js',
                 '/scripts/main.js'
             ]);
-            /*
-            Modernizr.load({
-                load: ['/static/style.css', '/lib/require.js'],
-                complete: function() {
-                    $('body').append('from header.html');
-                    console.log("HERE");
-                    define('modernizr', function() { return Modernizr; });
-                    define('window', function() { return window; });
-                    define('zquery', function() { return $; });
-                    require.config({baseUrl:"/scripts"})
-                    typeof main === 'function' && main();
-                }
-            });
-            setInterval(function() {
-                    $('li').text('foo');
-            }, 100);
-/*
-            Modernizr.load(
-                { complete: function() {
-                    $('body').append('from header.html');
-                    define('modernizr', function() { return Modernizr; });
-                    define('window', function() { return window; });
-                    define('zquery', function() { return $; });
-                    require.config({baseUrl:"/scripts"})
-                    typeof main === 'function' && main();
-
-                    }});
-                    */
         </script>
         <!--script type="text/javascript">var _gaq=[['_setAccount', 'UA-8354880-3'],['_trackPageview']];</script><script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script-->
         <!--
