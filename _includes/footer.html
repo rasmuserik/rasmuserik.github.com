@@ -1,3 +1,4 @@
+<script src="lib/require.js" type="text/javascript"></script>
 <script type="text/javascript">(function() {
     function load(filename) {
         var elem = document.createElement('script');
@@ -8,7 +9,6 @@
     window.JSON && JSON.parse || load('/lib/json2.js');
     Object.create && Object.keys && Array.prototype.forEach || load('/lib/es5-shim.js');
     load(navigator.userAgent.match(/webkit/i)?'/lib/zepto.js':'/lib/jquery-1.7.1.js');
-    load('/lib/require.js');
     load('/lib/modernizr.js');
     function whenReady() {
         if(window.$ && window.Modernizr && window.require) {
