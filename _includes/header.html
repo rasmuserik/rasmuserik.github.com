@@ -22,11 +22,13 @@
                 '/lib/jquery-1.7.1.js',
                 '/static/style.css',
                 { load: '/lib/require.js', complete: function() {
+                    $(body).append('A');
                     define('modernizr', function() { return Modernizr; });
                     define('window', function() { return window; });
                     define('zquery', function() { return $; });
                     require.config({baseUrl:"/scripts"})
                     typeof main === 'function' && main();
+
                  }}]);
         </script>
         <!--script type="text/javascript">var _gaq=[['_setAccount', 'UA-8354880-3'],['_trackPageview']];</script><script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script-->
