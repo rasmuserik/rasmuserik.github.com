@@ -22,7 +22,7 @@
                 '/lib/jquery-1.7.1.js',
                 '/static/style.css',
                 { load: '/lib/require.js', complete: function() {
-                    $(body).append('from header.html');
+                    $('body').append('from header.html');
                     define('modernizr', function() { return Modernizr; });
                     define('window', function() { return window; });
                     define('zquery', function() { return $; });
