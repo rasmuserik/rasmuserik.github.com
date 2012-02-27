@@ -1,5 +1,6 @@
 define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     "use strict";
+    $('body').append('from menu.js');
     var position, positionArray; // recursive function forward declaration
     // # Util
     var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
