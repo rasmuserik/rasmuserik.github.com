@@ -1,4 +1,4 @@
-define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
+define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
     "use strict";
     var position, positionArray; // recursive function forward declaration
     // # Util
@@ -71,8 +71,8 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
                     'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');
-        $(window).resize(relayoutDelayed);
-        $(window).on('orientationchange', relayoutDelayed);
+        $(window).bind('resize', relayoutDelayed);
+        $(window).bind('orientationchange', relayoutDelayed);
         relayout();
     }
 
@@ -84,13 +84,17 @@ define(['jquery', 'modernizr', 'window'], function($, modernizr, window) {
     // # Transformation to nested list to object
     function elemToObj(elem) {
         var result = {};
-        return {
-            title: $(elem.firstChild).text().trim(),
-            children: arraySlice($(elem).find('> ul > li'))
-                .map(elemToObj),
-            url: $(elem).find('> a').attr('href'),
-            elem: elem
-        };
+        result.title = $(elem.firstChild).text().trim(),
+        result.children = [];
+        if(elem.children[0]) {
+            var elems = elem.children[0].children;
+            for(var i=0;i<elems.length;++i) {
+                result.children.push(elemToObj(elems[i]));
+            }
+        }
+        result.url = $(elem).find('a').attr('href');
+        result.elem = elem;
+        return result;
     }
 
     // # Initialise the objects, calculate weight
