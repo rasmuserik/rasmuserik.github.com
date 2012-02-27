@@ -12,16 +12,5 @@
         <link rel="apple-touch-icon-precomposed" href="/static/icon.png">
         <link rel="icon" type="image/png" href="/static/icon.png">
         <link rel="shortcut icon" href="/static/icon.png">
-        <script src="/lib/modernizr.js"></script>
-        <script type="text/javascript">(function() {
-            function load(filename) {
-                document.write('<script src="'+filename+'"></'+'script>');
-            }
-            Modernizr.json || load('/lib/json2.js');
-            Object.create && Object.keys && Array.prototype.forEach || load('/lib/es5-shim.js');
-            load(navigator.userAgent.match(/webkit/i)?'/lib/zepto.js':'/lib/jquery-1.7.1.js');
-            load('/lib/require.js');
-            load('/scripts/main.js');
-       })()</script>
     </head>
 <body>
