@@ -10,7 +10,14 @@
     load(navigator.userAgent.match(/webkit/i)?'/lib/zepto.js':'/lib/jquery-1.7.1.js');
     load('/lib/require.js');
     load('/lib/modernizr.js');
-    load('/scripts/main.js');
+    function whenReady() {
+        if(window.$ && window.Modernizr && window.require) {
+            load('/scripts/main.js');
+        } else {
+            setTimeout(whenReady, 10);
+        }
+    }
+    whenReady();
 })()</script>
 </body>
 </html>
