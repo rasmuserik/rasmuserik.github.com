@@ -92,7 +92,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
                 result.children.push(elemToObj(elems[i]));
             }
         }
-        result.url = $(elem).find('a').attr('href');
+        result.url = elem.children[0] && elem.children[0].href;
         result.elem = elem;
         return result;
     }
@@ -118,6 +118,12 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         style.backgroundColor = colorHash(menu.title);
         style.boxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
         style.webkitBoxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
+        if(menu.url) {
+            var url = menu.url;
+            $(menu.elem).bind(modernizr.touch?'touch':'click', function() {
+                window.location = url;
+            });
+        }
         menu.children.forEach(initMenu);
         menu.size = totalSize(menu.children)/1.5 + 1;
         relayoutFn = function() {
