@@ -1,5 +1,4 @@
-define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
-    "use strict";
+define(['fullbrows', 'zquery', 'modernizr', 'window', 'exports'], function(fullbrows, $, modernizr, window, exports) { 'use strict';
     var boxWidth = 1.5;
     var position, positionArray; // recursive function forward declaration
     // # Util
@@ -16,65 +15,6 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
             result = pseudoRandom(result + text.charCodeAt(i));
         }
         return "#" + ((result | 0xe0e0e0)&0xffffff).toString(16);
-    }
-
-    function niceSingle(fn) {
-        var running = false;
-        return function() {
-            if(running) {
-                return;
-            }
-            running = true;
-            window.setTimeout(function() {
-                fn();
-                running = false;
-            }, 10);
-        };
-    }
-
-    function windowHeight() {
-        var height = $(window).height();
-        // workaround buggy window height on iOS
-        if(height === 356 || height === 208) {
-            height += 60;
-        }
-        return height;
-    }
-
-    // # Browser window setup
-    var relayoutFn;
-    var browsOpt;
-    var prevlayout = {};
-    function relayout() {
-        $('#content')
-            .css('position', 'absolute')
-            .css('left', 0)
-            .css('top', 1)
-            .css('overflow', 'hidden')
-            .css('width', $(window).width())
-            .css('height', browsOpt.scrollable ? 'auto' : windowHeight());
-        if(typeof relayoutFn === 'function') {
-            relayoutFn();
-        }
-        window.scrollTo(0,1);
-    }
-    var relayoutDelayed = niceSingle(relayout);
-    function initFullBrows(opt) {
-        browsOpt = opt || {};
-        if(!window.document.getElementById('content')) {
-            $('body').append('<div id="content"></div>');
-        }
-        if(!modernizr.touch) {
-            $('body').css('overflow', 'hidden');
-        } else {
-            $('body').append('<div style="height:' + 
-                    (Math.max(windowHeight(),$(window).width()) + 62) + 
-                    'px;background-color: black;"></div>');
-        }
-        $('body').css('background', 'black');
-        $(window).bind('resize', relayoutDelayed);
-        $(window).bind('orientationchange', relayoutDelayed);
-        relayout();
     }
 
     // # Config
@@ -128,9 +68,9 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         }
         menu.children.forEach(initMenu);
         menu.size = totalSize(menu.children)/1.5 + 1;
-        relayoutFn = function() {
-            position(menu, -margin,-margin,$(window).width()+margin, windowHeight()+margin);
-        };
+        fullbrows.init({callback: function(elem) {
+            position(menu, -margin,-margin,$(elem).width()+margin, $(elem).height()+margin);
+        }});
     }
 
     // # Calculate position of boxes
@@ -193,11 +133,7 @@ define(['zquery', 'modernizr', 'window'], function($, modernizr, window) {
         }
     };
 
-    // # Main runner
-    var menu;
-    $(function() {
-        menu = elemToObj($('div > ul > li')[0]);
-        initMenu(menu);
-        initFullBrows();
-    });
+    exports.doMenu = function(elem) {
+        initMenu(elemToObj(elem));
+    }
 });

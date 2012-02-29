@@ -1,6 +1,11 @@
-define(['menu'], function() {
-/*
-['solsort.dk',
+define(['menu', 'zquery'], function(menu, $) { 'use strict';
+$(function() {
+    menu.doMenu($('div > ul > li')[0]);
+});
+function showHTML() { };
+function redirect() { };
+function showMarkDown() { };
+console.log(['solsort.dk',
     {title: 'Curriculum Vitae', app: showHTML('/CurriculumVitae')},
     ['Apps',
         {title: 'Danske Byer', app: redirect('/dkcities')},
@@ -28,6 +33,5 @@ define(['menu'], function() {
        {title: 'hierachical layout', app: showMarkDown('')},
        {title: 'slidein transitions', app: showMarkDown('')}],
     ['Presentations',
-        {title: 'OAuth2', app: showMarkDown('/presentations/oauth2')}]];
-*/
+        {title: 'OAuth2', app: showMarkDown('/presentations/oauth2')}]]);
 });
