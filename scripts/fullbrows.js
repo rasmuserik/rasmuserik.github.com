@@ -1,28 +1,4 @@
-define(['zquery', 'modernizr', 'window', 'exports'], function($, modernizr, window, exports) { 'use strict';
-    // # Util
-    function niceSingle(fn) {
-        var running = false;
-        return function() {
-            if(running) {
-                return;
-            }
-            running = true;
-            window.setTimeout(function() {
-                fn();
-                running = false;
-            }, 10);
-        };
-    }
-
-    function windowHeight() {
-        var height = $(window).height();
-        // workaround buggy window height on iOS
-        if(height === 356 || height === 208) {
-            height += 60;
-        }
-        return height;
-    }
-
+define(['util', 'zquery', 'modernizr', 'window', 'exports'], function(util, $, modernizr, window, exports) { 'use strict';
     // # Browser window setup
     var relayoutFn;
     var browsOpt;
@@ -33,13 +9,13 @@ define(['zquery', 'modernizr', 'window', 'exports'], function($, modernizr, wind
             .css('top', 1)
             .css('overflow', 'hidden')
             .css('width', $(window).width())
-            .css('height', browsOpt.scrollable ? 'auto' : windowHeight());
+            .css('height', browsOpt.scrollable ? 'auto' : util.windowHeight());
         if(typeof relayoutFn === 'function') {
             relayoutFn(window.document.getElementById('content'));
         }
         window.scrollTo(0,1);
     }
-    var relayoutDelayed = niceSingle(relayout);
+    var relayoutDelayed = util.niceSingle(relayout);
 
     var init = exports.init = function(opt) {
         browsOpt = opt || {};
@@ -51,7 +27,7 @@ define(['zquery', 'modernizr', 'window', 'exports'], function($, modernizr, wind
             $('body').css('overflow', 'hidden');
         } else {
             $('body').append('<div style="height:' + 
-                    (Math.max(windowHeight(),$(window).width()) + 62) + 
+                    (Math.max(util.windowHeight(),$(window).width()) + 62) + 
                     'px;background-color: black;"></div>');
         }
         $('body').css('background', 'black');

@@ -1,21 +1,7 @@
-define(['fullbrows', 'zquery', 'modernizr', 'window', 'exports'], function(fullbrows, $, modernizr, window, exports) { 'use strict';
+define(['util', 'fullbrows', 'zquery', 'modernizr', 'window', 'exports'], 
+  function(util, fullbrows, $, modernizr, window, exports) { 'use strict';
     var boxWidth = 1.5;
     var position, positionArray; // recursive function forward declaration
-    // # Util
-    var arraySlice = Array.prototype.slice.apply.bind(Array.prototype.slice);
-
-    var seed = 1;
-    function pseudoRandom(n) {
-        return (seed = (1664525 * (n || seed) + 1013904223) |0);
-    }
-
-    function colorHash(text) {
-        var result = 0;
-        for(var i=0;i<text.length; ++i) {
-            result = pseudoRandom(result + text.charCodeAt(i));
-        }
-        return "#" + ((result | 0xe0e0e0)&0xffffff).toString(16);
-    }
 
     // # Config
     var margin = 2;
@@ -57,7 +43,7 @@ define(['fullbrows', 'zquery', 'modernizr', 'window', 'exports'], function(fullb
         style.borderRadius = margin*2 + 'px';
         style.border = border + 'px solid #000000'; 
         style.overflow = 'hidden';
-        style.backgroundColor = colorHash(menu.title);
+        style.backgroundColor = util.colorHash(menu.title);
         style.boxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
         style.webkitBoxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
         if(menu.url) {
