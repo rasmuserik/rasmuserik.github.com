@@ -11,45 +11,51 @@
 opposites: browser vs. serverside
 
 - intro
-    - why and what, - state of javascript
-    - practical, - dive into a sample project
-    - a glimpse into the future(present)
-- javascript - why and what
-    - why
-        - cross platform ubiquity
-        - functional
-        - state of the art: dynamic language virtual machines
-    - what
-        - async => what-not
-        - somewhat functional language
-        - scripting (regex, hashmaps, ...)
-        - dynamic 
-        - prototypal object model
-        - browser vs. server side
-        - where-to harmony
-- javascript engines, compilers and virtual machines
-    - v8 - node.js, chrome
-    - SpiderMonkey - Mozilla
-    - JavaScriptCore - Qt, Safari, Android
-    - Rhino - Java SE 6
-    - Carakan/... (Opera), Chakra/... (Microsoft), 
-    - Nashorn, Java SE 8, to be open, webkit+node-compat, ?2013?
-    - traceour - harmony
-- Best practice
+    - why:
+        - ubiquitous scripting language with good virtual machines
+    - what:
+        - javascript features
+    - how:
+        - best practices
+
+
+- Why - ubiquitous platform with good virtual machines 
+    - ubiquitous
+        - webbrowsers
+        - smartphones (sometimes the only option)
+        - scripting in applications (both open and proprietary)
+        - server-side (node, java, embedded)
+    - engines
+        - v8 - node.js, chrome
+        - SpiderMonkey - Mozilla
+        - JavaScriptCore - Qt, Safari, Android
+        - Rhino - Java SE 6
+        - Opera Carakan/futhark/..., Microsoft Chakra/JScript, Embedthis Ejscript, Adobe ActionScript, Unity UnityScript
+        - Nashorn, Java SE 8, to be open, webkit+node-compat, ?2013?
+
+- What - javascript features and issues
+    - somewhat functional dynamic asynchronous scripting language with prototypal object model, c-like syntax, and good and bad parts.
+
+- How, - good practices
     - modules
-        - commonjs modules + async: requirejs, ender, 
+        - commonjs - enderjs, browserify, ...
+        - amd (Asynchronous Module Definition) - requirejs, ...
         - harmony
     - packaging
         - npm
         - mobile via phonegap
         - widget spec
+        - minify (closure/uglify/...)
         - cache manifest
     - testing
-        - unit testing: jasmine, mocha,...
-        - system testing: Selenium, zombie.js, ...
-        - continous integration with travis
-        - code coverage
+        - Unit testing: jasmine, mocha,...
+        - System testing: Selenium, zombie.js, ...
+        - Continous integration with travis
+        - Code coverage
     - documentation
         - Literate programming: docco
         - API-documentation: jsdoc
-    - code style: several exists, choose one. The one from google is a good bet.
+    - code style
+        - avoid the bad parts, learn the good parts 
+        - jshint, jslint, closure
+        - style guides: choose one ie. google-styleguide 
