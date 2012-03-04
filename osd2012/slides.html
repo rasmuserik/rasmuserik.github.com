@@ -48,58 +48,9 @@
             line-height: 200%;
         }
 
-        .why {
-            left: 40pt;
-            top: 30pt;
-        }
-        .why div {
-            margin-bottom: 3pt;
-            line-height: 110%;
-            font-size: 12pt;
-        }
-        .why .tagline {
-            margin: 0;
-            font-size: 20pt;
-            text-align: left;
-            position: absolute;
-            top: 72pt;
-            left: 12pt;
-        }
-        .why h3 {
-            /* font-weight: normal;*/
-            text-align: left;
-            margin: 0pt 0pt 6pt 0pt;
-        }
-        .why .top {
-            position: absolute;
-            top: 108pt;
-        }
-        .why .bottom {
-            position: absolute;
-            top: 196pt;
-        }
-        .why .left {
-            left: 12pt;
-            width: 100pt;
-        }
-        .why .middle {
-            left: 126pt;
-            width: 100pt;
-            padding-left: 6pt;
-            padding-right: 0pt;
-        }
-        .why .right h3 {
-            letter-spacing: -0.9pt;
-        }
-        .why .right {
-            font-family: 'Ubuntu Condensed', 'Ubuntu', sans-serif;
-            left: 236pt;
-            width: 160pt;
-        }
-
         .what {
             left: 40pt;
-            top: 360pt;
+            top: 30pt;
         }
         .what .descr {
             position: absolute;
@@ -112,7 +63,7 @@
         }
 
         .how {
-            left: 480pt;
+            left: 40pt;
             top: 360pt;
         }
         .how h3 {
@@ -149,9 +100,67 @@
             top: 190pt;
             left: 206pt;
         }
+
+        .where {
+            left: 480pt;
+            top: 360pt;
+        }
+        .where div {
+            line-height: 140%;
+            font-size: 12pt;
+        }
+        .where h3 {
+            /* font-weight: normal;*/
+            text-align: left;
+            margin: 0pt 0pt 6pt 0pt;
+        }
+        .where .top {
+            position: absolute;
+            top: 96pt;
+        }
+        .where .bottom {
+            position: absolute;
+            top: 190pt;
+        }
+        .where .left {
+            left: 12pt;
+            width: 100pt;
+        }
+        .where .middle {
+            left: 126pt;
+            width: 100pt;
+            padding-left: 6pt;
+            padding-right: 0pt;
+        }
+        .where .right h3 {
+            letter-spacing: -0.9pt;
+        }
+        .where .right {
+            font-family: 'Ubuntu Condensed', 'Ubuntu', sans-serif;
+            left: 236pt;
+            width: 160pt;
+        }
+
+        .timer {
+            float: right;
+            font-size: 16pt;
+        }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>(function(){
+        function now() {
+            return (new Date()).getTime();
+        }
+        function startTimer() {
+            var deadline = now() + 15*60*1000 + 1500;
+
+            setInterval(function() {
+                var time = deadline - now();
+                $(".timer").text( time<0?'':  (time / 60000|0)+':' + (100+(time/1000|0)%60).toString().slice(1));
+            }, 1000);
+            //$(".timer").text(now());
+
+        }
         function vendorPrefix(attr, val) {
             var result = {};
             ['', '-ms-', '-moz-', '-webkit-', '-o-'].forEach(function(prefix) {
@@ -160,11 +169,6 @@
             return result;
         }
         var scale;
-        var zoomed;
-        var step;
-        function resetView() {
-            zoomout();
-        }
         function zoomout() {
             scale = $(window).height() / $('.main').height() ;
             var scaleStr = 'scale(' + scale + ', ' + scale + ')';
@@ -172,10 +176,8 @@
                 .css({top: 0, left: 0})
                 .css(vendorPrefix('transform-origin', '0px 0px'))
                 .css(vendorPrefix('transform', scaleStr));
-            zoomed = false;
         }
         function zoomin(slide) {
-            step = slide * 2;
             var scaleVal = scale * 690 / 300;
             var scaleStr = 'scale(' + scaleVal + ', ' + scaleVal + ')';
             $m = $('.main');
@@ -190,25 +192,13 @@
                 {top: -360*pt, left: -480*pt}
             ];
             $m.css(slides[slide]);
-            zoomed = true;
         }
-        $(window).resize(resetView);
+        $(window).resize(zoomout);
         $(function() {
-            resetView();
+            zoomout();
             zoomin(0);
-            step = 0;
+            var step = 0;
 
-            function slide() {
-                step = (step|0) % 8;
-                if(step&1) {
-                    zoomout();
-                } else {
-                    zoomin(step/2);
-                }
-            }
-            $('.main').on('mousedown', function() {
-                ++step; slide();
-            });
             $(document).on('keydown', function(ev) {
                 var key = ev.keyCode;
                 console.log(ev.keyCode);
@@ -223,15 +213,22 @@
                 if(key === 48) {
                     step = 1;
                 }
-                slide();
+                step = (step|0) % 8;
+                if(step&1) {
+                    zoomout();
+                } else {
+                    zoomin(step/2);
+                }
             });
             setTimeout(function() {
                 $('.main').css(vendorPrefix('transition', 'all 1s'));
             }, 0);
+            startTimer();
         });
     })();</script>
   </head>
   <body>
+    <div class="timer"></div>
     <div class="main">
         <div class="intro slide">
             <h1>Serious JavaScript</h1>
@@ -243,16 +240,13 @@
             <div class="link"><a href="http://solsort.dk/osd2012">solsort.dk&#8202;/osd2012</a></div>
             -->
         </div>
-        <div class="why slide">
-            <h2>Why&thinsp;?</h2>
-            <div class="tagline">
-                Ubiquitous platform, with good engines:
-            </div>
+        <div class="where slide">
+            <h2>Where&thinsp;?</h2>
             <div class="javascriptcore top left">
                 <h3>JavaScriptCore</h3>
                 <div>Safari</div>
                 <div>Smartphones</div>
-                <div>Qt &amp; QML</div>
+                <div>Qt &amp; Qt Quick</div>
             </div>
             <div class="v8 box top middle">
                 <h3>V8</h3>
@@ -288,13 +282,12 @@
         <div class="what slide">
             <h2>What&thinsp;?</h2>
             <div class="descr">
-                <b>JavaScript:</b><br/>
-                a somewhat functional
-                asynchronous dynamic
-                scripting language with
-                prototypal object model,
-                c-like syntax, and good
-                and bad parts.
+                JavaScript:&ensp;ubiquitous <br/>
+                somewhat functional <br/>
+                asynchronous&ensp;dynamic <br/>
+                scripting language with <br/>
+                prototypal object model <br/>
+                and quirks.
             </div>
         </div>
         <div class="how slide">
@@ -304,7 +297,7 @@
                 <div>CommonJS Modules</div>
                 <div>Asynchronous Module Definitions</div>
                 <div>RequireJS, EnderJS, Browserify, ...</div>
-                <div>Future: Harmony (via traceour)</div>
+                <div>Future: Harmony (via Traceur)</div>
             </div>
             <div class="packaging">
                 <h3>Packaging</h3>
@@ -315,20 +308,20 @@
             </div>
             <div class="testing">
                 <h3>Testing</h3>
-                <div>Unit testing: jasmine, mocha,...</div>
-                <div>System testing: Selenium, zombie.js, ...</div>  
-                <div>Continous integration: travis, ...</div>
+                <div>Unit testing: Jasmine, Mocha,...</div>
+                <div>System testing: Selenium, Zombie.js, ...</div>  
+                <div>Continous integration: Travis CI, ...</div>
                 <div>Code coverage</div>
             </div>
             <div class="documentation">
                 <h3>Documentation</h3>
-                <div>Literate programming: docco</div>
-                <div>API-documentation: jsdoc</div>
+                <div>Literate programming: Docco</div>
+                <div>API-documentation: JSDoc</div>
             </div>
             <div class="codestyle">
                 <h3>Code Style</h3>
                 <div>Avoid bad parts, learn good parts</div>
-                <div>Style checkers: jshint, jslint, closure</div>
+                <div>Style checkers: JSHint, JSLint, Closure</div>
                 <div>Use guidelines, ie. google-styleguide</div>
             </div>
         </div>
