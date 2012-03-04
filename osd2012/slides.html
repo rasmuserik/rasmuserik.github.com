@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Serious JavaScript</title>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed:400' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .main {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 920pt;
+            height: 690pt;
+            border: 2px solid blue;
+        }
+        .slide {
+            margin: 0pt;
+            padding: 0pt;
+            position: absolute;
+            width: 400pt;
+            height: 300pt;
+            border: 1px solid black;
+        }
+        .intro {
+            left: 480pt;
+            top: 30pt;
+        }
+        .why {
+            left: 40pt;
+            top: 30pt;
+        }
+        .what {
+            left: 40pt;
+            top: 360pt;
+        }
+        .how {
+            left: 480pt;
+            top: 360pt;
+        }
+        .intro {
+            border: none;
+            text-align: center;
+            font-size: 20pt;
+        }
+        h1 {
+            margin: 30pt 0pt 10pt 0pt;;
+            padding: 0pt;
+            font-size: 72pt;
+        }
+        h2 {
+            font-size: 48pt;
+            margin: 12pt;
+            padding: 0pt;
+        }
+
+        .why div {
+            margin-bottom: 3pt;
+            line-height: 100%;
+            font-size: 12pt;
+        }
+        .why .tagline {
+            margin: 0;
+            font-size: 16pt;
+            text-align: left;
+            position: absolute;
+            top: 72pt;
+            left: 12pt;
+        }
+        .why h3 {
+            /* font-weight: normal;*/
+            text-align: center;
+            margin: 0pt 0pt 6pt 0pt;
+        }
+        .top {
+            position: absolute;
+            top: 108pt;
+        }
+        .bottom {
+            position: absolute;
+            top: 196pt;
+        }
+        .left {
+            left: 24pt;
+            width: 100pt;
+        }
+        .middle {
+            left: 130pt;
+            width: 100pt;
+            border-right: 1px dotted black;
+            border-left: 1px dotted black;
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+        .right h3 {
+            letter-spacing: -1.2pt;
+        }
+        .right {
+            font-family: 'Ubuntu Condensed', 'Ubuntu', sans-serif;
+            left: 248pt;
+            width: 140pt;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>
+    </script>
+  </head>
+  <body>
+    <div class="main">
+        <div class="intro slide">
+            <h1>Serious JavaScript</h1>
+            <div class="author"><sup>by</sup> Rasmus&thinsp;@&thinsp;solsort.dk&emsp;<small>March 2012</small></div>
+            <div class="slidelink">
+                slides and more at:&ensp;<a href="http://solsort.dk/osd2012">solsort.dk&#8202;/&#8202;osd2012</a>
+            </div>
+        </div>
+        <div class="why slide">
+            <h2>Why&thinsp;?</h2>
+            <div class="tagline">
+                Ubiquitous platform with good engines:
+            </div>
+            <div class="javascriptcore top left">
+                <h3>JavaScriptCore</h3>
+                <div>Safari</div>
+                <div>Smartphones</div>
+                <div>Qt &amp; QML</div>
+            </div>
+            <div class="v8 box top middle">
+                <h3>v8</h3>
+                <div>Chrome</div>
+                <div>Generational GC</div>
+                <div>node.js</div>
+            </div>
+            <div class="spidermonkey box bottom left">
+                <h3>SpiderMonkey</h3>
+                <div>Mozilla Firefox</div>
+                <div>Tracing JIT</div>
+                <div>CouchDB, Gnome, MongoDB, Adobe</div>
+            </div>
+            <div class="rhino box bottom bottom middle">
+                <h3>Rhino</h3>
+                <div>Mozilla</div>
+                <div>Java Integration</div>
+                <div>Part of Java SE 6</div>
+            </div>
+            <div class="browsers box top right">
+                <h3>Other browsers engines</h3>
+                <div>KJS • KDE</div>
+                <div>Chakra, JScript • Microsoft</div>
+                <div>Carakan, Futhark • Opera</div>
+            </div>
+            <div class="engines box bottom right">
+                <h3>Other embedded engines</h3>
+                <div>Nashorn: Java SE 8, 2013</div>
+                <div>ActionScript: Adobe, Flash</div>
+                <div>EjScript, UnityScript, MiniJoe, LightScript</div>
+            </div>
+        </div>
+        <div class="what slide">
+            <h2>What&thinsp;?</h2>
+            <div class="descr">
+                A somewhat functional
+                asynchronous dynamic
+                scripting language with
+                prototypal object model,
+                c-like syntax, and good
+                and bad parts.
+            </div>
+        </div>
+        <div class="how slide">
+            <h2>How&thinsp;?</h2>
+            <div class="modules">
+                <h3>Modules</h3>
+                <div>CommonJS Modules: EnderJS, Browserify, ...</div>
+                <div>AMD (Asynchronous Module Definitions): RequireJS, ...</div>
+                <div>Future: Harmony, transition via traceour</div>
+            </div>
+            <div class="packaging">
+                <h3>Packaging</h3>
+                <div>CommonJS Packaging, NPM</div>
+                <div>Mobile Apps via Cordova(aka. Callback aka. PhoneGap)</div>
+                <div>Cache manifest and widget spec</div>
+                <div>Minification: Closure, UglifyJS, ...</div>
+            </div>
+            <div class="testing">
+                <h3>Testing</h3>
+                <div>Unit testing: jasmine, mocha,...</div>
+                <div>System testing: Selenium, zombie.js, ...</div>  
+                <div>Continous integration: travis, jenkins, ...</div>
+                <div>Code coverage</div>
+            </div>
+            <div class="documentation">
+                <h3>Documentation</h3>
+                <div>Literate programming: docco</div>
+                <div>API-documentation: jsdoc</div>
+            </div>
+            <div class="codestyle">
+                <h3>Code Style</h3>
+                <div>Avoid the bad parts, learn the good parts</div>
+                <div>Style checkers: jshint, jslint, closure</div>
+                <div>Choose a style guide, ie. google-styleguide</div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
