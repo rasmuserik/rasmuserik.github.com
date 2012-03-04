@@ -3,19 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Serious JavaScript</title>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed:400' rel='stylesheet' type='text/css'>
     <style>
         body {
             font-family: 'Ubuntu', sans-serif;
         }
         .main {
-            position: absolute;
+            position: fixed;
             top: 0px;
             left: 0px;
             width: 920pt;
             height: 690pt;
-            border: 2px solid blue;
+        }
+        .main div {
+            margin: 0pt;
+            padding: 0pt;
         }
         .slide {
             margin: 0pt;
@@ -23,31 +26,9 @@
             position: absolute;
             width: 400pt;
             height: 300pt;
-            border: 1px solid black;
-        }
-        .intro {
-            left: 480pt;
-            top: 30pt;
-        }
-        .why {
-            left: 40pt;
-            top: 30pt;
-        }
-        .what {
-            left: 40pt;
-            top: 360pt;
-        }
-        .how {
-            left: 480pt;
-            top: 360pt;
-        }
-        .intro {
-            border: none;
-            text-align: center;
-            font-size: 20pt;
         }
         h1 {
-            margin: 30pt 0pt 10pt 0pt;;
+            margin: 20pt 0pt 10pt 0pt;;
             padding: 0pt;
             font-size: 72pt;
         }
@@ -57,14 +38,28 @@
             padding: 0pt;
         }
 
+        .intro {
+            left: 480pt;
+            top: 30pt;
+            text-align: center;
+        }
+        .intro div {
+            font-size: 20pt;
+            line-height: 200%;
+        }
+
+        .why {
+            left: 40pt;
+            top: 30pt;
+        }
         .why div {
             margin-bottom: 3pt;
-            line-height: 100%;
+            line-height: 110%;
             font-size: 12pt;
         }
         .why .tagline {
             margin: 0;
-            font-size: 16pt;
+            font-size: 20pt;
             text-align: left;
             position: absolute;
             top: 72pt;
@@ -72,55 +67,186 @@
         }
         .why h3 {
             /* font-weight: normal;*/
-            text-align: center;
+            text-align: left;
             margin: 0pt 0pt 6pt 0pt;
         }
-        .top {
+        .why .top {
             position: absolute;
             top: 108pt;
         }
-        .bottom {
+        .why .bottom {
             position: absolute;
             top: 196pt;
         }
-        .left {
-            left: 24pt;
+        .why .left {
+            left: 12pt;
             width: 100pt;
         }
-        .middle {
-            left: 130pt;
+        .why .middle {
+            left: 126pt;
             width: 100pt;
-            border-right: 1px dotted black;
-            border-left: 1px dotted black;
-            padding-left: 6px;
-            padding-right: 6px;
+            padding-left: 6pt;
+            padding-right: 0pt;
         }
-        .right h3 {
-            letter-spacing: -1.2pt;
+        .why .right h3 {
+            letter-spacing: -0.9pt;
         }
-        .right {
+        .why .right {
             font-family: 'Ubuntu Condensed', 'Ubuntu', sans-serif;
-            left: 248pt;
-            width: 140pt;
+            left: 236pt;
+            width: 160pt;
+        }
+
+        .what {
+            left: 40pt;
+            top: 360pt;
+        }
+        .what .descr {
+            position: absolute;
+            top: 84pt;
+            left: 72pt;
+            font-size: 20pt;
+            width: 240pt;
+            text-align: left;
+            line-height: 140%;
+        }
+
+        .how {
+            left: 480pt;
+            top: 360pt;
+        }
+        .how h3 {
+            /* font-weight: normal;*/
+            font-family: 'Ubuntu', sans-serif;
+            text-align: left;
+            margin: 0pt 0pt 2pt 0pt;
+        }
+        .how > div {
+            position: absolute;
+            line-height: 140%;
+            left: 24pt;
+            font-family: 'Ubuntu Condensed', 'Ubuntu', sans-serif;
+            margin: 0pt;
+            padding: 0pt;
+            font-size: 12pt;
+        /*    width: 182pt;*/
+        }
+        .how .documentation {
+            top: 36pt;
+            left: 206pt;
+        }
+        .how .modules {
+            top: 96pt;
+        }
+        .how .testing {
+            top: 96pt;
+            left: 206pt;
+        }
+        .how .packaging {
+            top: 190pt;
+        }
+        .how .codestyle {
+            top: 190pt;
+            left: 206pt;
         }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script>
-    </script>
+    <script>(function(){
+        function vendorPrefix(attr, val) {
+            var result = {};
+            ['', '-ms-', '-moz-', '-webkit-', '-o-'].forEach(function(prefix) {
+                result[prefix+attr] = val;
+            });
+            return result;
+        }
+        var scale;
+        var zoomed;
+        var step;
+        function resetView() {
+            zoomout();
+        }
+        function zoomout() {
+            scale = $(window).height() / $('.main').height() ;
+            var scaleStr = 'scale(' + scale + ', ' + scale + ')';
+            $('.main')
+                .css({top: 0, left: 0})
+                .css(vendorPrefix('transform-origin', '0px 0px'))
+                .css(vendorPrefix('transform', scaleStr));
+            zoomed = false;
+        }
+        function zoomin(slide) {
+            step = slide * 2;
+            var scaleVal = scale * 690 / 300;
+            var scaleStr = 'scale(' + scaleVal + ', ' + scaleVal + ')';
+            $m = $('.main');
+            
+            $m.css(vendorPrefix('transform-origin', '0px 0px'))
+              .css(vendorPrefix('transform', scaleStr));
+            var pt = $m.height()/690*scaleVal;
+            var slides = [ 
+                {top: -30*pt, left: -480*pt},
+                {top: -30*pt, left: -40*pt},
+                {top: -360*pt, left: -40*pt},
+                {top: -360*pt, left: -480*pt}
+            ];
+            $m.css(slides[slide]);
+            zoomed = true;
+        }
+        $(window).resize(resetView);
+        $(function() {
+            resetView();
+            zoomin(0);
+            step = 0;
+
+            function slide() {
+                step = (step|0) % 8;
+                if(step&1) {
+                    zoomout();
+                } else {
+                    zoomin(step/2);
+                }
+            }
+            $('.main').on('mousedown', function() {
+                ++step; slide();
+            });
+            $(document).on('keydown', function(ev) {
+                var key = ev.keyCode;
+                console.log(ev.keyCode);
+                if([32, 39,40, 34, 9, 13].indexOf(key) !== -1) {
+                    ++step;
+                } else if([33, 38, 37, 20].indexOf(key) !== -1) {
+                    --step;
+                }
+                if(49 <= key && key <= 52) {
+                    step = (key - 49) * 2
+                }
+                if(key === 48) {
+                    step = 1;
+                }
+                slide();
+            });
+            setTimeout(function() {
+                $('.main').css(vendorPrefix('transition', 'all 1s'));
+            }, 0);
+        });
+    })();</script>
   </head>
   <body>
     <div class="main">
         <div class="intro slide">
             <h1>Serious JavaScript</h1>
-            <div class="author"><sup>by</sup> Rasmus&thinsp;@&thinsp;solsort.dk&emsp;<small>March 2012</small></div>
+            <div class="author"><sup>by</sup> Rasmus&thinsp;@&thinsp;solsort.dk</div>
             <div class="slidelink">
                 slides and more at:&ensp;<a href="http://solsort.dk/osd2012">solsort.dk&#8202;/&#8202;osd2012</a>
             </div>
+            <!--
+            <div class="link"><a href="http://solsort.dk/osd2012">solsort.dk&#8202;/osd2012</a></div>
+            -->
         </div>
         <div class="why slide">
             <h2>Why&thinsp;?</h2>
             <div class="tagline">
-                Ubiquitous platform with good engines:
+                Ubiquitous platform, with good engines:
             </div>
             <div class="javascriptcore top left">
                 <h3>JavaScriptCore</h3>
@@ -129,7 +255,7 @@
                 <div>Qt &amp; QML</div>
             </div>
             <div class="v8 box top middle">
-                <h3>v8</h3>
+                <h3>V8</h3>
                 <div>Chrome</div>
                 <div>Generational GC</div>
                 <div>node.js</div>
@@ -138,7 +264,7 @@
                 <h3>SpiderMonkey</h3>
                 <div>Mozilla Firefox</div>
                 <div>Tracing JIT</div>
-                <div>CouchDB, Gnome, MongoDB, Adobe</div>
+                <div>NoSQL, PDF</div>
             </div>
             <div class="rhino box bottom bottom middle">
                 <h3>Rhino</h3>
@@ -155,14 +281,15 @@
             <div class="engines box bottom right">
                 <h3>Other embedded engines</h3>
                 <div>Nashorn: Java SE 8, 2013</div>
-                <div>ActionScript: Adobe, Flash</div>
-                <div>EjScript, UnityScript, MiniJoe, LightScript</div>
+                <div>ActionScript, UnityScript</div>
+                <div>EjScript, MiniJoe, LightScript</div>
             </div>
         </div>
         <div class="what slide">
             <h2>What&thinsp;?</h2>
             <div class="descr">
-                A somewhat functional
+                <b>JavaScript:</b><br/>
+                a somewhat functional
                 asynchronous dynamic
                 scripting language with
                 prototypal object model,
@@ -174,14 +301,15 @@
             <h2>How&thinsp;?</h2>
             <div class="modules">
                 <h3>Modules</h3>
-                <div>CommonJS Modules: EnderJS, Browserify, ...</div>
-                <div>AMD (Asynchronous Module Definitions): RequireJS, ...</div>
-                <div>Future: Harmony, transition via traceour</div>
+                <div>CommonJS Modules</div>
+                <div>Asynchronous Module Definitions</div>
+                <div>RequireJS, EnderJS, Browserify, ...</div>
+                <div>Future: Harmony (via traceour)</div>
             </div>
             <div class="packaging">
                 <h3>Packaging</h3>
                 <div>CommonJS Packaging, NPM</div>
-                <div>Mobile Apps via Cordova(aka. Callback aka. PhoneGap)</div>
+                <div>Mobile Apps via Cordova(PhoneGap)</div>
                 <div>Cache manifest and widget spec</div>
                 <div>Minification: Closure, UglifyJS, ...</div>
             </div>
@@ -189,7 +317,7 @@
                 <h3>Testing</h3>
                 <div>Unit testing: jasmine, mocha,...</div>
                 <div>System testing: Selenium, zombie.js, ...</div>  
-                <div>Continous integration: travis, jenkins, ...</div>
+                <div>Continous integration: travis, ...</div>
                 <div>Code coverage</div>
             </div>
             <div class="documentation">
@@ -199,9 +327,9 @@
             </div>
             <div class="codestyle">
                 <h3>Code Style</h3>
-                <div>Avoid the bad parts, learn the good parts</div>
+                <div>Avoid bad parts, learn good parts</div>
                 <div>Style checkers: jshint, jslint, closure</div>
-                <div>Choose a style guide, ie. google-styleguide</div>
+                <div>Use guidelines, ie. google-styleguide</div>
             </div>
         </div>
     </div>
