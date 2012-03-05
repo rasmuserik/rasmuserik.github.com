@@ -1,0 +1,9 @@
+body { 
+    margin: 1% 2% 1% 2%; 
+    font-family: sans-serif; 
+    line-height: 130%; 
+} 
+
+.menu li {
+    display: inline;
+}

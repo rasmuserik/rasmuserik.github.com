@@ -1,0 +1,24 @@
+- out
+  - watermellon man
+- existing
+  - summertime
+  - hit the road jack
+  - st. james infirmary
+  - song for my father
+  - girl from ipanema
+  - autumn leaves
+  - blues jam - nb: to distinct versions
+  - hit the road jack
+- to learn  
+  - Dire Straits - Your Latest Trick 
+  - minnie the moocher
+  - love me or leave me
+- backlog
+  - rawhide
+  - star wars bar song
+  - aristocats
+  - king louis song (junglebook)
+  - i hope you dont mind
+  - sophisticated lady
+  - the bare necessities
+  - pink panther
