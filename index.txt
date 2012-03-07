@@ -1,0 +1,27 @@
+
+
+
+
+
++----------+
+|          |  
+|          |    Rasmus Erik @ solsort.dk     (CV)
+|          |  
+|          |    - software developer at DBC a/s,
+|          |    and freelance computer scientist.
+|          |  
++----------+   
+
+
+Current areas of focus:
+
+    Mobile and webapp • strategy, teaching, and development
+    Open Source • infrastructure, reusing existing solutions
+    JavaScript • consulting, best practises, scripting engines
+
+
+------------
+Resources:
+
+- Serious JavaScript - presentation at OpenSourceDays 2012
+- GitHub

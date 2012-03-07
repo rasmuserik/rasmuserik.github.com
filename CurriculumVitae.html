@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>solsort.dk - Rasmus Erik Voel Jensen</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="True">
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:400' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                margin: 0px;
+                padding: 0px;
+                font-family: "Akzidenz-Grotesk", "Helvetica", "Arial", sans-serif;
+                font-size: 11pt;
+                line-height: 120%;
+            }
+            h2 {
+                left: 0pt;
+                margin: 0;
+                margin-left: 12pt;
+                padding: 6pt 12pt 0pt 0pt; 
+                padding-top: 18pt;
+                padding-bottom: 4pt;
+                width: 92pt;
+                text-align: right;
+                border-bottom: solid;
+                border-width: 2pt;
+            }
+            .cv {
+                page-break-before: avoid;
+                margin:0; padding:0;
+                margin-left: 12pt;
+                margin-bottom: 12pt;
+                padding-top: 12pt;
+                padding-bottom: 0pt;
+                border-left: solid;
+                border-bottom: solid;
+                border-width: 2pt;
+                width: 450pt;
+            }
+            .cv a {
+                color: #000080;
+                text-decoration: none;
+                border-bottom: dotted;
+                border-color: #8080ff;
+                border-width: 1pt;
+            }
+            .cv div {
+                margin-bottom: 3pt;
+            }
+            .cv .entry {
+                margin:0; padding:0;
+                margin-left: 102pt;
+                margin-bottom: 12pt;
+            }
+            .lowspace .entry {
+                margin-bottom: 6pt;
+            }
+            .cv .title {
+                margin:0; padding:0;
+                font-weight: bold;
+                position: relative;
+                left: -92pt;
+                width: 488pt;
+            }
+            .cv .year {
+                margin:0; padding:0;
+                text-align:right;
+                position: relative;
+                float: left;
+                left: -104pt; 
+                width: 92pt;
+            }
+            .cv ul {
+                margin:0; padding:0;
+                margin-top: 6pt;
+                margin-left: 12pt;
+            }
+            .cv li {
+                margin-bottom: 6pt;
+            }
+            .cvmenu {
+                margin-top: 0pt;
+                padding-top: 0pt;
+                margin-left: 12pt;
+                width: 500pt;
+                text-align: center;
+
+            }
+            .nopagebreak {
+                page-break-inside: avoid
+            }
+            .smallspace {
+                position: relative;
+                width: 5pt;
+            }
+            @media screen {
+                .printheader { 
+                    position: static;
+                    display:none; 
+                    /*
+                    */
+                } 
+            }
+
+            @media print {
+                .topbar {
+                    display: none;
+                }
+                .topbarskip {
+                    display: none;
+                }
+                .lowspace .title{
+                    font-weight: normal;
+                }
+                .printheader{
+                    position: fixed;
+                    width: 90%;
+                    text-align: right;
+                }
+
+                .cv .title {
+                    /*
+                    font-weight: normal;
+                    font-style: italic;*/
+                }
+                .pagebreak {
+                    page-break-before: always; 
+                }
+
+                .cvmenu{
+                    display:none;
+                }
+                .menu{
+                    display:none;
+                }
+                .noprint{
+                    display:none;
+                }
+                h1 { display: none;}
+                h2 {
+                    /*    
+                    font-weight: normal;
+                    font-style: italic;
+                    */
+                    border-width: 1pt;
+                    padding-left: 1pt;
+
+                }
+                .cv {
+                    border-width: 1pt;
+                }
+                .cv a {
+                    color: #000000;
+                    border: none;
+                }
+            }
+        </style>
+        </style>
+    </head>
+    <body>
+        <h1>Curriculum Vitae for</h1>
+        <h1>Rasmus Erik &#64; <a href="http://solsort.dk/">solsort.dk</a></h1>
+        <div class="page">
+            <div class="printheader">Rasmus&#8202;Erik&#8202;.&#8202;dk&#8202;/&#8202;Curriculum&#8202;Vitae<br/><b>↑</b><small> latest version, with hyperlinks </small><b>↑</b>&nbsp; &nbsp; &nbsp;</div>
+
+            <div class=no-page-break><h2 id="Oversigt">Oversigt</h2>
+                <div class="cv lowspace">
+                    <div class="entry"><div class="year">2009-nu</div> <div class="title"><a href="http://dbc.dk/">Dansk BiblioteksCenter</a> udvikler </div> </div>
+                    <div class="entry"><div class="year">2006-nu</div> <div class="title"><a href="http://solsort.dk">solsort.dk</a> freelance </div> </div>
+                    <div class="entry"><div class="year">2007-2010</div> <div class="title"><a href="http://ku.dk/">Københavns Universitet</a> underviser</div></div>
+                    <div class="entry"><div class="year">2009</div> <div class="title">Kandidat i Datalogi</div></div>
+                    <div class="entry"><div class="year">2007-2008</div> <div class="title"><a href="http://bibliotek.kk.dk/">Københavns Hovedbibliotek</a> projektleder</div></div>
+                    <!--div class="entry"><div class="year">2007-2008</div> <div class="title"><a href="http://tetraplan.dk">Tetraplan</a> udvikler</div> </div-->
+                    <div class="entry"><div class="year">2002,2003,2006</div> <div class="title"><a href="http://ku.dk/">Københavns Universitet</a> instruktor</div></div>
+                    <div class="entry"><div class="year">2005</div> <div class="title">Bachelor i Datalogi</div></div>
+                    <div class="entry"><div class="year">2004-2005</div> <div class="title"><a href="http://iva.dk/">Danmarks Biblioteksskole</a> it-lab medarbejder</div></div>
+                    <div class="entry"><div class="year">2001</div> <div class="title"><a href="http://ku.dk">Københavns Universitet</a> forskningsprogrammør</div> </div>
+                    <div class="entry"><div class="year">1981</div> <div class="title">Født</div></div>
+            </div></div>
+            <div class="cvmenu"> <a href="#Oversigt">Oversigt</a> • <a href="#Datalogi">Datalogi</a> • <a href="#Formidling">Formidling</a> • <a href="#Andet">Andet</a> • <a href="#Privat">Privat</a> </div>
+
+            <div class=nopagebreak><h2 id="Datalogi">Datalogi</h2>
+                <div class=cv>
+                    <div class="entry"><div class="year">2009-nu</div><div class="title">Udvikler ved Dansk BiblioteksCenter</div>
+                        JavaScript-engines, søgemaskine og mobile grænseflader.<br/>
+                        <ul>
+                            <li>Udvikling af mobilt framework, der genererer apps og mobil-web.</li>
+                            <li>Konferencer og samarbejde om open source og mobilt bibliotek m.m.</li>
+                            <li>Rettelser i Mozilla <a href="https://developer.mozilla.org/en/SpiderMonkey">SpiderMonkey</a> og <a href="http://www.mozilla.org/rhino/">Rhino</a>.</li>
+                            <li>Fejlretning og driftsmodning af søgemaskine til <a href="http://bibliotek.dk">bibliotek.dk</a>.</li>
+                        </ul>
+                    </div>
+                    <div class="entry"><div class="year">2009</div><div class="title">Kandidatgrad i Datalogi</div>
+                        <a href="http://lightscript.net/static/2009-Rasmus_Jensen-Design_and_Implementation_of_a_Scripting_Language_for_Mobile_Devices.pdf">Speciale</a> om scriptingsprog på mobiltelefoner.<br/>
+                        Projekter om formidling.
+                    </div>
+                    <div class="entry"><div class="year">2007-2008</div><div class="title">Udviklingsopgaver hos Tetraplan</div>
+                        Performanceoptimering af <a href="http://tetraplan.dk/kompetencer/konsekvensvurderinger-/stoejkortlaegning.aspx">støjsimulationskerne</a>.<br/>
+                        Udvikling og idriftsætning af system for websurveys.
+                    </div>
+                    <div class="entry"><div class="year">2005</div><div class="title">Bachelorgrad i Datalogi</div>
+                        <a href="ftp://ftp.diku.dk/diku/image/publications/voel.190605.pdf">Bachelorprojekt</a> om datakomprimering.<br/>
+                        Fag indenfor matematik, biblioteks- og informationsvidenskab.
+                    </div>
+                    <div class="entry"><div class="year">2001</div><div class="title">Forskningsprogrammør ved Datalogisk Institut, KU</div>
+                        Maskinkode-optimering og -backend for partiel evaluering.<br/>
+                        <small><em>Gilles Muller, Julia L. Lawall, Scott Thibault, R. E. Voel Jensen:</em> A domain-specific language approach to programmable networks. <em>IEEE Transactions on Systems, Man, and Cybernetics, 2003</em></small>
+                    </div>
+            </div></div>
+            <div class="cvmenu"> <a href="#Oversigt">Oversigt</a> • <a href="#Datalogi">Datalogi</a> • <a href="#Formidling">Formidling</a> • <a href="#Andet">Andet</a> • <a href="#Privat">Privat</a> </div>
+
+            <div class=pagebreak><h2 id="Formidling">Formidling</h2>
+                <div class="cv">
+                    <div class="entry"><div class="year">2009-2010</div><div class="title">Udviklet og afholdt kursus: Grundlæggende Datalogi (15 ECTS)</div>
+                        <div>Første <a href="http://studier.ku.dk/studier_A-z/kommunikation_og_it/moduler/#modulII">datalogikursus</a> på helt ny uddannelse: <a href="http://kommit.ku.dk">Kommunikation og IT</a>.<br/>
+                            Kandidatkursus på <a href="http://itogkognition.ku.dk/">IT og Kognition</a>. Begge dele ved <a href="http://ku.dk/">KU</a>.</div> 
+                        <ul>
+                            <li>Tilrettelæggelse af kursus og indhold.</li>
+                            <li>Afholdelse af øvelser (med instruktor) og forelæsninger.</li>
+                            <li>Udarbejdelse af infrastruktur, kursushjemmeside, supplerende noter.</li>
+                            <li>Evaluering.</li>
+                        </ul>
+                    </div>
+                    <div class="entry"><div class="year">2008</div><div class="title">Rapporter om formidling</div>
+                        <div>Designdokumentation og dybdegående evaluering af datalogikursus<br/>
+                            - inklusiv generel kvalitativ undersøgelsesmetode af læringsudbytte.</div>
+                        <div>Pædagogiske aspekter ved valg af programmeringssprog.</div>
+                    </div>
+                    <div class="entry"><div class="year">2007,2008</div><div class="title">Programmeringskursus på Matematisk Institut, KU</div>
+                        <div>Tilrettelæggelse, afholdelse og evaluering </div>
+                        Ugentlige forelæsninger/øvelser, del af kurset <a href="http://isis.ku.dk/kurser/index.aspx?kursusid=25815&xslt=simple6&param1=162601&param8=false">SaSt3</a>.<br/>
+                        Kursus redesign <a href="http://isis.ku.dk/kurser/index.aspx?kursusid=26909&xslt=simple6&param1=192600&param8=false">andet</a> år.
+                    </div>
+                    <div class="entry"><div class="year">2004-2006</div><div class="title">Undervisning i argentinsk tango</div>
+                        Undervisning under længere højskoleophold, diverse tangoevents.
+                        Regelmæssig underviser i 2005 og opstart af <a href="http://www.kulturhuset-nv.dk/argentinsktango.htm">tangospillet</a>.
+                    </div>
+                    <div class="entry"><div class="year">2002,2003,2006</div><div class="title">Instruktor/hjælpelærer på kurser på Datalogisk Institut, KU</div>
+                        Mønster- og billedbehandling i 2002 og 2003.<br/>
+                        Førsteårsprojekt i 2006.
+                    </div>
+                    <div class="entry"><div class="year">2002</div><div class="title">Foredragsholder</div>
+                        Foredrag om kryptologi på Køge Bibliotek.
+                    </div>
+            </div></div>
+            <div class="cvmenu"> <a href="#Oversigt">Oversigt</a> • <a href="#Datalogi">Datalogi</a> • <a href="#Formidling">Formidling</a> • <a href="#Andet">Andet</a> • <a href="#Privat">Privat</a> </div>
+
+            <div class=nopagebreak><h2 id="Andet">Andet</h2>
+                <div class=cv>
+                    <div class="entry"><div class="year">2006-nu</div><div class="title">Personlig virksomhed: solsort.dk</div>
+                        <div>For øjeblikket fokus på open source mobile applikationer.</div>
+                        <div>Tidligere: fotograf, usability-konsulent, digitalisering.</div>
+                    </div>
+                    <div class="entry"><div class="year">2007-2008</div><div class="title">Projektledelse digitaliseringsprojekt ved Hovedbiblioteket</div>
+                        <div>Udvikling af workflow og billedopretningssoftware for bogdigitalisering.</div>
+                        <div>Ansættelse og instruktion af studenter til bogskanning.</div>
+                        <div>Webprototype for crowdsourced korrekturlæsning.</div>
+                    </div>
+                    <div class="entry"><div class="year">2004-2005</div><div class="title">Danmarks Biblioteksskole it-lab medarbejder</div>
+                        Systemadministration, softwareudvikling, research.<br/>
+                        <small><em>H. Lund, B. Larsen, R. E. Voel Jensen, A. Ardö, K. Golub, and P. Ingwersen:</em> Capturing Contexts for Web Filtering in the Humanities. <em>Second Workshop on Information Retrieval in Context (IRiX), SIGIR 2005</em></small>
+                    </div>
+            </div></div>
+            <div class="cvmenu"> <a href="#Oversigt">Oversigt</a> • <a href="#Datalogi">Datalogi</a> • <a href="#Formidling">Formidling</a> • <a href="#Andet">Andet</a> • <a href="#Privat">Privat</a> </div>
+
+            <div class=pagebreak><h2 id="Privat">Privat</h2>
+                <div class=cv>
+                    <div class="entry"><div class="year">2003-nu</div><div class="title">Foreningsaktivitet</div>
+                        Aktiv og arrangør i <a href="http://mensa.dk">mensa</a>: brætspil, rollespil, fællessang, ... <br/>
+                        <a href="http://toastmasters.dk">Toastmasters</a> talerforening, holdt 10+ taler.<br/>
+                        <a href="http://couchsurfing.org">CouchSurfing</a>, jævnligt vært for rejsende.
+                    </div>
+                    <div class="entry"><div class="year">198?-nu</div><div class="title">Musiker</div>
+                        Klaver, guitar og andre instrumenter på hobbyplan.<br/>
+                        Jam-sessions, almindeligvis blues/jazz.
+                    </div>
+                    <div class="entry"><div class="year">2003-2010</div><div class="title">Tangodanser</div>
+                        Argentinsk tango, social dans.<br/>
+                        Rejst og danset i Danmark, Sverige, Norge, Tyskland, <br/>
+                        Holland, Tyrkiet, Spanien, England og Skotland.
+                    </div>
+                    <div class="entry"><div class="year">2004-2005</div><div class="title">Højskole</div>
+                        Lang kursist, primært indenfor dans,<br/>
+                        desuden skrivekunst, musik og teater.<br/>
+                    </div>
+            </div></div>
+            <div class="cvmenu"> <a href="#Oversigt">Oversigt</a> • <a href="#Datalogi">Datalogi</a> • <a href="#Formidling">Formidling</a> • <a href="#Andet">Andet</a> • <a href="#Privat">Privat</a> </div>
+        </div>
+</div></div>
+</div>
