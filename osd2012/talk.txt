@@ -1,0 +1,164 @@
+# Presentation
+
+Serious JavaScript
+
+This talk consists of two parts.
+
+First we'll set the baseline
+and look at: what is JavaScript
+
+from a computer science 
+programming language perspective
+
+and also
+why is it interesting
+and should be take seriously
+
+
+Then the second part is about
+how to approach
+serious javascript development
+and best practices
+
+
+- so What is JavaScript?
+
+## Slide 1
+
+If we should define it in a single sentence,
+it could be:
+
+an ubiquitous 
+somewhat functional 
+asynchronous 
+dynamic 
+scripting language 
+with prototypal object model 
+and quirks. 
+
+
+Ubiquitous
+- it is everywhere.
+
+That is also what 
+makes JavaScript
+so interesting.
+
+JavaScript is the most easily deployed language
+for applications on mobile phones
+
+and it is also the language
+that is in most webbrowsers.
+
+tons of different applications
+has it embedded for scripting
+
+an JavaScript also runs very well for servers
+
+and even in some embedded systems.
+
+
+-----
+
+somewhat functional
+i like functional programming a lot
+it's very expressive
+
+functions in jsvascript are first class values
+that means you can pass them around and
+use higher order functions.
+They can even be defined anonymously
+and javascript got closures correct
+that is a lot better than most mainstream languages
+
+it is only somewhat functional
+because it is missing tail recursion
+
+and mosts of javascript datastructures are mutable
+
+it doesn't have a natural datastructure
+for immutable lists
+which are usually used in functional programming
+
+
+--------
+
+Asynchronous,
+a lot of the engines
+does not support
+multiple threads
+
+This is not as big an issue
+as you might expect.
+
+A lot of the libraries are asynchronous
+so when you are reading a file, waiting for a timeout,
+or writing to the network,
+the execution is not blocked,
+but instead you just
+pass a callback
+to the readfile or timeout function.
+And this will then be called when the desired action has finished.
+
+This actually performes well
+as long as the application
+is not cpu-bound.
+
+Cpu-heavy applications
+must yield to stay responsive,
+but on the other hand
+we are released from locks.
+
+
+
+Dynamic means that 
+types are resolved at runtime.
+
+This means less toolability,
+and that errors are not caught at compiletime.
+This is a trade-off against stability 
+for rapid prototyping.
+
+
+
+Scripting language
+
+regular expressions are a part of the language
+and hashmap is the usual datastructure
+
+
+
+prototypal inheritance
+
+
+--------
+
+one of the quirks of javascript is that tha language don't have builtin support for modules
+
+fortunately recently a lot of the implementors 
+found common ground, for how to define and load modules.
+especially for application scripting and server side
+
+In a commonjs modules, symbols can be exported
+by assigning them as properties
+on the exports object.
+Similarly modules can be loaded
+via the require function
+that returns the desired module as an object.
+
+Unfortunately this doesn't work in browsers
+The require function blocks,
+and module loading in browsers must be asynchronous.
+The approach here instead is asynchrounus module definition
+which essentially wraps commonjs modules in a closure.
+
+
+For this, there are tools like
+requirejs, enderjs and browserify.
+
+In the future there will be harmony.
+Harmony is the next version of JavaScript
+and it contains syntax for modules.
+It is even possible to experiment with it now
+as Traceour recently has been released.
+It is an open source tool for compiling JavaScript from the future to now.

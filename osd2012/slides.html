@@ -58,9 +58,9 @@
         .what .descr {
             position: absolute;
             top: 84pt;
-            left: 72pt;
+            left: 60pt;
             font-size: 20pt;
-            width: 240pt;
+            width: 340pt;
             text-align: left;
             line-height: 140%;
         }
@@ -92,17 +92,17 @@
             left: 206pt;
         }
         .how .modules {
-            top: 96pt;
+            top: 100pt;
         }
         .how .testing {
-            top: 96pt;
-            left: 206pt;
+            top: 182pt;
         }
         .how .packaging {
-            top: 190pt;
+            top: 182pt;
+            left: 206pt;
         }
         .how .codestyle {
-            top: 190pt;
+            top: 100pt;
             left: 206pt;
         }
 
@@ -200,7 +200,7 @@
         $(window).resize(zoomout);
         $(function() {
             zoomout();
-            var step = 0;
+            var step = 1;
 
             $(document).on('keydown', function(ev) {
                 var key = ev.keyCode;
@@ -216,7 +216,7 @@
                 if(key === 48) {
                     step = 1;
                 }
-                step = (step|0) % 4;
+                step = step&3;
                 if(step&1) {
                     zoomout();
                 } else {
@@ -284,10 +284,14 @@
             <div class="descr">
                 JavaScript:&ensp;ubiquitous <br/>
                 somewhat functional <br/>
-                asynchronous&ensp;dynamic <br/>
-                scripting language with <br/>
+                scripting language <br/>
+                with quirks and<br/>
+                good performance
+                <!--asynchronous&ensp;dynamic <br/>
+
                 prototypal object model <br/>
                 and quirks.
+                -->
             </div>
         </div>
         <div class="how slide">
@@ -295,8 +299,7 @@
             <div class="modules">
                 <h3>Modules</h3>
                 <div>CommonJS Modules</div>
-                <div>Asynchronous Module Definitions</div>
-                <div>RequireJS, EnderJS, Browserify, ...</div>
+                <div>EnderJS, Browserify, ...</div>
                 <div>Future: Harmony (via Traceur)</div>
             </div>
             <div class="packaging">
@@ -304,12 +307,11 @@
                 <div>CommonJS Packaging, NPM</div>
                 <div>Mobile Apps via Cordova(PhoneGap)</div>
                 <div>Cache manifest and widget spec</div>
-                <div>Minification: Closure, UglifyJS, ...</div>
             </div>
             <div class="testing">
                 <h3>Testing</h3>
                 <div>Unit testing: Jasmine, Mocha,...</div>
-                <div>System testing: Selenium, Zombie.js, ...</div>  
+                <div>System testing: Selenium, ...</div>  
                 <div>Continous integration: Travis CI, ...</div>
                 <div>Code coverage</div>
             </div>
@@ -320,8 +322,8 @@
             </div>
             <div class="codestyle">
                 <h3>Code Style</h3>
-                <div>Avoid bad parts, learn good parts</div>
-                <div>Style checkers: JSHint, JSLint, Closure</div>
+                <div>Bad parts, good parts, "use strict"</div>
+                <div>Style checking: JSHint, JSLint, Closure</div>
                 <div>Use guidelines, ie. google-styleguide</div>
             </div>
         </div>
