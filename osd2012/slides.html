@@ -21,6 +21,7 @@
             padding: 0pt;
         }
         .slide {
+            border: 3pt solid black;
             margin: 0pt;
             padding: 0pt;
             position: absolute;
@@ -28,9 +29,9 @@
             height: 300pt;
         }
         h1 {
-            margin: 20pt 0pt 10pt 0pt;;
+            margin: 40pt 0pt 20pt 0pt;;
             padding: 0pt;
-            font-size: 72pt;
+            font-size: 96pt;
         }
         h2 {
             font-size: 48pt;
@@ -40,17 +41,19 @@
 
         .intro {
             left: 480pt;
-            top: 30pt;
+            top: 140pt;
             text-align: center;
         }
         .intro div {
-            font-size: 20pt;
-            line-height: 200%;
+            font-size: 36pt;
+            line-height: 140%;
         }
 
         .what {
-            left: 40pt;
-            top: 30pt;
+            /*left: 30pt;
+            top: 340pt;*/
+            left: 27pt;
+            top: 337pt;
         }
         .what .descr {
             position: absolute;
@@ -63,8 +66,10 @@
         }
 
         .how {
-            left: 40pt;
-            top: 360pt;
+            /*left: 490pt;
+            top: 340pt;*/
+            left: 487pt;
+             top: 337pt;
         }
         .how h3 {
             /* font-weight: normal;*/
@@ -146,7 +151,8 @@
             font-size: 16pt;
         }
     </style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="../lib/es5-shim.min.js"></script>
+    <script src="../lib/jquery-1.7.1.min.js"></script>
     <script>(function(){
         function now() {
             return (new Date()).getTime();
@@ -186,17 +192,14 @@
               .css(vendorPrefix('transform', scaleStr));
             var pt = $m.height()/690*scaleVal;
             var slides = [ 
-                {top: -30*pt, left: -480*pt},
-                {top: -30*pt, left: -40*pt},
-                {top: -360*pt, left: -40*pt},
-                {top: -360*pt, left: -480*pt}
+                {top: -340*pt, left: -30*pt},
+                {top: -340*pt, left: -490*pt}
             ];
             $m.css(slides[slide]);
         }
         $(window).resize(zoomout);
         $(function() {
             zoomout();
-            zoomin(0);
             var step = 0;
 
             $(document).on('keydown', function(ev) {
@@ -213,7 +216,7 @@
                 if(key === 48) {
                     step = 1;
                 }
-                step = (step|0) % 8;
+                step = (step|0) % 4;
                 if(step&1) {
                     zoomout();
                 } else {
@@ -230,17 +233,14 @@
   <body>
     <div class="timer"></div>
     <div class="main">
-        <div class="intro slide">
+        <div class="intro">
             <h1>Serious JavaScript</h1>
             <div class="author"><sup>by</sup> Rasmus&thinsp;@&thinsp;solsort.dk</div>
             <div class="slidelink">
                 slides and more at:&ensp;<a href="http://solsort.dk/osd2012">solsort.dk&#8202;/&#8202;osd2012</a>
             </div>
-            <!--
-            <div class="link"><a href="http://solsort.dk/osd2012">solsort.dk&#8202;/osd2012</a></div>
-            -->
         </div>
-        <div class="where slide">
+        <!-- div class="where slide">
             <h2>Where&thinsp;?</h2>
             <div class="javascriptcore top left">
                 <h3>JavaScriptCore</h3>
@@ -278,7 +278,7 @@
                 <div>ActionScript, UnityScript</div>
                 <div>EjScript, MiniJoe, LightScript</div>
             </div>
-        </div>
+        </div-->
         <div class="what slide">
             <h2>What&thinsp;?</h2>
             <div class="descr">
