@@ -141,7 +141,7 @@ especially for application scripting and server side
 
 In a commonjs modules, symbols can be exported
 by assigning them as properties
-on the exports object.
+on the special exports object.
 Similarly modules can be loaded
 via the require function
 that returns the desired module as an object.
