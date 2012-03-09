@@ -37,6 +37,54 @@
                 <li><a href="http://phonegap.com/">PhoneGap</a> aka. Apache Cordova, for packaging for mobile phones</li>
             </ul></li>
         </ul>
+        <h2>Sample .travis.yml for setting up javascript test</h2>
+<pre>
+language: node_js
+node_js:
+  - 0.4
+  - 0.6
+</pre>
+        <h2>Sample output from Docco after processing a JavaScript program with literate documentation</h2>
+        Available <a href="http://dbc-as.github.com/selenese-runner/docs/selenese-runner.html">here</a>.
+        <h2>Sample package.json for publishing a project</h2>
+<pre>
+{
+  "name": "selenese-runner",
+  "version": "0.0.12",
+  "author": "Rasmus Jensen, DBC-as",
+  "homepage": "http://github.com/DBC-as/selenese-runner",
+  "description": "Automated execution of selenese scripts (tests made in selenium-ide)",
+  "dependencies": {
+    "soda": "*",
+    "async": "*",
+    "request": "*"
+  },
+  "licenses": [{"type": "GPLv3", "url": "https://raw.github.com/DBC-as/selenese-runner/master/COPYING"}],
+  "engines": {"node": "*"},
+  "main": "lib/selenese-runner.js",
+  "scripts": {
+    "test": "./test.sh"
+  }
+}
+</pre>
+    <h2>Example of CommonJS module<h2>
+<h3>hello.js</h3>
+<pre>
+// Simple module to demonstrate `exports`
+exports.printHello = function(name) {
+    console.log('Hello ' + name);
+}
+</pre>
+
+<h3>main.js</h3>
+<pre>
+// Simple module, to demonstrate `require`
+var helloModule = require('hello');
+helloModule.printHello('Module');
+</pre>
+
+
+
 
 
 
@@ -52,10 +100,16 @@
         what is javascript
         from a computer science / programminglanguage perspective
 
+        and then the second part will explore how to approach
+        serious javascript development
+
+        a ubiquitous somewhat functional scripting language
 
 
         javascript is the language most easily deployed 
-        fom mobile applications
+        for mobile applications
+
+        it is also the language that are in most webbrowsers
 
 
         in addition to this javascript is also being run or used on servers
