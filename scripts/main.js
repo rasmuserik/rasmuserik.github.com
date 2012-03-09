@@ -5,7 +5,7 @@ $(function() {
 function showHTML() { };
 function redirect() { };
 function showMarkDown() { };
-console.log(['solsort.dk',
+/*console.log(['solsort.dk',
     {title: 'Curriculum Vitae', app: showHTML('/CurriculumVitae')},
     ['Apps',
         {title: 'Danske Byer', app: redirect('/dkcities')},
@@ -33,5 +33,5 @@ console.log(['solsort.dk',
        {title: 'hierachical layout', app: showMarkDown('')},
        {title: 'slidein transitions', app: showMarkDown('')}],
     ['Presentations',
-        {title: 'OAuth2', app: showMarkDown('/presentations/oauth2')}]]);
+        {title: 'OAuth2', app: showMarkDown('/presentations/oauth2')}]]); */
 });
