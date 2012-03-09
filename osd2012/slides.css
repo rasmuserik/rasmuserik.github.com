@@ -1,0 +1,86 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+.main {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 920pt;
+    height: 690pt;
+}
+.main div {
+    margin: 0pt;
+    padding: 0pt;
+}
+.slide {
+    border: 3pt solid black;
+    margin: 0pt;
+    padding: 0pt;
+    position: absolute;
+    width: 400pt;
+    height: 300pt;
+}
+h1 {
+    margin: 40pt 0pt 20pt 0pt;;
+    padding: 0pt;
+    font-size: 96pt;
+}
+h2 {
+    font-size: 48pt;
+    margin: 12pt;
+    padding: 0pt;
+}
+
+.intro {
+    left: 480pt;
+    top: 140pt;
+    text-align: center;
+}
+.intro div {
+    font-size: 36pt;
+    line-height: 140%;
+}
+
+.what {
+    left: 27pt;
+    top: 337pt;
+}
+.what div {
+    position: absolute;
+    top: 84pt;
+    left: 60pt;
+    font-size: 24pt;
+    width: 340pt;
+    text-align: left;
+    line-height: 140%;
+}
+
+.how {
+    left: 487pt;
+     top: 337pt;
+}
+.how h2 {
+    text-align: right;
+}
+.how h3 {
+    text-align: left;
+    margin: 16pt 0pt 2pt 0pt;
+    text-align: left;
+}
+.how > div {
+    position: absolute;
+    top: 18pt;
+    left: 20pt;
+    width: 352pt;
+    font-size: 16pt;
+    line-height: 120%;
+    text-align: left;
+}
+.how > div > div:before {
+    content: " • ";
+}
+
+.timer {
+    float: right;
+    font-size: 16pt;
+}
