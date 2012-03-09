@@ -34,8 +34,8 @@
 
     var scaleX, scaleY;
     function zoomout() {
-        var scaleX = $(window).width() / $('.main').width() ;
-        var scaleY = $(window).height() / $('.main').height() ;
+        scaleX = $(window).width() / $('.main').width() ;
+        scaleY = $(window).height() / $('.main').height() ;
         var scaleStr = 'scale(' + scaleX + ', ' + scaleY+ ')';
         $('.main')
             .css({top: 0, left: 0})
@@ -62,29 +62,21 @@
     $(function() {
         zoomout();
         var step = 1;
-
-        $(document).on('keydown', function(ev) {
-            var key = ev.keyCode;
-            if([32, 39,40, 34, 9, 13].indexOf(key) !== -1) {
-                ++step;
-            } else if([33, 38, 37, 20].indexOf(key) !== -1) {
-                --step;
-            }
-            if(49 <= key && key <= 52) {
-                step = (key - 49) * 2;
-            }
-            if(key === 48) {
-                step = 1;
-            }
-            step = step&3;
+        function nextSlide() {
+            step = step+1&3;
             if(step&1) {
                 zoomout();
             } else {
                 zoomin(step/2);
             }
-        });
+        }
+        $(document).on('mousedown', nextSlide);
+
+        $(document).on('keydown', nextSlide);
         setTimeout(function() {
-            $('.main').css(vendorPrefix('transition', 'all 1s'));
+            $('.main')
+                .css(vendorPrefix('transition', 'all 1s'))
+                .css('position', 'fixed');
         }, 0);
         startTimer();
     });
