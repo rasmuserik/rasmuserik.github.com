@@ -30,7 +30,7 @@ define(['util', 'zquery', 'modernizr', 'window', 'exports'], function(util, $, m
                     (Math.max(util.windowHeight(),$(window).width()) + 62) + 
                     'px;background-color: black;"></div>');
         }
-        $('body').css('background', 'black');
+        $('body').css('background-color', 'black');
         $(window).bind('resize', relayoutDelayed);
         $(window).bind('orientationchange', relayoutDelayed);
         relayout();
