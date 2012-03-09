@@ -19,8 +19,70 @@
         </style>
     </head>
     <body>
-        more to come...
+        <h1>Serious JavaScript</h1>
+        <ul>
+            <li><a href="slides.html">Slides</a> (requires a modern web browser)</li>
+        </ul>
+        <ul>
+            <li>Links from the talk<ul>
+                <li><a href="http://pivotal.github.com/jasmine/">Jasmine</a> for unit testing</li>
+                <li><a href="http://seleniumhq.org/">Selenium</a> for user interface testing</li>
+                <li><a href="http://about.travis-ci.org/">Travis CI</a> for continous integration service on open source projects</li>
+                <li><a href="http://code.google.com/p/jsdoc-toolkit/">JSDoc</a> for API documentation, with <a href="https://developers.google.com/closure/">Closure tools</a> for exploiting the type annotations</li>
+                <li><a href="http://jashkenas.github.com/docco/">Docco</a> for literate programming</li>
+                <li><a href="http://wiki.commonjs.org/wiki/Modules/1.0">CommonJS Modules</a> for modules (mainly server side), can be used in browser with tools such as: <a href="http://ender.no.de">Ender</a>, <a href="https://github.com/substack/node-browserify">Browserify</a>, ..., or wrapped in <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">Asynchronous Module Definition</a> and loaded with tools such as <a href="http://requirejs.org/">RequireJS</a></li>
+                <li><a href="http://www.w3.org/TR/html5/offline.html">Cache manifest</a> for offline web-apps</a></li>
+                <li><a href="http://npmjs.org/">Node Package Manager</a> for packaging and distributing server-side modules</li>
+                <li><a href="http://phonegap.com/">PhoneGap</a> aka. Apache Cordova, for packaging for mobile phones</li>
+            </ul></li>
+        </ul>
+
+
+
         <!--
+
+
+        Transcript:
+
+        Serious JavaScript
+
+        This presentation consist of two parts
+        first we'll set the baseline and look at
+        what is javascript
+        from a computer science / programminglanguage perspective
+
+
+
+        javascript is the language most easily deployed 
+        fom mobile applications
+
+
+        in addition to this javascript is also being run or used on servers
+        and it even runs on some embedded systems
+
+        in javascript you can even use anonymous functions
+        and it got closures right which is a lot better
+        than most mainstream language
+
+
+        regular expressions and string processing is a natural part of the language
+
+
+        and that have several applications
+        1) it means that the language is less toolable
+
+
+        so thet is the bad side of dynamic type system
+        the good part is that it 
+
+        in the last couple of years there has been a competition
+        between the webbrowsers for making 
+
+
+
+        the have quite advanced
+
+
         <h1><a href="slides.html">Slides</a></h1>
         designed for a 4:3 ratio screen with modern browser: firefox, chrome or safari.
         <h1>Links</h1>
@@ -123,6 +185,7 @@ and and what's so interesting about it
 next how do we approach serious javascript development
 
 </pre><h2>How?</h2><pre>
+        So, how can we approach serious javascript development.
 
         first we write the tests for our code,
         then we document what it is to do,
@@ -133,11 +196,26 @@ next how do we approach serious javascript development
         Javascript is a dynamic language
         and that makes testing even more important
 
-        we test on different levels
-        the internal test, or unit test,
+        We can look at test on different levels.
 
-        TODO
+        There is the unit testing, or internal testing,
+        which is written within the program.
+        There are many frameworks for this,
+        of which Jasmine seems to be
+        the most popular one.
+        (We are using that,
+        or sometimes just write the tests frameworkless).
 
+        On a higher level there is system testing.
+        JavaScript often use web technology
+        for user interfaces,
+        and there are several tools 
+        for automating web application testing.
+        Selenium is a good bet,
+        as it remote controls 
+        most of the different browsers,
+        and also has GUI for test development
+        which means it can be done by non-developer-testers.
 
 
 </pre><h3>Documentating</h3><pre>
