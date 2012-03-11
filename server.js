@@ -54,12 +54,17 @@
     }
 
     function uglifyFn(str) {
-        var ast = uglify.parser.parse(str);
-        ast = uglify.uglify.ast_mangle(ast);
-        ast = uglify.uglify.ast_squeeze(ast);
-        return uglify.uglify.gen_code(ast);
+        try {
+            var ast = uglify.parser.parse(str);
+            ast = uglify.uglify.ast_mangle(ast);
+            ast = uglify.uglify.ast_squeeze(ast);
+            return uglify.uglify.gen_code(ast);
+        } catch(e) {
+            return 'throw {error: "uglify-error"}';
+        }
     }
 
+    var watchers = [];
     function watchLists(arrs, fn) {
         var files = {};
         arrs.forEach(function(arr) {
@@ -68,7 +73,15 @@
             });
         });
         Object.keys(files).forEach(function(filename) {
-            fs.watch(filename, fn);
+            watchers.push(fs.watch(filename, function(a, b) {
+                console.log('watched', a, b);
+                watchers.forEach(function(watcher) {
+                    watcher.close();
+                });
+                watchers=[];
+                fn();
+                watchLists(arrs, fn);
+            }));
         });
     }
     
@@ -87,11 +100,12 @@
               "lib/bundler.js"];
     
     var modules =  ["scripts/util.js",
+                "scripts/jsxml.js",
                 "scripts/main.js",
                 "scripts/menu.js",
                 "scripts/fullbrows.js"];
     
-    watchLists([libs, libsLegacy, modules], requestRun);
+    watchLists([libs, libsLegacy, modules], allBundles);
     requestRun();
 
     function allBundles() {

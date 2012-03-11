@@ -1,5 +1,61 @@
+var Backbone = require('backbone');
+var jsxml = require('jsxml');
+
+console.log(Backbone);
+
+var SiteMap = Backbone.Router.extend({
+    routes: {
+        'menu': 'menu',
+        '*default': 'default'
+    },
+    'default': function() { },
+    menu: menuFn
+});
+
+var sitemap = new SiteMap;
+
 exports.main = function() {
-    $(function() {
+    $(function() { Backbone.history.start(); });
+};
+
+function menuFn() {
+    require('fullbrows').init();
+    $('#content').html(jsxml.toDOM(menuXml));
+    require('menu').doMenu($('#content > ul > li')[0]);
+}
+
+var menuXml = ["ul",
+    ["li","solsort.dk",["ul",
+        ["li",["a",{"href":"/CurriculumVitae.html"},"CV"]],
+        ["li","Apps",["ul",
+            ["li",["a",{"href":"/dkcities"},"Danske byer"]],
+            ["li",["a",{"href":"/notescore"},"note­score"]],
+            ["li",["a",{"href":"/planetcute"},"Planet­Cute"]]]],
+        ["li","Notes",["ul",
+            ["li",["a",{"href":"/notes/tekststruktur-for-rapporter.html"},"Tekst­struktur for rap­porter"]],
+            ["li",["a",{"href":"/notes/tommelfingerregler-for-skrivning.html"},"Tommel­finger­regler for skriv­ning"]],
+            ["li",["a",{"href":"/notes/fototips.html"},"Foto­tips"]],
+            ["li","Tech",["ul",
+                ["li",["a",{"href":"/notes/tech/c9ender.html"},"Cloud9 and Ender"]],
+                ["li",["a",{"href":"/notes/tech/jekyll.html"},"Jekyll / github-pages"]],
+                ["li",["a",{"href":"/notes/tech/vim.html"},"vim"]],
+                ["li",["a",{"href":"/notes/tech/coffee.html"},"Coffee­Script"]]]],
+            ["li",["a",{"href":"/notes/ted.html"},"TED talks"]]]],
+        ["li","JS",["ul",
+            ["li",["a",{"href":"/devintro/book.html"},"dev­intro"]],
+            ["li","1k",["ul",
+                ["li",["a",{"href":"/f1k/blah.html"},"4d­julia­brot"]],
+                ["li",["a",{"href":"/f1k/rain.html"},"rain"]]]],
+            ["li","tweetsize",["ul",
+                ["li",["a",{"href":"/f1k/brown.html"},"brownian motion"]],
+                ["li",["a",{"href":"/f1k/sierpinsky.html"},"sier­pinsky"]]]],
+            ["li","“iOS style”:"],["li","“hierachical layout”:"],
+            ["li","“slidein transitions”:"]]],
+        ["li","Presentations",["ul",
+            ["li",["a",{"href":"/presentations/oauth2.html"},"OAuth2"]]]]]]];
+/*
+exports.main = function() {
+    require('zquery')(function() {
         require('menu').doMenu($('div > ul > li')[0]);
     });
 };

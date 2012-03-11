@@ -20,7 +20,7 @@ var relayoutDelayed = util.niceSingle(relayout);
 
 var init = exports.init = function(opt) {
     browsOpt = opt || {};
-    relayoutFn = opt.callback;
+    relayoutFn = browsOpt.callback;
     if(!window.document.getElementById('content')) {
         $('body').append('<div id="content"></div>');
     }
