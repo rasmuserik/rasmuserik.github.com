@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>solsort.dk</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" href="/static/icon.png">
+        <link rel="icon" type="image/png" href="/static/icon.png">
+        <link rel="shortcut icon" href="/static/icon.png">
+    </head>
+    <body>
+        <div id="content">
+        </div>
+        <script>
+            var script = 'bundle.debug.js';
+            if(!Object.create || !Object.keys || !Array.prototype.forEach 
+              || !window.JSON || !JSON.parse  || !navigator.userAgent.match(/webkit/i)) {
+                script = 'bundle.legacy.debug.js';
+            }
+            document.write('<script src="' + script + '" type="text/javascript"></' + 'script>');
+        </script>
+    </body>
+</html>

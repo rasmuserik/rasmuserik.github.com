@@ -43,10 +43,10 @@
             </div>
         </div>
         <script>
-            var script = 'bundle.debug.js';
+            var script = 'bundle.min.js';
             if(!Object.create || !Object.keys || !Array.prototype.forEach 
               || !window.JSON || !JSON.parse  || !navigator.userAgent.match(/webkit/i)) {
-                script = 'bundle.legacy.debug.js';
+                script = 'bundle.legacy.min.js';
             }
             document.write('<script src="' + script + '" type="text/javascript"></' + 'script>');
         </script>
