@@ -1,7 +1,7 @@
 {% include header.html %}
-    <script type="text/javascript" src="js.js"></script>
-</head>
-<body>
-    {% include menu.html %}
+{% include menu.html %}
+<script type="text/javascript">//<![CDATA[
+require(['require'], function(require) {
     {{ content }}
+});//]]></script>
 {% include footer.html %}

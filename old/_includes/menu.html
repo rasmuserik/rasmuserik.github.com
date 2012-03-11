@@ -1,14 +1,16 @@
-<div class="menu">
-<!-- // wall info photos notes friends-->
-<ul>
-    <!--li><a href="/">what?</a></li-->
-    <!--li><a href="/latest">latest</a></li-->
-    <!--li><a href="/rasmuserik">rasmuserik</a></li-->
-    <!--li><a href="browser_platforms">browsers</a></li-->
-    <!--li><a href="javascript">javascript</a></li-->
-    <li><a href="/">info</a></li>
-    <li><a href="/CurriculumVitae">cv</a></li>
-    <!--li><a href="/apps/">apps</a></li-->
-    <li><a href="http://github.com/rasmuserik">github</a></li>
-</ul>
+<div class="topbar">
+    <a class="right" href="/main.html">solsort.dk</a>
+    <a class="left" href="javascript:history.back()">&lt;&lt;</a>
+    <span class="pagetitle">{{ page.title }}</span>
 </div>
+<div class="topbarskip"></div>
+<script type="text/javascript">
+$(function() {
+     function resizeMenuPadding() {$('.topbarskip').css('height', $('.topbar').outerHeight());};
+     $('.topbar').css('position', 'fixed');
+     $(window).resize(resizeMenuPadding);
+     resizeMenuPadding();
+     window.scrollTo(1,0);
+});
+</script>
+
