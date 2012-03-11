@@ -63,8 +63,8 @@
 	</ul></li>
 </ul>
 </div>
-<script src="/lib/modernizr.js" type="text/javascript"></script>
-<script src="/lib/require.js" type="text/javascript"></script>
+<script src="/depend/modernizr.js" type="text/javascript"></script>
+<script src="/depend/require.js" type="text/javascript"></script>
 <script type="text/javascript">
     var lib= [];
     if(!Object.create || !Object.keys || !Array.prototype.forEach) {
@@ -74,7 +74,7 @@
         lib.push('json2');
     }
     lib.push(navigator.userAgent.match(/webkit/i)?'zepto.min':'jquery-1.7.1.min');
-    require.config({baseUrl:"/lib"});
+    require.config({baseUrl:"/depend"});
     require(lib, function() {
         define('modernizr', function() { return Modernizr; });
         define('window', function() { return window; });
