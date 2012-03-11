@@ -1,11 +1,13 @@
-define(['menu', 'zquery'], function(menu, $) { 'use strict';
-$(function() {
-    menu.doMenu($('div > ul > li')[0]);
-});
+exports.main = function() {
+    $(function() {
+        require('menu').doMenu($('div > ul > li')[0]);
+    });
+};
+/*
 function showHTML() { };
 function redirect() { };
 function showMarkDown() { };
-/*console.log(['solsort.dk',
+   console.log(['solsort.dk',
     {title: 'Curriculum Vitae', app: showHTML('/CurriculumVitae')},
     ['Apps',
         {title: 'Danske Byer', app: redirect('/dkcities')},
@@ -34,4 +36,3 @@ function showMarkDown() { };
        {title: 'slidein transitions', app: showMarkDown('')}],
     ['Presentations',
         {title: 'OAuth2', app: showMarkDown('/presentations/oauth2')}]]); */
-});
