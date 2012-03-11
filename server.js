@@ -66,8 +66,8 @@
                 "scripts/menu.js",
                 "scripts/fullbrows.js"];
     
-    bundle({libs: libs, out: 'out.js', modules: modules, run: 'bundler.require("main").main()'});
-    bundle({libs: libsIE, out: 'out.ie.js', modules: modules, run: 'bundler.require("main").main()'});
+    bundle({libs: libs, out: 'bundle.js', modules: modules, run: 'bundler.require("main").main()'});
+    bundle({libs: libsIE, out: 'bundle.ie.js', modules: modules, run: 'bundler.require("main").main()'});
 })();
 
 (function server() {
