@@ -1,0 +1,13 @@
+{
+  "name": "solsort.dk",
+  "version": "0.0.1",
+  "author": "Rasmus Erik Voel Jensen",
+  "homepage": "http://solsort.dk",
+  "description": "personal homepage",
+  "dependencies": {
+    "async": "*",
+    "uglify-js": "*",
+    "express": "*"
+  },
+  "engines": {"node": "*"},
+}
