@@ -1,13 +1,14 @@
+#!/usr/bin/env node
 /*global require: true, console: true*/
 (function() {
     "use strict";
     var async = require('async');
     var fs = require('fs');
+    var uglify = require('uglify-js');
     
     function appendLibs(out, opt, next) {
         async.forEachSeries(opt.libs, function(libname, callback) {
             fs.readFile(libname, 'utf-8', function(err, data) {
-                console.log(opt.out, libname, data.length);
                 if(err) throw err;
                 out.push(data);
                 callback();
@@ -19,7 +20,6 @@
         async.forEachSeries(opt.modules, function(modulename, callback) {
             fs.readFile(modulename, 'utf-8', function(err, data) {
                 if(err) throw err;
-                console.log(opt.out, modulename, data.length);
                 var process = opt.process || function(id) { return id; };
                 out.push('bundler.module("');
                 out.push(modulename);
@@ -39,12 +39,37 @@
     }
     
     function bundle(opt) {
-        var out = [];
+        var out = ['(function(){'];
         appendLibs(out, opt, function() {
         appendModules(out, opt, function() {
         out.push(opt.run || "");
-        fs.writeFile(opt.out, out.join(''));
+        out.push('})()');
+        out = out.join('');
+        if(opt.process) {
+            out = opt.process(out);
+        }
+        console.log('writing', opt.out);
+        fs.writeFile(opt.out, out);
         });});
+    }
+
+    function uglifyFn(str) {
+        var ast = uglify.parser.parse(str);
+        ast = uglify.uglify.ast_mangle(ast);
+        ast = uglify.uglify.ast_squeeze(ast);
+        return uglify.uglify.gen_code(ast);
+    }
+
+    function watchLists(arrs, fn) {
+        var files = {};
+        arrs.forEach(function(arr) {
+            arr.forEach(function(filename) {
+                files[filename] = true;
+            });
+        });
+        Object.keys(files).forEach(function(filename) {
+            fs.watch(filename, fn);
+        });
     }
     
     var libs = ["depend/zepto.js",
@@ -53,7 +78,7 @@
             "depend/backbone.js",
             "lib/bundler.js"];
     
-    var libsIE = ["depend/es5-shim.js",
+    var libsLegacy = ["depend/es5-shim.js",
               "depend/jquery-1.7.1.js",
               "depend/json2.js",
               "depend/modernizr.js",
@@ -66,8 +91,36 @@
                 "scripts/menu.js",
                 "scripts/fullbrows.js"];
     
-    bundle({libs: libs, out: 'bundle.js', modules: modules, run: 'bundler.require("main").main()'});
-    bundle({libs: libsIE, out: 'bundle.ie.js', modules: modules, run: 'bundler.require("main").main()'});
+    watchLists([libs, libsLegacy, modules], requestRun);
+    requestRun();
+
+    function allBundles() {
+        bundle({libs: libs, out: 'bundle.debug.js', modules: modules, run: 'bundler.require("main").main()'});
+        bundle({libs: libsLegacy, out: 'bundle.legacy.debug.js', modules: modules, run: 'bundler.require("main").main()'});
+        bundle({libs: libs, out: 'bundle.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
+        bundle({libs: libsLegacy, out: 'bundle.legacy.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
+    };
+
+    var doRun = false;
+    var running = false;
+    function requestRun() {
+        doRun = true;
+        tryRun();
+    }
+    function tryRun() {
+        if(!doRun) {
+            return;
+        }
+        if(!running) {
+            running = true;
+            doRun = false;
+            allBundles();
+            setTimeout(function() { running = false; }, 4000);
+            return;
+        } 
+        setTimeout(function() { tryRun(); }, 4000);
+    }
+
 })();
 
 (function server() {
