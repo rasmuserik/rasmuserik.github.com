@@ -36,6 +36,8 @@
         f('$(document).height()');
         f('$(window).height()');
         f('$("#foo").height()');
+        f('navigator.userAgent');
+        $('head').append('<meta name="viewport" content="width=' + screen.width + ', initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">');
     </script>
     </body>
 </html>
