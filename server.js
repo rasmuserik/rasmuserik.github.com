@@ -87,6 +87,7 @@
     
     var libs = ["depend/zepto.js",
             "depend/modernizr.js",
+            "depend/markdown.js",
             "depend/underscore.js",
             "depend/backbone.js",
             "lib/bundler.js"];
@@ -95,6 +96,7 @@
               "depend/jquery-1.7.1.js",
               "depend/json2.js",
               "depend/modernizr.js",
+              "depend/markdown.js",
               "depend/underscore.js",
               "depend/backbone.js",
               "lib/bundler.js"];

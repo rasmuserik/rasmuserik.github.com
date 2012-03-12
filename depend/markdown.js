@@ -1,3 +1,5 @@
+// from https://github.com/cadorn/markdown-js/blob/master/lib/markdown.js
+
 // Released under MIT license
 // Copyright (c) 2009-2010 Dominic Baggott
 // Copyright (c) 2009-2010 Ash Berlin

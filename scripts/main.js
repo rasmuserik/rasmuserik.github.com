@@ -6,13 +6,26 @@ console.log(Backbone);
 var SiteMap = Backbone.Router.extend({
     routes: {
         'menu': 'menu',
+        'notes/*path': 'notes',
         '*default': 'default'
     },
     'default': function() { },
-    menu: menuFn
+    menu: menuFn,
+    notes: notes
 });
 
-var sitemap = new SiteMap;
+var markdown = require('markdown');
+function notes(fnname) {
+    console.log(fnname);
+    var html = markdown.toHTML(markdown.parse('# Hello world\n\n blah blah blah'));
+    console.log(html);
+    $.get('notes/' + fnname + '.md', function(text) {
+        var html = markdown.toHTML(markdown.parse(text));
+        $('#content').html(html);
+    });
+}
+
+var sitemap = new SiteMap();
 
 exports.main = function() {
     $(function() { Backbone.history.start(); });
@@ -28,27 +41,27 @@ var menuXml = ["ul",
     ["li","solsort.dk",["ul",
         ["li",["a",{"href":"/CurriculumVitae.html"},"CV"]],
         ["li","Apps",["ul",
-            ["li",["a",{"href":"/dkcities"},"Danske byer"]],
-            ["li",["a",{"href":"/notescore"},"note­score"]],
-            ["li",["a",{"href":"/planetcute"},"Planet­Cute"]]]],
+            ["li",["a",{"href":"/dkcities"},"Danskebyer"]],
+            ["li",["a",{"href":"/notescore"},"notescore"]],
+            ["li",["a",{"href":"/planetcute"},"PlanetCute"]]]],
         ["li","Notes",["ul",
-            ["li",["a",{"href":"/notes/tekststruktur-for-rapporter.html"},"Tekst­struktur for rap­porter"]],
-            ["li",["a",{"href":"/notes/tommelfingerregler-for-skrivning.html"},"Tommel­finger­regler for skriv­ning"]],
-            ["li",["a",{"href":"/notes/fototips.html"},"Foto­tips"]],
+            ["li",["a",{"href":"/notes/tekststruktur-for-rapporter.html"},"Tekststruktur for rapporter"]],
+            ["li",["a",{"href":"/notes/tommelfingerregler-for-skrivning.html"},"Tommelfingerregler for skrivning"]],
+            ["li",["a",{"href":"/notes/fototips.html"},"Fototips"]],
             ["li","Tech",["ul",
                 ["li",["a",{"href":"/notes/tech/c9ender.html"},"Cloud9 and Ender"]],
                 ["li",["a",{"href":"/notes/tech/jekyll.html"},"Jekyll / github-pages"]],
                 ["li",["a",{"href":"/notes/tech/vim.html"},"vim"]],
-                ["li",["a",{"href":"/notes/tech/coffee.html"},"Coffee­Script"]]]],
+                ["li",["a",{"href":"/notes/tech/coffee.html"},"CoffeeScript"]]]],
             ["li",["a",{"href":"/notes/ted.html"},"TED talks"]]]],
         ["li","JS",["ul",
-            ["li",["a",{"href":"/devintro/book.html"},"dev­intro"]],
+            ["li",["a",{"href":"/devintro/book.html"},"devintro"]],
             ["li","1k",["ul",
-                ["li",["a",{"href":"/f1k/blah.html"},"4d­julia­brot"]],
+                ["li",["a",{"href":"/f1k/blah.html"},"4d juliabrot"]],
                 ["li",["a",{"href":"/f1k/rain.html"},"rain"]]]],
             ["li","tweetsize",["ul",
                 ["li",["a",{"href":"/f1k/brown.html"},"brownian motion"]],
-                ["li",["a",{"href":"/f1k/sierpinsky.html"},"sier­pinsky"]]]],
+                ["li",["a",{"href":"/f1k/sierpinsky.html"},"sierpinsky"]]]],
             ["li","“iOS style”:"],["li","“hierachical layout”:"],
             ["li","“slidein transitions”:"]]],
         ["li","Presentations",["ul",
@@ -59,7 +72,6 @@ exports.main = function() {
         require('menu').doMenu($('div > ul > li')[0]);
     });
 };
-/*
 function showHTML() { };
 function redirect() { };
 function showMarkDown() { };

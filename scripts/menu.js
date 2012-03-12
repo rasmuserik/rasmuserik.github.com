@@ -13,7 +13,7 @@ var border = Modernizr.boxshadow ? 0 : 1;
 // # Transformation to nested list to object
 function elemToObj(elem) {
     var result = {};
-    result.title = $(elem.firstChild).text().trim(),
+    result.title = $(elem.firstChild).text().trim();
     result.children = [];
     if(elem.children[0]) {
         var elems = elem.children[0].children;
@@ -122,4 +122,4 @@ positionArray = function(arr, x, y, w, h) {
 
 exports.doMenu = function(elem) {
     initMenu(elemToObj(elem));
-}
+};
