@@ -14,6 +14,8 @@
         <link rel="shortcut icon" href="/images/icon.png">
     </head>
     <body>
+        <div id=foo style="position: absolute; height: 100%"></div>
+        <script src="depend/jquery-1.7.1.js"></script>
         <script>
         function f(s) {
             document.write('<br>' + s + ': ');
@@ -30,6 +32,10 @@
         f('document.documentElement.clientHeight');
         f('screen.availHeight');
         f('screen.height');
+        f('screen.width');
+        f('$(document).height()');
+        f('$(window).height()');
+        f('$("#foo").height()');
     </script>
     </body>
 </html>
