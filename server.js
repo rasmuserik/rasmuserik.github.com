@@ -87,18 +87,18 @@
     
     var libs = ["depend/zepto.js",
             "depend/modernizr.js",
-            "depend/markdown.js",
             "depend/underscore.js",
             "depend/backbone.js",
+            "depend/showdown.js",
             "lib/bundler.js"];
     
     var libsLegacy = ["depend/es5-shim.js",
               "depend/jquery-1.7.1.js",
               "depend/json2.js",
               "depend/modernizr.js",
-              "depend/markdown.js",
               "depend/underscore.js",
               "depend/backbone.js",
+              "depend/showdown.js",
               "lib/bundler.js"];
     
     var modules =  ["scripts/util.js",

@@ -1,8 +1,6 @@
 var Backbone = require('backbone');
 var jsxml = require('jsxml');
 
-console.log(Backbone);
-
 var SiteMap = Backbone.Router.extend({
     routes: {
         'menu': 'menu',
@@ -14,13 +12,13 @@ var SiteMap = Backbone.Router.extend({
     notes: notes
 });
 
-var markdown = require('markdown');
 function notes(fnname) {
-    console.log(fnname);
-    var html = markdown.toHTML(markdown.parse('# Hello world\n\n blah blah blah'));
-    console.log(html);
+    var showdown;
+    showdown = require('showdown');
+    showdown = new showdown.converter;
+    console.log(showdown);
     $.get('notes/' + fnname + '.md', function(text) {
-        var html = markdown.toHTML(markdown.parse(text));
+        var html = showdown.makeHtml(text);
         $('#content').html(html);
     });
 }
