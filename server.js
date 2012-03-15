@@ -111,10 +111,10 @@
     requestRun();
 
     function allBundles() {
-        bundle({libs: libs, out: 'build/bundle.debug.js', modules: modules, run: 'bundler.require("main").main()'});
-        bundle({libs: libsLegacy, out: 'build/bundle.legacy.debug.js', modules: modules, run: 'bundler.require("main").main()'});
-        bundle({libs: libs, out: 'build/bundle.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
-        bundle({libs: libsLegacy, out: 'build/bundle.legacy.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
+        bundle({libs: libs, out: 'dist/bundle.debug.js', modules: modules, run: 'bundler.require("main").main()'});
+        bundle({libs: libsLegacy, out: 'dist/bundle.legacy.debug.js', modules: modules, run: 'bundler.require("main").main()'});
+        bundle({libs: libs, out: 'dist/bundle.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
+        bundle({libs: libsLegacy, out: 'dist/bundle.legacy.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
     };
 
     var doRun = false;

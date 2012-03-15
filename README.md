@@ -12,7 +12,7 @@
     - `debug.html` - debug version of app
     - `404.html` error page: redirect to /
     - `favicon.ico` 
-    - `build` generated debug/minified/... JavaScript
+    - `dist` generated debug/minified/... JavaScript
     - `files` `images` - various files and images
 - `old` old versions of this site, merge and delete
     - `timelog` - timelog application, to be rewritten into `scripts`

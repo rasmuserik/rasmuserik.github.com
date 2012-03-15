@@ -17,10 +17,10 @@
         <div id="content">
         </div>
         <script>
-            var script = 'build/bundle.debug.js';
+            var script = 'dist/bundle.debug.js';
             if(!Object.create || !Object.keys || !Array.prototype.forEach 
               || !window.JSON || !JSON.parse  || !navigator.userAgent.match(/webkit/i)) {
-                script = 'build/bundle.legacy.debug.js';
+                script = 'dist/bundle.legacy.debug.js';
             }
             document.write('<script src="' + script + '" type="text/javascript"></' + 'script>');
         </script>
