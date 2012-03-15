@@ -12,7 +12,6 @@
 // run on javascript-subsets on j2me devices.
 /*global document */
 /*jshint evil:true */
-"use strict";
 var global = this;
 
 // ## Utility
@@ -99,8 +98,8 @@ function fromXml(xml) {
                 } else {
                     c = entities[entity];
                     if(!c) {
-                        jsonmlError("error: unrecognisable xml entity: " 
-                            + entity);
+                        jsonmlError("error: unrecognisable xml entity: " + 
+                                entity);
                     }
                 }
             } 
@@ -173,8 +172,8 @@ function fromXml(xml) {
                 }
                 next_char();
                 var parent_tag = stack.pop();
-                if(tag.length <= 2 && !Array.isArray(tag[1]) 
-                        && typeof(tag[1]) !== "string") {
+                if(tag.length <= 2 && !Array.isArray(tag[1]) && 
+                        typeof(tag[1]) !== "string") {
                     tag.push("");
                 }
                 parent_tag.push(tag);
@@ -230,8 +229,8 @@ function toXmlAcc(jsonml, acc) {
         var pos = 1;
         var attributes = jsonml[1];
         var key;
-        if(attributes && !Array.isArray(attributes) 
-                && typeof(attributes) !== "string") {
+        if(attributes && !Array.isArray(attributes) && 
+                typeof(attributes) !== "string") {
             for(key in attributes) { if(attributes.hasOwnProperty(key)) {
                 acc.push(' ');
                 acc.push(key);

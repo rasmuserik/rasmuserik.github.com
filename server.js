@@ -5,6 +5,7 @@
     var async = require('async');
     var fs = require('fs');
     var uglify = require('uglify-js');
+    var mustache = require('mustache');
     
     function appendLibs(out, opt, next) {
         async.forEachSeries(opt.libs, function(libname, callback) {
@@ -20,6 +21,14 @@
         async.forEachSeries(opt.modules, function(modulename, callback) {
             fs.readFile(modulename, 'utf-8', function(err, data) {
                 if(err) throw err;
+                var JSHINT = require('jshint').JSHINT;
+                var ok = JSHINT('(function(){"use strict";/*global require: true, exports: true */'+data+'})();');
+                console.log('jshint', modulename, ok);
+                JSHINT.errors.forEach(function(err) {
+                    console.log(mustache.to_html(
+                            '<div>{{file}} line {{line}} pos {{pos}}: {{err}}</div>',
+                            {file: modulename, line: err.line, pos: err.character, err: err.reason}));
+                });
                 var process = opt.process || function(id) { return id; };
                 out.push('bundler.module("');
                 out.push(modulename);

@@ -1,5 +1,7 @@
 var Backbone = require('backbone');
 var jsxml = require('jsxml');
+var console = require('console');
+var $ = require('zquery');
 
 var SiteMap = Backbone.Router.extend({
     routes: {
@@ -15,7 +17,7 @@ var SiteMap = Backbone.Router.extend({
 function notes(fnname) {
     var showdown;
     showdown = require('showdown');
-    showdown = new showdown.converter;
+    showdown = new showdown.converter();
     console.log(showdown);
     $.get('notes/' + fnname + '.md', function(text) {
         var html = showdown.makeHtml(text);

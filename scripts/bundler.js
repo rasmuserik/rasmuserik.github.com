@@ -20,9 +20,9 @@ bundler = {};
     module('backbone', 'module.exports=Backbone');
     module('underscore', 'module.exports=_');
     module('zquery', 'module.exports=$');
+    module('window', 'module.exports=window');
+    module('document', 'module.exports=document');
     module('modernizr', 'module.exports=Modernizr');
     module('showdown', 'module.exports=Showdown');
+    module('console', 'module.exports=window.console || {log: function() {}}');
 })(bundler);
-if(typeof console === 'undefined') {
-    console = {log: function() {}};
-}

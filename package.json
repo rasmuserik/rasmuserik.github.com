@@ -5,6 +5,8 @@
   "homepage": "http://solsort.dk",
   "description": "personal homepage",
   "dependencies": {
+    "mustache": "*",
+    "jshint": "*",
     "async": "*",
     "uglify-js": "*",
     "express": "*"

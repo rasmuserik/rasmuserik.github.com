@@ -1,4 +1,7 @@
 var util = require('util');
+var $ = require('zquery');
+var window = require('window');
+var Modernizr = require('modernizr');
 
 // # Browser window setup
 var relayoutFn;

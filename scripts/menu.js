@@ -1,5 +1,8 @@
 var util = require('util');
 var fullbrows = require('fullbrows');
+var Modernizr = require('modernizr');
+var $ = require('zquery');
+var window = require('window');
 
 var boxWidth = 1.5;
 var position, positionArray; // recursive function forward declaration
