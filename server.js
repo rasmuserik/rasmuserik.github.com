@@ -90,7 +90,7 @@
             "depend/underscore.js",
             "depend/backbone.js",
             "depend/showdown.js",
-            "lib/bundler.js"];
+            "scripts/bundler.js"];
     
     var libsLegacy = ["depend/es5-shim.js",
               "depend/jquery-1.7.1.js",
@@ -99,7 +99,7 @@
               "depend/underscore.js",
               "depend/backbone.js",
               "depend/showdown.js",
-              "lib/bundler.js"];
+              "scripts/bundler.js"];
     
     var modules =  ["scripts/util.js",
                 "scripts/jsxml.js",
@@ -111,10 +111,10 @@
     requestRun();
 
     function allBundles() {
-        bundle({libs: libs, out: 'bundle.debug.js', modules: modules, run: 'bundler.require("main").main()'});
-        bundle({libs: libsLegacy, out: 'bundle.legacy.debug.js', modules: modules, run: 'bundler.require("main").main()'});
-        bundle({libs: libs, out: 'bundle.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
-        bundle({libs: libsLegacy, out: 'bundle.legacy.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
+        bundle({libs: libs, out: 'build/bundle.debug.js', modules: modules, run: 'bundler.require("main").main()'});
+        bundle({libs: libsLegacy, out: 'build/bundle.legacy.debug.js', modules: modules, run: 'bundler.require("main").main()'});
+        bundle({libs: libs, out: 'build/bundle.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
+        bundle({libs: libsLegacy, out: 'build/bundle.legacy.min.js', modules: modules, run: 'bundler.require("main").main()', process: uglifyFn});
     };
 
     var doRun = false;
