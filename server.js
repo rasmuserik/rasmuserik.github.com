@@ -152,7 +152,7 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
 
     function watchObj(obj, writeModulesCallback) {
         // needs timeout to handle vims delete+create file when saving
-        obj.watchCallback = delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 300);
+        obj.watchCallback = delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 1000);
         fs.watchFile(obj.filename, obj.watchCallback);
     }
 

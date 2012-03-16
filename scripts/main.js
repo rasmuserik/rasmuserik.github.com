@@ -6,13 +6,33 @@ var $ = require('zquery');
 var SiteMap = Backbone.Router.extend({
     routes: {
         'menu': 'menu',
+        'unicodeTest': 'unicodeTest',
         'notes/*path': 'notes',
         '*default': 'default'
     },
     'default': function() { },
+    unicodeTest: unicodeTest,
     menu: menuFn,
     notes: notes
 });
+
+function unicodeTest() {
+    var g = require('window');
+    g.t = [];
+    var i;
+    $('body').text('');
+    for(i=0;i<=65536;++i) {
+        g.t.push(i);
+    }
+    g.t = g.t.map(function(a) { return String.fromCharCode(a); });
+    g.t = g.t.join('');
+    for(i=0;i<=65536;++i) {
+        if(g.t.charCodeAt(i) !== i) {
+            $('body').append('error at ' + i + '<br>');
+        }
+    }
+    $('body').append('done');
+}
 
 function notes(fnname) {
     var showdown;
