@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /*global require: true, setTimeout: true, console: true*/
+/*jshint es5: true*/
 
 var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
 // # Util
@@ -21,29 +22,30 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
         var scheduled = false;
         var running = false;
         var doneFns = [];
+        var scheduleFn;
         function exec() {
             scheduled = false;
             var fns = doneFns;
             doneFns = [];
-            if(running) return schedule();
+            if(running) return scheduleFn();
             running = true;
             fn(function() {
                 running = false;
-                fns.forEach(function(fn) {fn()});
+                fns.forEach(function(fn) {fn();});
             });
         }
-        function schedule(done) {
+        scheduleFn = function(done) {
             if(typeof done === 'function') {
                 doneFns.push(done);
             }
             if(scheduled) return;
             scheduled = true;
             setTimeout(exec, delay);
-        }
-        return schedule;
+        };
+        return scheduleFn;
     };
 
-    function flattenArrays(list) {
+    flattenArrays = function(list) {
         if(Array.isArray(list)) {
             return list.map(flattenArrays).reduce(function(a,b) {
                 return a.concat(b);
@@ -117,27 +119,83 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
     }
 
     function moduleString(modulename, modulesource) {
-        return ['bundler.module(\'', modulename, '\',\'', stringEscape(modulesource)
-                , '\');'].join('');
+        return ['bundler.module(\'', modulename, '\',\'', 
+                stringEscape(modulesource) , '\');'].join('');
     }
 
     function uniqModules(bundles) {
         return uniq(bundles.map(function(bundle) {
             return bundle.modules;
         }));
-    };
+    }
     function uniqLibs(bundles) {
         return uniq(bundles.map(function(bundle) {
             return bundle.libs;
         }));
-    };
+    }
 
     function processFile(obj, callback) {
         readFile(obj, function(obj) {
         jsHint(obj, function(obj) {
         applyUglify(obj, function(obj) {
         callback(null, obj);
-        })})});
+        });});});
+    }
+
+    function watchCallback(obj, writeModulesCallback) { return function(done) {
+        fs.unwatchFile(obj.filename);
+        fs.watchFile(obj.filename, obj.watchCallback);
+        processFile(obj, function() {
+            writeModulesCallback(done);
+        });
+    };}
+
+    function watchObj(obj, writeModulesCallback) {
+        // needs timeout to handle vims delete+create file when saving
+        obj.watchCallback = delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 300);
+        fs.watchFile(obj.filename, obj.watchCallback);
+    }
+
+    function writeBundle(bundle, fileObjHash, callback) {
+        console.log('writebundle', bundle.out);
+        var resultFile = [];
+        var err = '';
+        bundle.libs.forEach(function(libName) {
+            var lib = fileObjHash[libName];
+            if(lib.err) {
+                console.log(libName, lib.err);
+                err += lib.err;
+            } else {
+                resultFile.push(lib.filedata);
+            }
+        });
+        bundle.modules.forEach(function(moduleName) {
+            var module = fileObjHash[moduleName];
+            if(module.err) {
+                err += module.err;
+                console.log(moduleName, module.err);
+            } else {
+                resultFile.push(moduleString(
+                    moduleName, module[bundle.moduleVersion]));
+                err += module.jshint;
+            }
+        });
+        resultFile.push(bundle.run);
+        resultFile = resultFile.join('\n');
+        if(err) {
+            resultFile = "document.body.innerHTML='"+ stringEscape(err)+ "';";
+        } 
+        fs.writeFile(bundle.out, resultFile, 'utf8', callback);
+    }
+
+    function writeBundles(bundles, fileObjs, callback) {
+        var fileObjHash = {};
+        fileObjs.forEach(function(obj) {
+            fileObjHash[obj.filename] = obj;
+        });
+        async.forEach(bundles, function(bundle, callback) {
+            writeBundle(bundle, fileObjHash, callback);
+        }, callback);
     }
 
     function bundle(bundles) {
@@ -153,68 +211,13 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
         });
 
         async.forEach(libObjs, readFile, function(err, objs) {
-        async.forEach(moduleObjs, processFile, delayedWriteBundles)});
+        async.forEach(moduleObjs, processFile, delayedWriteBundles);});
 
         moduleObjs.forEach(function(obj) {
             watchObj(obj, delayedWriteBundles);
         });
-    };
-
-    function watchCallback(obj, writeModulesCallback) { return function(done) {
-        fs.unwatchFile(obj.filename);
-        fs.watchFile(obj.filename, obj.watchCallback);
-        processFile(obj, function() {
-            writeModulesCallback(done);
-        });
-    }};
-
-    function watchObj(obj, writeModulesCallback) {
-        // needs timeout to handle vims delete+create file when saving
-        obj.watchCallback = delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 300);
-        fs.watchFile(obj.filename, obj.watchCallback);
-    };
-
-    function writeBundles(bundles, fileObjs, callback) {
-        var fileObjHash = {};
-        fileObjs.forEach(function(obj) {
-            fileObjHash[obj.filename] = obj;
-        });
-        async.forEach(bundles, function(bundle, callback) {
-            writeBundle(bundle, fileObjHash, callback);
-        }, callback);
     }
 
-    function writeBundle(bundle, fileObjHash, callback) {
-        console.log('writebundle', bundle.out);
-        var resultFile = [];
-        var err = '';
-        bundle.libs.forEach(function(libName) {
-            var lib = fileObjHash[libName];
-            if(lib.err) {
-                console.log(libName, module.err);
-                err += lib.err;
-            } else {
-                resultFile.push(lib.filedata);
-            }
-        });
-        bundle.modules.forEach(function(moduleName) {
-            var module = fileObjHash[moduleName];
-            if(module.err) {
-                err += module.err;
-                console.log(moduleName, module.err);
-            } else {
-                resultFile.push(moduleString(
-                    moduleName, module[bundle.moduleVersion]));
-                err += module.jshint;
-            };
-        });
-        resultFile.push(bundle.run);
-        resultFile = resultFile.join('\n');
-        if(err) {
-            resultFile = "document.body.innerHTML='"+ stringEscape(err)+ "';";
-        } 
-        fs.writeFile(bundle.out, resultFile, 'utf8', callback);
-    }
 
     var base = ["depend/zepto.min.js"];
     var legacy = ["depend/es5-shim.min.js",
@@ -262,6 +265,7 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
 })();
 
 (function server() {
+    /*global process: true, __dirname: true*/
     "use strict";
     var app = require('express').createServer();
 
@@ -271,5 +275,5 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
 
     var port = process.env.PORT || 8080;
     app.listen(port);
-    console.log('starting server on port ' + port);
+    console.log('\nstarting server on port ' + port + '\n');
 })();
