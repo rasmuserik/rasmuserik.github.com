@@ -19,7 +19,7 @@ var jshint = require('jshint').JSHINT;
 function readFile(obj, callback) {
     console.log('readfile', obj.filename);
     fs.readFile(obj.filename, 'utf8', function(err, data) {
-        obj.err = obj.err || err;
+        obj.err = err;
         obj.filedata = data;
         callback(obj);
     });
@@ -183,6 +183,7 @@ var modules =  ["scripts/util.js",
                 "scripts/main.js",
                 "scripts/showSource.js",
                 "scripts/menu.js",
+                "scripts/bidiv.js",
                 "scripts/webutil.js",
                 "scripts/fullbrows.js"];
 

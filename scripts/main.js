@@ -6,6 +6,7 @@ var $ = require('zquery');
 var SiteMap = Backbone.Router.extend({
     routes: {
         'menu': 'menu',
+        'bidiv': 'bidiv',
         'unicodeTest': 'unicodeTest',
         'notes/*path': 'notes',
         'source/*path': 'source',
@@ -14,6 +15,7 @@ var SiteMap = Backbone.Router.extend({
     'default': function() { },
     unicodeTest: unicodeTest,
     menu: menuFn,
+    bidiv: require('bidiv').run,
     source: function(name) { require('showSource').show(name); },
     notes: notes
 });

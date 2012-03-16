@@ -24,7 +24,7 @@ var relayoutDelayed = util.niceSingle(relayout);
 
 var init = exports.init = function(opt) {
     browsOpt = opt || {};
-    relayoutFn = browsOpt.callback;
+    relayoutFn = browsOpt.callback || browsOpt.update;
     if(!window.document.getElementById('content')) {
         $('body').append('<div id="content"></div>');
     }

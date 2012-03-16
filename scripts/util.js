@@ -80,7 +80,7 @@ exports.niceSingle = function(fn) {
 // ## Deterministic pseudorandom number generator
 var seed = 1;
 var pseudoRandom = exports.pseudoRandom = function(n) {
-    return (seed = (1664525 * (n || seed) + 1013904223) |0);
+    return (seed = (1664525 * (n || seed) + 1013904223) &0x7fffffff);
 };
 
 // ## From a string, generate a HTML-color
