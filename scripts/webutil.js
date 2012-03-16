@@ -13,16 +13,28 @@ exports.windowHeight = function() {
     return height;
 };
 
+function binsearch(a, b, fn) {
+    if(a >= b) {
+        return a;
+    }
+    var t = (a + b + 1) >> 1;
+    if(fn(t)) {
+        return binsearch(a, t-1, fn);
+    } else {
+        return binsearch(t, b, fn);
+    }
+}
+
 exports.scaleText = function($elems) {
     _($elems).each(function(elem) {
         var $elem = $(elem);
         var h = $elem.height();
         var size = parseInt($elem.css('font-size'), 10);
         $elem.css('height', 'auto');
-        while($elem.height() > h && size > 5) {
-            --size;
+        binsearch(3, 64, function(size) {
             $elem.css('font-size', size);
-        }
+            return $elem.height() > h || elem.scrollWidth > elem.offsetWidth;
+        });
         $elem.css('height', h);
     });
 };
