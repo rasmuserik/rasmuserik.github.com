@@ -1,5 +1,65 @@
-var window = require('window');
-var $ = require('zquery');
+/*global setTimeout: true*/
+exports.stringEscape = function(str) {
+    return str.replace(/[^" !#-&(-\[\]-~]/g, function(c) {
+        var code = c.charCodeAt(0);
+        if(code < 256) {
+            return "\\x" + (0x100 + code).toString(16).slice(1);
+        } else {
+            return "\\u" + (0x10000 + code).toString(16).slice(1);
+        }
+    });
+};
+
+exports.delaySingleExecAsync = function(fn, delay) {
+    delay = delay || 10;
+    var scheduled = false;
+    var running = false;
+    var doneFns = [];
+    var scheduleFn;
+    function exec() {
+        scheduled = false;
+        var fns = doneFns;
+        doneFns = [];
+        if(running) {
+            return scheduleFn();
+        }
+        running = true;
+        fn(function() {
+            running = false;
+            fns.forEach(function(fn) {fn();});
+        });
+    }
+    scheduleFn = function(done) {
+        if(typeof done === 'function') {
+            doneFns.push(done);
+        }
+        if(scheduled) {
+            return;
+        }
+        scheduled = true;
+        setTimeout(exec, delay);
+    };
+    return scheduleFn;
+};
+
+var flattenArrays = exports.flattenArrays = function(list) {
+    if(Array.isArray(list)) {
+        return list.map(flattenArrays).reduce(function(a,b) {
+            return a.concat(b);
+        });
+    } else {
+        return [list];
+    }
+};
+
+exports.uniq = function(lists) {
+    var hash = {};
+    flattenArrays(lists).forEach(function(elem) {
+            hash[elem] = true;
+    });
+    return Object.keys(hash);
+};
+
 // ## Throttle a function and limit it to a single invocation per 10ms
 // Slightly delay execution of a function, and make sure it only run once,
 // even though it is requested several times to be executed.
@@ -10,23 +70,11 @@ exports.niceSingle = function(fn) {
             return;
         }
         running = true;
-        window.setTimeout(function() {
+        setTimeout(function() {
             fn();
             running = false;
         }, 10);
     };
-};
-
-// ## Actual window height
-//
-// The height of the window, including height of optional auto-hiding address bar.
-exports.windowHeight = function() {
-    var height = $(window).height();
-    // workaround buggy window height on iOS
-    if(height === 356 || height === 208) {
-        height += 60;
-    }
-    return height;
 };
 
 // ## Deterministic pseudorandom number generator

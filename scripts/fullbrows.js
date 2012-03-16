@@ -1,4 +1,5 @@
 var util = require('util');
+var webutil = require('webutil');
 var $ = require('zquery');
 var window = require('window');
 var Modernizr = require('modernizr');
@@ -13,7 +14,7 @@ function relayout() {
         .css('top', 1)
         .css('overflow', 'hidden')
         .css('width', $(window).width())
-        .css('height', browsOpt.scrollable ? 'auto' : util.windowHeight());
+        .css('height', browsOpt.scrollable ? 'auto' : webutil.windowHeight());
     if(typeof relayoutFn === 'function') {
         relayoutFn(window.document.getElementById('content'));
     }
@@ -31,7 +32,7 @@ var init = exports.init = function(opt) {
         $('body').css('overflow', 'hidden');
     } else {
         $('body').append('<div style="height:' +
-                (Math.max(util.windowHeight(),$(window).width()) + 62) +
+                (Math.max(webutil.windowHeight(),$(window).width()) + 62) +
                 'px;background-color: black;"></div>');
     }
     $('body').css('background-color', 'black');

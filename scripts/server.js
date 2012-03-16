@@ -2,7 +2,7 @@
 /*global require: true, setTimeout: true, console: true*/
 /*jshint es5: true*/
 
-var pu = require('./pureutils');
+var util = require('./util');
 
 (function() {
     "use strict";
@@ -60,16 +60,16 @@ var pu = require('./pureutils');
 
     function moduleString(modulename, modulesource) {
         return ['bundler.module(\'', modulename, '\',\'', 
-                pu.stringEscape(modulesource) , '\');'].join('');
+                util.stringEscape(modulesource) , '\');'].join('');
     }
 
     function uniqModules(bundles) {
-        return pu.uniq(bundles.map(function(bundle) {
+        return util.uniq(bundles.map(function(bundle) {
             return bundle.modules;
         }));
     }
     function uniqLibs(bundles) {
-        return pu.uniq(bundles.map(function(bundle) {
+        return util.uniq(bundles.map(function(bundle) {
             return bundle.libs;
         }));
     }
@@ -92,7 +92,7 @@ var pu = require('./pureutils');
 
     function watchObj(obj, writeModulesCallback) {
         // needs timeout to handle vims delete+create file when saving
-        obj.watchCallback = pu.delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 1000);
+        obj.watchCallback = util.delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 1000);
         fs.watchFile(obj.filename, obj.watchCallback);
     }
 
@@ -123,7 +123,7 @@ var pu = require('./pureutils');
         resultFile.push(bundle.run);
         resultFile = resultFile.join('\n');
         if(err) {
-            resultFile = "document.body.innerHTML='"+ pu.stringEscape(err)+ "';";
+            resultFile = "document.body.innerHTML='"+ util.stringEscape(err)+ "';";
         } 
         fs.writeFile(bundle.out, resultFile, 'utf8', callback);
     }
@@ -146,7 +146,7 @@ var pu = require('./pureutils');
                 return {filename: filename}; 
             });
         var fileObjs = libObjs.concat(moduleObjs);
-        var delayedWriteBundles = pu.delaySingleExecAsync(function(done) {
+        var delayedWriteBundles = util.delaySingleExecAsync(function(done) {
            writeBundles(bundles, fileObjs, done);
         });
 
@@ -171,7 +171,9 @@ var pu = require('./pureutils');
     var modules =  ["scripts/util.js",
                     "scripts/jsxml.js",
                     "scripts/main.js",
+                    "scripts/showSource.js",
                     "scripts/menu.js",
+                    "scripts/webutil.js",
                     "scripts/fullbrows.js"];
 
     var bundles = [

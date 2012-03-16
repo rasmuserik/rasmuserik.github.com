@@ -8,11 +8,13 @@ var SiteMap = Backbone.Router.extend({
         'menu': 'menu',
         'unicodeTest': 'unicodeTest',
         'notes/*path': 'notes',
+        'source/*path': 'source',
         '*default': 'default'
     },
     'default': function() { },
     unicodeTest: unicodeTest,
     menu: menuFn,
+    source: function(name) { require('showSource').show(name); },
     notes: notes
 });
 
