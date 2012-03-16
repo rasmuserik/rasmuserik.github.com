@@ -18,7 +18,7 @@ exports.niceSingle = function(fn) {
 };
 
 // ## Actual window height
-// 
+//
 // The height of the window, including height of optional auto-hiding address bar.
 exports.windowHeight = function() {
     var height = $(window).height();

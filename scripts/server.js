@@ -34,7 +34,7 @@ var pu = require('./pureutils');
     function jsHint(obj, callback) {
         console.log('jshint', obj.filename);
         if(obj.err) return callback(obj);
-        jshint('(function(){"use strict";/*global require: true, exports: true */' + obj.filedata + '})();');
+        jshint('/*jshint strict: true, trailing: true, curly: true, es5: true, eqeqeq: true*/(function(){"use strict";/*global require: true, exports: true */' + obj.filedata + '})();');
         obj.jshint = '';
         jshint.errors.forEach(function(err) {
             if(err) obj.jshint += mustache.to_html(

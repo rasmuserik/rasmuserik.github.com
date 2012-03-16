@@ -18,7 +18,6 @@ var SiteMap = Backbone.Router.extend({
 
 function unicodeTest() {
     var t = [];
-
     var i;
     var n = 65538;
     $('body').text('');

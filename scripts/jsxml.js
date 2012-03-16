@@ -1,14 +1,14 @@
 // # JsonML
-  
+
 // Various functions for handling
 // jsonml in array form.
 // For more info on jsonml,
 // see [jsonml.org](http://jsonml.org/)
 // or [wikipedia](http://en.wikipedia.org/wiki/JsonML)
 //
-// Implemented to be as portable as possible. 
+// Implemented to be as portable as possible.
 // Not depending on any libraries, and also
-// avoid regular expressions to be possible to 
+// avoid regular expressions to be possible to
 // run on javascript-subsets on j2me devices.
 /*global document */
 /*jshint evil:true */
@@ -46,16 +46,16 @@ var reventities = (function () {
 
 // ## XML parser
 
-// Parse an XML-string. 
+// Parse an XML-string.
 // Actually this is not a full implementation, but just
-// the basic parts to get it up running. 
+// the basic parts to get it up running.
 // Nonetheless it is Good Enough(tm) for most uses.
-// 
-// Known deficiencies: CDATA is not supported, will accept even 
+//
+// Known deficiencies: CDATA is not supported, will accept even
 // non-well-formed documents, <?... > <!... > are not really handled, ...
 function fromXml(xml) {
     if(typeof(xml) !== "string") {
-        jsonmlError( 
+        jsonmlError(
             "Error: jsonml.parseXML didn't receive a string as parameter");
     }
 
@@ -70,7 +70,7 @@ function fromXml(xml) {
     // current tag being parsed
     var tag = [];
     // read the next char from the string
-    function next_char() { 
+    function next_char() {
         ++pos;
         if(pos < xml.length) {
             c = xml[pos];
@@ -78,10 +78,10 @@ function fromXml(xml) {
             c = undefined;
        }
     }
-    // check if the current char is one of those in the string parameter 
+    // check if the current char is one of those in the string parameter
     function is_a(str) { return str.indexOf(c) !== -1; }
-    // return the string from the current position to right before the first 
-    // occurence of any of symb. Translate escaped xml entities to their value 
+    // return the string from the current position to right before the first
+    // occurence of any of symb. Translate escaped xml entities to their value
     // on the fly.
     function read_until(symb) {
         var buffer = [];
@@ -98,11 +98,11 @@ function fromXml(xml) {
                 } else {
                     c = entities[entity];
                     if(!c) {
-                        jsonmlError("error: unrecognisable xml entity: " + 
+                        jsonmlError("error: unrecognisable xml entity: " +
                                 entity);
                     }
                 }
-            } 
+            }
             buffer.push(c);
             next_char();
         }
@@ -122,7 +122,7 @@ function fromXml(xml) {
                     while(xml.slice(pos, pos+2) !== "--") {
                         ++pos;
                     }
-                } 
+                }
                 read_until('>');
                 next_char();
 
@@ -154,8 +154,8 @@ function fromXml(xml) {
                 // end of tag, is it `<.../>` or  `<...>`
                 if(is_a("/")) {
                     next_char();
-                    if(!is_a(">")) { 
-                        jsonmlError('expected ">" after "/" within tag'); 
+                    if(!is_a(">")) {
+                        jsonmlError('expected ">" after "/" within tag');
                     }
                     tag.push(newtag);
                 } else {
@@ -172,7 +172,7 @@ function fromXml(xml) {
                 }
                 next_char();
                 var parent_tag = stack.pop();
-                if(tag.length <= 2 && !Array.isArray(tag[1]) && 
+                if(tag.length <= 2 && !Array.isArray(tag[1]) &&
                         typeof(tag[1]) !== "string") {
                     tag.push("");
                 }
@@ -220,7 +220,7 @@ function xmlEscape(str, acc) {
     }
 }
 
-// The actual implementation. As the XML-string is built by appending to the 
+// The actual implementation. As the XML-string is built by appending to the
 // `acc`umulator.
 function toXmlAcc(jsonml, acc) {
     if(Array.isArray(jsonml)) {
@@ -229,7 +229,7 @@ function toXmlAcc(jsonml, acc) {
         var pos = 1;
         var attributes = jsonml[1];
         var key;
-        if(attributes && !Array.isArray(attributes) && 
+        if(attributes && !Array.isArray(attributes) &&
                 typeof(attributes) !== "string") {
             for(key in attributes) { if(attributes.hasOwnProperty(key)) {
                 acc.push(' ');
@@ -245,7 +245,7 @@ function toXmlAcc(jsonml, acc) {
             do {
                 toXmlAcc(jsonml[pos], acc);
                 ++pos;
-            } while(pos < jsonml.length); 
+            } while(pos < jsonml.length);
             acc.push("</");
             acc.push(jsonml[0]);
             acc.push(">");
@@ -287,8 +287,8 @@ exports.getAttr = function(jsonml, attribute) {
 };
 
 
-// Add a property to the object. If the property is already there, append 
-// the `val`ue to an array at the key instead, possibly putting existing 
+// Add a property to the object. If the property is already there, append
+// the `val`ue to an array at the key instead, possibly putting existing
 // object in front of such array, if that is not an array yet.
 function addprop(obj, key, val) {
     if(obj[key]) {
@@ -302,7 +302,7 @@ function addprop(obj, key, val) {
     }
 }
 
-// Internal function called by toObject. Return an object corresponding to 
+// Internal function called by toObject. Return an object corresponding to
 // the child nodes of the `jsonml`-parameter
 function toObjectInner(jsonml) {
     var result = {};
@@ -332,19 +332,19 @@ function toObjectInner(jsonml) {
     return result;
 }
 
-// Convert jsonml into an easier subscriptable json structure, not preserving 
+// Convert jsonml into an easier subscriptable json structure, not preserving
 // the order of the elements
 exports.toObject = function(jsonml) {
     var result = {};
     result[jsonml[0]] = toObjectInner(jsonml);
-    return result; 
+    return result;
 };
 
 
 function visit(jsonml, fn) {
-    jsonml.forEach(function(elem) { 
+    jsonml.forEach(function(elem) {
         if(Array.isArray(elem)) {
-            visit(elem, fn); 
+            visit(elem, fn);
         }
     });
     fn(jsonml);
@@ -382,10 +382,10 @@ exports.toDOM = function toDOM(jsonml) {
                     // some properties cannot be set on internet explorer
                 }
                 elem.setAttribute(name, attr[name]);
-    
+
                 if(global.$ && name.slice(0,2) === "on") {
-                    var fn = (typeof attr[name] === "string" ) ? 
-                            new Function(attr[name]) : 
+                    var fn = (typeof attr[name] === "string" ) ?
+                            new Function(attr[name]) :
                             attr[name];
                     global.$(elem).bind(name.slice(2), fn);
                 }

@@ -37,15 +37,15 @@ function totalSize(arr) {
 function initMenu(menu) {
     var style = menu.elem.style;
     style.fontSize = '16px';
-    style.display = 'block'; 
-    style.position = 'absolute'; 
+    style.display = 'block';
+    style.position = 'absolute';
     style.padding = padding + 'px';
-    style.top = '100px'; 
-    style.left = '100px'; 
+    style.top = '100px';
+    style.left = '100px';
     style.margin = margin + 'px';
     style.textAlign = 'center';
     style.borderRadius = margin*2 + 'px';
-    style.border = border + 'px solid #000000'; 
+    style.border = border + 'px solid #000000';
     style.overflow = 'hidden';
     style.backgroundColor = util.colorHash(menu.title);
     style.boxShadow = '3px 3px 9px rgba(0, 0, 0, .8)';
@@ -68,7 +68,7 @@ position = function(menu, x, y, w, h) {
     w-= 2*(margin + border + padding);
     h-= 2*(margin + border + padding);
     var $elem = $(menu.elem);
-    
+
     $elem.css('left', x)
          .css('top', y)
          .css('width', w);

@@ -30,8 +30,8 @@ var init = exports.init = function(opt) {
     if(!Modernizr.touch) {
         $('body').css('overflow', 'hidden');
     } else {
-        $('body').append('<div style="height:' + 
-                (Math.max(util.windowHeight(),$(window).width()) + 62) + 
+        $('body').append('<div style="height:' +
+                (Math.max(util.windowHeight(),$(window).width()) + 62) +
                 'px;background-color: black;"></div>');
     }
     $('body').css('background-color', 'black');
