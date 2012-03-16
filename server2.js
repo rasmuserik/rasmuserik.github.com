@@ -1,30 +1,47 @@
 #!/usr/bin/env node
 /*global require: true, setTimeout: true, console: true*/
 
-var uniq, delaySingleExecAsync, flattenArrays;
+var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
 // # Util
 (function() {
     "use strict";
+    stringEscape = function(str) {
+        return str.replace(/[^" !#-&(-\[\]-~]/g, function(c) {
+            var code = c.charCodeAt(0);
+            if(code < 256) {
+                return "\\x" + (0x100 + code).toString(16).slice(1);
+            } else {
+                return "\\u" + (0x10000 + code).toString(16).slice(1);
+            }
+        });
+    };
+
     delaySingleExecAsync = function(fn, delay) {
         delay = delay || 10;
         var scheduled = false;
         var running = false;
+        var doneFns = [];
         function exec() {
             scheduled = false;
+            var fns = doneFns;
+            doneFns = [];
             if(running) return schedule();
             running = true;
-            fn(done);
+            fn(function() {
+                running = false;
+                fns.forEach(function(fn) {fn()});
+            });
         }
-        function done() {
-            running = false;
-        }
-        function schedule() {
+        function schedule(done) {
+            if(typeof done === 'function') {
+                doneFns.push(done);
+            }
             if(scheduled) return;
             scheduled = true;
             setTimeout(exec, delay);
         }
         return schedule;
-    }
+    };
 
     function flattenArrays(list) {
         if(Array.isArray(list)) {
@@ -34,7 +51,7 @@ var uniq, delaySingleExecAsync, flattenArrays;
         } else {
             return [list];
         }
-    }
+    };
 
     uniq = function(lists) {
         var hash = {};
@@ -42,7 +59,7 @@ var uniq, delaySingleExecAsync, flattenArrays;
                 hash[elem] = true;
         });
         return Object.keys(hash);
-    }
+    };
 })();
 
 (function() {
@@ -100,20 +117,18 @@ var uniq, delaySingleExecAsync, flattenArrays;
     }
 
     function moduleString(modulename, modulesource) {
-        return ['bundler.module(\'', modulename, '\',\'',
-            modulesource.replace(/[^" !#-&(-\[\]-~]/g, function(c) {
-                var code = c.charCodeAt(0);
-                if(code < 256) {
-                    return "\\x" + (0x100 + code).toString(16).slice(1);
-                } else {
-                    return "\\u" + (0x10000 + code).toString(16).slice(1);
-                }
-            }), '\');'].join('');
+        return ['bundler.module(\'', modulename, '\',\'', stringEscape(modulesource)
+                , '\');'].join('');
     }
 
-    function uniqFiles(bundles) {
+    function uniqModules(bundles) {
         return uniq(bundles.map(function(bundle) {
-            return [bundle.libs, bundle.modules];
+            return bundle.modules;
+        }));
+    };
+    function uniqLibs(bundles) {
+        return uniq(bundles.map(function(bundle) {
+            return bundle.libs;
         }));
     };
 
@@ -126,12 +141,37 @@ var uniq, delaySingleExecAsync, flattenArrays;
     }
 
     function bundle(bundles) {
-        var fileObjs = uniqFiles(bundles).map(function(filename) {
+        var moduleObjs = uniqModules(bundles).map(function(filename) {
                 return {filename: filename}; 
             });
-        async.forEach(fileObjs, processFile, function(err, objs) {
-           writeBundles(bundles, fileObjs);
+        var libObjs = uniqLibs(bundles).map(function(filename) {
+                return {filename: filename}; 
+            });
+        var fileObjs = libObjs.concat(moduleObjs);
+        var delayedWriteBundles = delaySingleExecAsync(function(done) {
+           writeBundles(bundles, fileObjs, done);
         });
+
+        async.forEach(libObjs, readFile, function(err, objs) {
+        async.forEach(moduleObjs, processFile, delayedWriteBundles)});
+
+        moduleObjs.forEach(function(obj) {
+            watchObj(obj, delayedWriteBundles);
+        });
+    };
+
+    function watchCallback(obj, writeModulesCallback) { return function(done) {
+        fs.unwatchFile(obj.filename);
+        fs.watchFile(obj.filename, obj.watchCallback);
+        processFile(obj, function() {
+            writeModulesCallback(done);
+        });
+    }};
+
+    function watchObj(obj, writeModulesCallback) {
+        // needs timeout to handle vims delete+create file when saving
+        obj.watchCallback = delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 300);
+        fs.watchFile(obj.filename, obj.watchCallback);
     };
 
     function writeBundles(bundles, fileObjs, callback) {
@@ -150,34 +190,40 @@ var uniq, delaySingleExecAsync, flattenArrays;
         var err = '';
         bundle.libs.forEach(function(libName) {
             var lib = fileObjHash[libName];
-            resultFile.push(lib[bundle.libVersion]);
-            err += lib.err || '';
+            if(lib.err) {
+                console.log(libName, module.err);
+                err += lib.err;
+            } else {
+                resultFile.push(lib.filedata);
+            }
         });
         bundle.modules.forEach(function(moduleName) {
             var module = fileObjHash[moduleName];
-            resultFile.push(moduleString(
+            if(module.err) {
+                err += module.err;
+                console.log(moduleName, module.err);
+            } else {
+                resultFile.push(moduleString(
                     moduleName, module[bundle.moduleVersion]));
-            err += module.jshint;
-            err += module.err || '';
+                err += module.jshint;
+            };
         });
         resultFile.push(bundle.run);
-        if(err) {
-            resultFile = ['document.write("', err, '");'];
-        } 
         resultFile = resultFile.join('\n');
+        if(err) {
+            resultFile = "document.body.innerHTML='"+ stringEscape(err)+ "';";
+        } 
         fs.writeFile(bundle.out, resultFile, 'utf8', callback);
     }
 
-
-    
-    var base = ["depend/zepto.js"];
-    var legacy = ["depend/es5-shim.js",
-                  "depend/jquery-1.7.1.js",
-                  "depend/json2.js"];
+    var base = ["depend/zepto.min.js"];
+    var legacy = ["depend/es5-shim.min.js",
+                  "depend/jquery-1.7.1.min.js",
+                  "depend/json2.min.js"];
     var libs = ["depend/modernizr.js",
-                "depend/underscore.js",
-                "depend/backbone.js",
-                "depend/showdown.js",
+                "depend/underscore-min.js",
+                "depend/backbone-min.js",
+                "depend/showdown.min.js",
                 "scripts/bundler.js"];
     var modules =  ["scripts/util.js",
                     "scripts/jsxml.js",
@@ -186,28 +232,28 @@ var uniq, delaySingleExecAsync, flattenArrays;
                     "scripts/fullbrows.js"];
 
     var bundles = [
-        { out: 'dist/bundle2.debug.js',
+        { out: 'dist/bundle.debug.js',
           libs: base.concat(libs),
           modules: modules,
-          libVersion: 'filedata', moduleVersion: 'filedata',
+          moduleVersion: 'filedata',
           run: 'bundler.require("main").main()'},
 
-        { out: 'dist/bundle2.legacy.debug.js',
+        { out: 'dist/bundle.legacy.debug.js',
           libs: legacy.concat(libs),
           modules: modules,
-          libVersion: 'filedata', moduleVersion: 'filedata',
+          moduleVersion: 'filedata',
           run: 'bundler.require("main").main()'},
 
-        { out: 'dist/bundle2.min.js',
+        { out: 'dist/bundle.min.js',
           libs: base.concat(libs),
           modules: modules,
-          libVersion: 'minified', moduleVersion: 'minified',
+          moduleVersion: 'minified',
           run: 'bundler.require("main").main()'},
 
-        { out: 'dist/bundle2.legacy.min.js',
+        { out: 'dist/bundle.legacy.min.js',
           libs: legacy.concat(libs),
           modules: modules,
-          libVersion: 'minified', moduleVersion: 'minified',
+          moduleVersion: 'minified',
           run: 'bundler.require("main").main()'}
     ];
 
@@ -215,7 +261,6 @@ var uniq, delaySingleExecAsync, flattenArrays;
 
 })();
 
-/*
 (function server() {
     "use strict";
     var app = require('express').createServer();
@@ -228,4 +273,3 @@ var uniq, delaySingleExecAsync, flattenArrays;
     app.listen(port);
     console.log('starting server on port ' + port);
 })();
-*/
