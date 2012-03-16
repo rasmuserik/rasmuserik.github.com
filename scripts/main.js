@@ -17,18 +17,19 @@ var SiteMap = Backbone.Router.extend({
 });
 
 function unicodeTest() {
-    var g = require('window');
-    g.t = [];
+    var t = [];
+
     var i;
+    var n = 65538;
     $('body').text('');
-    for(i=0;i<=65536;++i) {
-        g.t.push(i);
+    for(i=0;i<n;++i) {
+        t.push(i);
     }
-    g.t = g.t.map(function(a) { return String.fromCharCode(a); });
-    g.t = g.t.join('');
-    for(i=0;i<=65536;++i) {
-        if(g.t.charCodeAt(i) !== i) {
-            $('body').append('error at ' + i + '<br>');
+    t = t.map(function(a) { return String.fromCharCode(a); });
+    t = t.join('');
+    for(i=0;i<n;++i) {
+        if(t.charCodeAt(i) !== i) {
+            $('body').append('error t[' + i + '] -> ' + t.charCodeAt(i) + '<br>');
         }
     }
     $('body').append('done');
