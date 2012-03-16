@@ -66,8 +66,11 @@ function docco(text) {
 }
 
 exports.show = function(filename) {
-    $.get('scripts/' + filename + '.js', function(text) {
-        console.log(docco(text));
-        $('body').html(docco(text));
+    $.ajax({
+        url: ('/scripts/' + filename + '.js'),
+        dataType: 'text',
+        success: function(text) {
+            $('body').html(docco(text));
+        }
     });
 };
