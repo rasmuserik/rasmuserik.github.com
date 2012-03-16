@@ -92,10 +92,8 @@ function update(dom) {
 
 exports.run = function() {
     // ### Assign random weights to map;
-    util.pseudoRandom(1); // set seed
-    tree = makeTree(menuRaw);
-    console.log(makeTree(menuRaw));
-    //tree = ['foo', 'bar'];
+    util.pseudoRandom(1000); // set seed
+    tree = makeTree(menuRaw.concat(menuRaw).concat(menuRaw).concat(menuRaw));
 
     fullbrows.init({update: update});
 };
