@@ -1,5 +1,6 @@
 var fullbrows = require('fullbrows');
 var util = require('util');
+var webutil = require('webutil');
 var console = require('console');
 var _ = require('underscore');
 var $ = require('zquery');
@@ -62,10 +63,11 @@ function layoutTree(tree, $dom, x, y, w, h, dir) {
             .css('height', Math.ceil(h))
             .css('border-radius', 0)
             .css('border', '1px solid black')
+            .css('font-size', 64)
             .css('margin', 0)
             //.css('box-shadow', '0px 0px 10px ' + util.colorHash(tree))
             .css('background-color', util.colorHash(tree))
-            .text(tree));
+            .text(tree.replace('/', ' ').replace('#', '')));
     } else {
         var x0 = x, y0 = y;
         if(dir) {
@@ -85,6 +87,7 @@ function update(dom) {
     var $dom = $(dom);
     $dom.html('');
     layoutTree(tree, $dom, 0, 0, $dom.width(), $dom.height(), false);
+    webutil.scaleText($dom.find('div'));
 }
 
 

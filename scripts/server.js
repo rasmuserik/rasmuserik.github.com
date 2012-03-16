@@ -32,7 +32,7 @@ function jsHint(obj, callback) {
     }
     jshint('/*jshint strict: true, trailing: true, curly: true, ' +
            'es5: true, eqeqeq: true*/(function(){"use strict";' +
-           '/*global require: true, module: true, exports: true */' + 
+           '/*global require:true,module:true,exports:true,console:true */' +
            obj.filedata + '})();');
     obj.jshint = '';
     jshint.errors.forEach(function(err) { if(err) {
