@@ -55,7 +55,7 @@ exports.main = function() {
 function menuFn() {
     require('fullbrows').init();
     $('#content').html(jsxml.toDOM(menuXml));
-    require('menu').doMenu($('#content > ul > li')[0]);
+    require('./menu').doMenu($('#content > ul > li')[0]);
 }
 
 var menuXml = ["ul",

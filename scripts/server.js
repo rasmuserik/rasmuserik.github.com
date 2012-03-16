@@ -2,67 +2,7 @@
 /*global require: true, setTimeout: true, console: true*/
 /*jshint es5: true*/
 
-var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
-// # Util
-(function() {
-    "use strict";
-    stringEscape = function(str) {
-        return str.replace(/[^" !#-&(-\[\]-~]/g, function(c) {
-            var code = c.charCodeAt(0);
-            if(code < 256) {
-                return "\\x" + (0x100 + code).toString(16).slice(1);
-            } else {
-                return "\\u" + (0x10000 + code).toString(16).slice(1);
-            }
-        });
-    };
-
-    delaySingleExecAsync = function(fn, delay) {
-        delay = delay || 10;
-        var scheduled = false;
-        var running = false;
-        var doneFns = [];
-        var scheduleFn;
-        function exec() {
-            scheduled = false;
-            var fns = doneFns;
-            doneFns = [];
-            if(running) return scheduleFn();
-            running = true;
-            fn(function() {
-                running = false;
-                fns.forEach(function(fn) {fn();});
-            });
-        }
-        scheduleFn = function(done) {
-            if(typeof done === 'function') {
-                doneFns.push(done);
-            }
-            if(scheduled) return;
-            scheduled = true;
-            setTimeout(exec, delay);
-        };
-        return scheduleFn;
-    };
-
-    flattenArrays = function(list) {
-        if(Array.isArray(list)) {
-            return list.map(flattenArrays).reduce(function(a,b) {
-                return a.concat(b);
-            });
-        } else {
-            return [list];
-        }
-    };
-
-    uniq = function(lists) {
-        var hash = {};
-        flattenArrays(lists).forEach(function(elem) {
-                hash[elem] = true;
-        });
-        return Object.keys(hash);
-    };
-})();
+var pu = require('./pureutils');
 
 (function() {
     "use strict";
@@ -120,16 +60,16 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
 
     function moduleString(modulename, modulesource) {
         return ['bundler.module(\'', modulename, '\',\'', 
-                stringEscape(modulesource) , '\');'].join('');
+                pu.stringEscape(modulesource) , '\');'].join('');
     }
 
     function uniqModules(bundles) {
-        return uniq(bundles.map(function(bundle) {
+        return pu.uniq(bundles.map(function(bundle) {
             return bundle.modules;
         }));
     }
     function uniqLibs(bundles) {
-        return uniq(bundles.map(function(bundle) {
+        return pu.uniq(bundles.map(function(bundle) {
             return bundle.libs;
         }));
     }
@@ -152,7 +92,7 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
 
     function watchObj(obj, writeModulesCallback) {
         // needs timeout to handle vims delete+create file when saving
-        obj.watchCallback = delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 1000);
+        obj.watchCallback = pu.delaySingleExecAsync(watchCallback(obj, writeModulesCallback), 1000);
         fs.watchFile(obj.filename, obj.watchCallback);
     }
 
@@ -183,7 +123,7 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
         resultFile.push(bundle.run);
         resultFile = resultFile.join('\n');
         if(err) {
-            resultFile = "document.body.innerHTML='"+ stringEscape(err)+ "';";
+            resultFile = "document.body.innerHTML='"+ pu.stringEscape(err)+ "';";
         } 
         fs.writeFile(bundle.out, resultFile, 'utf8', callback);
     }
@@ -206,7 +146,7 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
                 return {filename: filename}; 
             });
         var fileObjs = libObjs.concat(moduleObjs);
-        var delayedWriteBundles = delaySingleExecAsync(function(done) {
+        var delayedWriteBundles = pu.delaySingleExecAsync(function(done) {
            writeBundles(bundles, fileObjs, done);
         });
 
@@ -270,7 +210,7 @@ var uniq, delaySingleExecAsync, flattenArrays, stringEscape;
     var app = require('express').createServer();
 
     app.configure(function(){
-        app.use("/", require('express').static(__dirname ));
+        app.use("/", require('express').static(__dirname.replace(/\/scripts$/, '')));
     });
 
     var port = process.env.PORT || 8080;

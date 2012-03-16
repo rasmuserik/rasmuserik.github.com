@@ -7,6 +7,7 @@ bundler = {};
         modules[path.replace(/.*\//,'').replace(/\.js$/,'')] = content;
     }
     function require(name) {
+        name = name.replace(/.*\//,'').replace(/\.js$/,'');
         if(typeof modules[name] === 'string') {
             var exports = {};
             var module = {exports: exports};
