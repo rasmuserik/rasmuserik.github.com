@@ -30,10 +30,10 @@ exports.scaleText = function($elems) {
         var $elem = $(elem);
         var h = $elem.height();
         var size = parseInt($elem.css('font-size'), 10);
-        $elem.css('height', 'auto');
-        binsearch(3, 64, function(size) {
+        $elem.css('overflow', 'hidden');
+        binsearch(1, 100, function(size) {
             $elem.css('font-size', size);
-            return $elem.height() > h || elem.scrollWidth > elem.offsetWidth;
+            return elem.scrollHeight > elem.clientHeight || elem.scrollWidth > elem.clientWidth;
         });
         $elem.css('height', h);
     });
