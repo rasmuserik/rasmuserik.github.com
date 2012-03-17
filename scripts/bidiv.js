@@ -53,31 +53,44 @@ function makeTree(list) {
 }
 var tree;
 
-function layoutTree(tree, $dom, x, y, w, h, dir) {
+var execNo = 0;
+function layoutTree(tree, $dom, x, y, w, h, dir, runId) {
     if(typeof tree === 'string') {
-        $dom.append($('<div>')
+        var $elem = $('<div>')
             .css('position', 'absolute')
-            .css('left', Math.floor(x))
-            .css('top', Math.floor(y))
-            .css('width', Math.max(0,Math.ceil(w) - 12))
-            .css('height', Math.max(0,Math.ceil(h) - 22))
+            .css('left', x + 1)
+            .css('top', y + 1)
+            .css('width', Math.max(0, w-2))
+            .css('height', Math.max(h-2))
             .css('border-radius', 5)
             //.css('border', '1px solid black')
-            .css('padding', 5)
-            //.css('box-shadow', '0px 0px 10px ' + util.colorHash(tree))
+            //.css('padding', 5)
+            //.css('box-shadow', '0px 0px 8px ' + util.colorHash(tree))
             .css('background-color', util.colorHash(tree))
-            .text(tree.replace('/', ' ').replace('#', '')));
+            .text(tree.replace('/', ' ').replace('#', ''));
+        $dom.append($elem);
+        webutil.scaleText($elem);
     } else {
-        var x0 = x, y0 = y;
+        var x0 = x, x1 = x;
+        var y0 = y, y1 = y;
+        var w0 = w, w1 = w;
+        var h0 = h, h1 = h;
         if(dir) {
-            w /= 2;
-            x0 += w;
+            w0 >>= 1;
+            x1 = x + w0;
+            w1 = w - w0;
         } else {
-            h /= 2;
-            y0 += h;
+            h0 >>= 1;
+            y1 = y + h0;
+            h1 = h - h0;
         }
-        layoutTree(tree[0], $dom, x,y,w,h, !dir);
-        layoutTree(tree[1], $dom, x0,y0,w,h, !dir);
+        setTimeout(function() {
+            if(runId !== execNo) {
+                return;
+            }
+            layoutTree(tree[0], $dom, x0,y0,w0,h0, !dir, runId);
+            layoutTree(tree[1], $dom, x1,y1,w1,h1, !dir, runId);
+        }, 0);
     }
 }
 
@@ -85,7 +98,7 @@ function layoutTree(tree, $dom, x, y, w, h, dir) {
 function update(dom) {
     var $dom = $(dom);
     $dom.html('');
-    layoutTree(tree, $dom, 0, 0, $dom.width(), $dom.height(), false);
+    layoutTree(tree, $dom, 0, 0, $dom.width(), $dom.height(), false, ++execNo);
     webutil.scaleText($dom.find('div'));
 }
 
