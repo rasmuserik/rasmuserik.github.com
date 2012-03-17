@@ -10,17 +10,6 @@ var recentLog;
 var tasks;
 var changes;
 
-function scriptString(obj) {
-    var result = '<script src="https://rasmuserik-timelog.appspot.com/?' +
-        'callback=timelogResponseFromServer' +
-        '&name=' + account +
-        '&since=' + lastTime;
-    if(obj) {
-        result += '&id=' + obj.id + '&value=' + obj.value;
-    }
-    result += '"></script>';
-    return result;
-}
 
 function update() {
     var elem = false;
@@ -28,7 +17,16 @@ function update() {
         elem = changes[Object.keys(changes)[0]];
         console.log('WARNING:', elem, changes);
     }
-    window.document.write(scriptString(elem));
+
+    var url = '<script src="https://rasmuserik-timelog.appspot.com/?' +
+        'callback=timelogResponseFromServer' +
+        '&name=' + account +
+        '&since=' + lastTime;
+    if(elem) {
+        url += '&id=' + elem.id + '&value=' + window.escape(elem.value);
+    }
+    url += '"></script>';
+    window.document.write(url);
 }
 
 function setCurrent(name) {
