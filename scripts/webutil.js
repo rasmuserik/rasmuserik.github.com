@@ -31,7 +31,7 @@ exports.scaleText = function($elems) {
         var h = $elem.height();
         var size = parseInt($elem.css('font-size'), 10);
         $elem.css('overflow', 'hidden');
-        binsearch(1, 100, function(size) {
+        binsearch(2, Math.min($elem.height() >> 1, 100), function(size) {
             $elem.css('font-size', size);
             return elem.scrollHeight > elem.clientHeight || elem.scrollWidth > elem.clientWidth;
         });
