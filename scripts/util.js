@@ -83,12 +83,16 @@ var pseudoRandom = exports.pseudoRandom = function(n) {
     return (seed = (1664525 * (n || seed) + 1013904223) &0x7fffffff);
 };
 
-// ## From a string, generate a HTML-color
-// pastel theme
-exports.colorHash = function(text) {
+exports.hash = function(text) {
     var result = 0;
     for(var i=0;i<text.length; ++i) {
         result = pseudoRandom(result + text.charCodeAt(i));
     }
-    return "#" + ((result | 0xe0e0e0)&0xffffff).toString(16);
+    return result;
+};
+
+// ## From a string, generate a HTML-color
+// pastel theme
+exports.colorHash = function(text) {
+    return "#" + ((exports.hash(text) | 0xe0e0e0)&0xffffff).toString(16);
 };

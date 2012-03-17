@@ -27,3 +27,4 @@ bundler = {};
     module('showdown', 'module.exports=Showdown');
     module('console', 'module.exports=window.console || {log: function() {}}');
 })(bundler);
+require = bundler.require;

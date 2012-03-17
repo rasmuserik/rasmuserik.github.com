@@ -184,6 +184,7 @@ var modules =  ["scripts/util.js",
                 "scripts/main.js",
                 "scripts/showSource.js",
                 "scripts/menu.js",
+                "scripts/timelog.js",
                 "scripts/bidiv.js",
                 "scripts/webutil.js",
                 "scripts/fullbrows.js"];

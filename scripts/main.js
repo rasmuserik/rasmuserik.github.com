@@ -10,10 +10,12 @@ var SiteMap = Backbone.Router.extend({
         'unicodeTest': 'unicodeTest',
         'notes/*path': 'notes',
         'source/*path': 'source',
+        'timelog': 'timelog',
         '*default': 'default'
     },
     'default': function() { },
     unicodeTest: unicodeTest,
+    timelog: require('timelog').main,
     menu: menuFn,
     bidiv: require('bidiv').run,
     source: function(name) { require('showSource').show(name); },
