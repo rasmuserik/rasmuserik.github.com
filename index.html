@@ -45,7 +45,7 @@
         <script>
             var script = 'dist/bundle.min.js';
             if(!Object.create || !Object.keys || !Array.prototype.forEach 
-              || !window.JSON || !JSON.parse  || !navigator.userAgent.match(/webkit/i)) {
+             || !window.JSON || !JSON.parse  || !navigator.userAgent.match(/webkit/i)) {
                 script = 'dist/bundle.legacy.min.js';
             }
             document.write('<script src="' + script + '" type="text/javascript"></' + 'script>');
