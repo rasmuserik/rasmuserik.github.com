@@ -1,0 +1,61 @@
+# Toastmaster notes for evaluating
+
+- preparation/intro
+    - talk with speaker, what kind of feedback do you want?
+    - manual / goal of this speech
+    - read-up on evaluating, sharpen your saw
+- parts to look at
+    - effect
+        - personal, enriching, inspiring
+        - purpose: inform/persuade/entertain/inspire
+        - audience reception, focus on audience
+        - humor, enthusiasm, personality
+    - content
+        - concrete vs. abstract
+        - past, future, present
+        - rhetorical devices
+    - tools
+        - visuals and props
+        - notes
+        - supporting material / research
+        - quotes
+    - body language
+        - eye contact - one complet thought
+        - posture open/close, confidence, direction/focus
+        - face/smile
+        - gestures/hands
+        - use of floor
+    - vocal variety
+        - speed
+        - volume
+        - pitch
+        - pauses
+        - articulation
+    - language
+        - words: simple/slang/jargon/technical
+        - images/vividness
+        - active vs. passive
+        - grammar
+    - structure
+        - opening: approach, hook, clear intent
+        - outline: chrono/spatial/causal/comparative/topical/problem-solving
+        - transitions
+        - closing - consise, summary, memorable/call to action
+        - overall structure
+- presentation
+    - sandwich / CRC - commend recommend commend/conclude
+    - intro
+        - she/he showed us ..., thanks
+        - purpose of the speech
+        - summarize the speech
+    - make a point from  the speech, teach a lesson to all
+    - concrete points from the speech
+    - focus on a few points in depth
+    - talk about how it impacts the audience, rather than what you would do as speaker
+    - personal opinion, personal dequalifiers, girafsprog, my point of view
+    - presentation
+        - notes - careful, not look in them much
+        - 'and', not 'but'
+        - avoid cliches
+        - job: improve the speaker, not speaking yourself
+    - start with the end in mind
