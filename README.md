@@ -1,4 +1,4 @@
-# nothing to see here, really, - just a personal website.
+# ![logo](https://solsort.com/_logo.png) nothing to see here, really, - just a personal website.
 
 - `COPYING` - DO NOT COPY ;-)
 - `scripts` JavaScript source for the app
